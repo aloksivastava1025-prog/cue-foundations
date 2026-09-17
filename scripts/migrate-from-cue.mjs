@@ -246,6 +246,13 @@ async function main() {
   // Slugs that will get an auto-generated preview wrapper + entry in
   // preview-map.ts so their detail page shows the Video ⇄ Live toggle.
   const liveSlugs = []
+  // Explicit exclude list — components that DID pass the safety
+  // check but visually don't fit the docs pane (fullscreen layouts
+  // designed to own the viewport, corner-rendering when clipped).
+  // Video preview only for these.
+  const LIVE_EXCLUDE = new Set([
+    'cell-to-card-calendar-expansion',
+  ])
 
   // ── Pass 1: write files ────────────────────────────────────────
   for (const row of withCode) {
@@ -273,7 +280,7 @@ async function main() {
     // a JSX component, generate a small preview wrapper and add the
     // slug to liveSlugs. preview-map.ts is regenerated at the end.
     const liveInfo = detectLiveSafety(row.code)
-    if (liveInfo.safe) {
+    if (liveInfo.safe && !LIVE_EXCLUDE.has(slug)) {
       const wrapperRel = `components/previews/foundations/${slug}.tsx`
       const wrapperAbs = path.join(ROOT, wrapperRel)
 

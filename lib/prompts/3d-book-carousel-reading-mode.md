@@ -114,7 +114,7 @@ State:
 ```
 targetScroll   = 8         (float — the book to be centred; user drives via wheel/drag)
 currentScroll  = 8         (float — lerped smoothly toward target at 0.08 per frame)
-openedBookIndex = -1       (int — -1 means shelf mode, else that book is opened)
+openedBookIndex = -1       (int �� -1 means shelf mode, else that book is opened)
 bookOpenness   = [0, 0, …] (per-book scalar 0→1 — how "open" each book is)
 ```
 
