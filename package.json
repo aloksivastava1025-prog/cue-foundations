@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync-kit": "node scripts/sync-kit.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
