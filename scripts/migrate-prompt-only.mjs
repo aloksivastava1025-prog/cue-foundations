@@ -98,12 +98,18 @@ async function main() {
   const promptOnly = rows.filter((r) => (!r.code || !r.code.trim()) && r.prompt && r.prompt.trim())
   console.log(`[promptonly] ${promptOnly.length} prompt-only rows to import`)
 
-  // Load current registry so we can skip slugs that already exist.
+  // Load current registry so we can skip slugs that already exist,
+  // and preserve their addedAt (when Kit first saw the slug).
   const REGISTRY = path.join(ROOT, 'lib/registry.ts')
   let reg = await fs.readFile(REGISTRY, 'utf-8')
   const existingSlugs = new Set(
     [...reg.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]),
   )
+  const existingAddedAt = new Map()
+  const entryRe = /\{\s*slug:\s*"([^"]+)"[\s\S]*?addedAt:\s*"([^"]+)"/g
+  let mm
+  while ((mm = entryRe.exec(reg)) !== null) existingAddedAt.set(mm[1], mm[2])
+  const today = new Date().toISOString().slice(0, 10)
 
   const newEntries = []
   const usedSlugs = new Set(existingSlugs)
@@ -128,8 +134,8 @@ async function main() {
       videoSrc: row.hover_src || undefined,
       posterSrc: row.thumb_src || undefined,
       premiumHref: `https://cuedesign.space/component/${row.id}`,
-      addedAt: (row.created_at || '').slice(0, 10) || '2026-09-17',
-      updatedAt: (row.created_at || '').slice(0, 10) || '2026-09-17',
+      addedAt: existingAddedAt.get(slug) || today,
+      updatedAt: today,
     })
     console.log(`[promptonly] ✓ ${row.id} → ${slug}`)
   }

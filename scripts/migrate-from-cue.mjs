@@ -186,6 +186,22 @@ async function main() {
   console.log(`[migrate] ${withCode.length} rows have code — will migrate`)
   console.log(`[migrate] ${rows.length - withCode.length} rows are prompt-only — skipping (Phase 2)`)
 
+  // Preserve addedAt for existing slugs — Cue paid's created_at is
+  // the DB creation date (when the component was designed), but for
+  // Cue Kit sorting we want "when it landed on Kit" (i.e. when it
+  // was first toggled to tier=free). Read the current registry.ts
+  // and lift every existing addedAt into a slug map. Slugs new to
+  // Kit get today's date.
+  const REGISTRY_PATH = path.join(ROOT, 'lib/registry.ts')
+  const existingRegistry = await fs.readFile(REGISTRY_PATH, 'utf-8').catch(() => '')
+  const existingAddedAt = new Map()
+  const entryRe = /\{\s*slug:\s*"([^"]+)"[\s\S]*?addedAt:\s*"([^"]+)"/g
+  let m
+  while ((m = entryRe.exec(existingRegistry)) !== null) {
+    existingAddedAt.set(m[1], m[2])
+  }
+  const today = new Date().toISOString().slice(0, 10)
+
   const registryEntries = []
   const usedSlugs = new Set()
 
@@ -223,8 +239,11 @@ async function main() {
       videoSrc: row.hover_src || undefined,
       posterSrc: row.thumb_src || undefined,
       premiumHref: `https://cuedesign.space/component/${row.id}`,
-      addedAt: (row.created_at || '').slice(0, 10) || '2026-09-17',
-      updatedAt: (row.created_at || '').slice(0, 10) || '2026-09-17',
+      // addedAt = when this slug first appeared in Kit (preserved
+      // across syncs so old components don't jump to the top on each
+      // regeneration). Slugs new to Kit get today's date.
+      addedAt: existingAddedAt.get(slug) || today,
+      updatedAt: today,
       isNew: true,
       contributor: { name: 'Alok', href: 'https://x.com/Alok619308' },
       related: [],

@@ -414,6 +414,9 @@ export const registry: RegistryItem[] = [
     related: ["expandable-book-search-palette"],
   },
   {
+    // Latest addition — first landed on Kit 2026-09-18 (was tier=paid
+    // in Cue's DB with created_at 2026-08-23; the addedAt below is
+    // when Kit first saw it, which is what the grid sorts by).
     slug: "chained-spring-arc-carousel",
     name: "Chained Spring Arc Carousel",
     description: "A 10-card fanned wheel carousel where scroll input triggers a chained spring ripple, propagating tension outward from the leading card like a plucked string.",
@@ -426,8 +429,8 @@ export const registry: RegistryItem[] = [
     videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1788247372936-9a7d5x.mp4",
     posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1787507012960-p91a4f.jpeg",
     premiumHref: "https://cuedesign.space/component/cue063",
-    addedAt: "2026-08-23",
-    updatedAt: "2026-08-23",
+    addedAt: "2026-09-18",
+    updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
     related: ["stacked-deck-scroll-reveal","gooey-liquid-feedback-drop","3d-book-carousel-reading-mode"],
