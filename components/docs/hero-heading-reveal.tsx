@@ -67,6 +67,22 @@ export function HeroHeadingReveal({ children }: { children: string }) {
     let cancelled = false
     let startTs = 0
 
+    // If the user scrolls while the reveal is playing, jump the
+    // heading to the fully-revealed state immediately. Per-frame
+    // backgroundImage writes + smooth scroll fight for the main
+    // thread on some devices, which felt like the page was pinning.
+    // Better to end the animation cleanly than to jank the scroll.
+    const finish = () => {
+      if (cancelled) return
+      cancelled = true
+      cancelAnimationFrame(raf)
+      if (ref.current) {
+        ref.current.style.backgroundImage = `linear-gradient(90deg, ${TEXT_COLOR}, ${TEXT_COLOR})`
+      }
+      window.removeEventListener("scroll", onScroll)
+    }
+    const onScroll = () => finish()
+
     const tick = (now: number) => {
       if (cancelled) return
       const t = Math.min(1, (now - startTs) / DURATION_MS)
@@ -79,7 +95,11 @@ export function HeroHeadingReveal({ children }: { children: string }) {
           TEXT_COLOR,
         )
       }
-      if (t < 1) raf = requestAnimationFrame(tick)
+      if (t < 1) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        window.removeEventListener("scroll", onScroll)
+      }
     }
 
     // Wait for fonts to be ready (so the sweep doesn't fire while
@@ -88,6 +108,7 @@ export function HeroHeadingReveal({ children }: { children: string }) {
     const kick = () => {
       if (cancelled) return
       startTs = performance.now()
+      window.addEventListener("scroll", onScroll, { passive: true, once: true })
       raf = requestAnimationFrame(tick)
     }
     const fontsReady = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts?.ready
@@ -100,6 +121,7 @@ export function HeroHeadingReveal({ children }: { children: string }) {
     return () => {
       cancelled = true
       cancelAnimationFrame(raf)
+      window.removeEventListener("scroll", onScroll)
     }
   }, [])
 
