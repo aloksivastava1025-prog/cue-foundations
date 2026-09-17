@@ -71,7 +71,7 @@ export default function HomePage() {
         </h1>
         <p className="mx-auto mb-8 max-w-xl text-[15px] leading-[1.5] text-[#6B7280] md:text-[16px]">
           Some ship with just the AI prompt, some ship with prompt + React code.
-          Copy either into v0, Cursor, Bolt, or Framer AI.
+          Copy either into any AI tool of your choice.
         </p>
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
           <HeroInstallChip />
