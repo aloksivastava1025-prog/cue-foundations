@@ -90,11 +90,10 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
         {previewContent}
         {hasLiveToggle && (
           <span
-            className="pointer-events-none absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#10B981]"
+            className="pointer-events-none absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-2.5 py-1 text-[11px] font-semibold text-[#111827] shadow-sm"
             title="Live interactive preview available on the detail page"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-            Live preview
+            Show Preview
           </span>
         )}
       </div>

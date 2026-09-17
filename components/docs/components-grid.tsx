@@ -28,22 +28,17 @@ export function ComponentsGrid({ items }: { items: RegistryItem[] }) {
           type="button"
           onClick={() => setLiveOnly((v) => !v)}
           aria-pressed={liveOnly}
-          className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
+          className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
             liveOnly
-              ? "border-[#10B981]/25 bg-[#DCFCE7] text-[#10B981]"
+              ? "border-[#111827] bg-[#1A1A1A] text-white"
               : "border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#D1D5DB] hover:text-[#111827]"
           }`}
         >
+          Show preview only
           <span
-            className={`h-1.5 w-1.5 rounded-full ${
-              liveOnly ? "bg-[#10B981]" : "bg-[#9CA3AF]"
-            }`}
-          />
-          Live preview only
-          <span
-            className={`ml-1 rounded-full px-1.5 py-0.5 text-[9px] font-bold ${
+            className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${
               liveOnly
-                ? "bg-white/60 text-[#10B981]"
+                ? "bg-white/15 text-white"
                 : "bg-[#F3F4F6] text-[#6B7280]"
             }`}
           >

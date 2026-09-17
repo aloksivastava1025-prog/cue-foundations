@@ -154,12 +154,12 @@ export function Faq() {
       </h2>
       <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#6B7280]">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
           <span>5 new components ship weekly to Cue Kit</span>
         </span>
         <span className="hidden text-[#E5E7EB] sm:inline">·</span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#111827]" />
           <span>
             10+ ship weekly to{" "}
             <a

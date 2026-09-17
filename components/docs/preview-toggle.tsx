@@ -32,19 +32,12 @@ export function PreviewToggle({
             key={id}
             type="button"
             onClick={() => setMode(id)}
-            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold transition-colors ${
+            className={`rounded-full px-3 py-1 font-semibold transition-colors ${
               mode === id
                 ? "bg-[#1A1A1A] text-white"
                 : "text-[#6B7280] hover:text-[#111827]"
             }`}
           >
-            {id === "live" && (
-              <span
-                className={`h-1.5 w-1.5 rounded-full ${
-                  mode === "live" ? "bg-[#10B981]" : "bg-[#10B981]"
-                }`}
-              />
-            )}
             {label}
           </button>
         ))}

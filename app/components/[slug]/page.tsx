@@ -119,7 +119,7 @@ export default async function ComponentPage({
       className="relative overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA]"
       style={{ boxShadow: DNA_SHADOW }}
     >
-      <div className="absolute left-4 top-4 z-10 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
+      <div className="absolute left-4 top-4 z-10 rounded-full border border-[#E5E7EB] bg-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280] shadow-sm">
         You can interact
       </div>
       <div
@@ -337,7 +337,7 @@ export default async function ComponentPage({
             {isInteractive && (
               <span
                 title="This component is fully interactive on this page — hover, click, drag."
-                className="rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]"
+                className="rounded-full border border-[#E5E7EB] bg-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280]"
               >
                 Interactive
               </span>
