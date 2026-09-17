@@ -43,14 +43,17 @@ export function Faq() {
         </>
       ),
     },
-    {
+      {
       q: "How is Cue Kit different from Cue+ (the paid version)?",
       a: (
         <>
-          Cue Kit is the open-source entry point — free forever, community
-          contributions welcome. Cue+ is the premium studio: 120+
-          hand-built cinematic components, Design DNA per component, and
-          the Adapt API (soon). Same taste, deeper library.
+          <strong className="text-[#111827]">Both are Awwwards-tier — I never ship filler in either.</strong>{" "}
+          Cue Kit is the open-source, curated slice for free tier and
+          exploring — 40+ hand-built components you can drop into real
+          projects today. Cue+ is the premium studio: 120+ cinematic
+          components, Design DNA per component, and the Adapt API — for
+          people who want more variety and taste transfer. Same taste
+          bar. Deeper library.
         </>
       ),
     },
