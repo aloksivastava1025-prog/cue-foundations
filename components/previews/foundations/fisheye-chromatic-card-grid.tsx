@@ -4,9 +4,14 @@ import EdgeDistortionGallery from "@/components/foundations/fisheye-chromatic-ca
 
 /**
  * Auto-generated live preview wrapper. Renders the component at its
- * natural size — the detail page's live pane supplies bounds + scroll.
- * Regenerated on every sync-kit run — do not edit by hand.
+ * natural size but centers it in the pane so components that don't
+ * self-center (which is most of them) don't render in the top-left
+ * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function FisheyeChromaticCardGridPreview() {
-  return <EdgeDistortionGallery />
+  return (
+    <div className="flex min-h-full w-full items-center justify-center">
+      <EdgeDistortionGallery />
+    </div>
+  )
 }
