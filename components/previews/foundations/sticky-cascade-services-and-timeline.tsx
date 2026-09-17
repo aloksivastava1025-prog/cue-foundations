@@ -10,7 +10,7 @@ import ServicesAboutPage from "@/components/foundations/sticky-cascade-services-
  */
 export function StickyCascadeServicesAndTimelinePreview() {
   return (
-    <div className="flex min-h-full w-full items-center justify-center">
+    <div className="flex min-h-[520px] w-full items-center justify-center">
       <ServicesAboutPage />
     </div>
   )

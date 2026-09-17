@@ -10,7 +10,7 @@ import PhantomGallery from "@/components/foundations/phantom-infinite-gallery"
  */
 export function PhantomInfiniteGalleryPreview() {
   return (
-    <div className="flex min-h-full w-full items-center justify-center">
+    <div className="flex min-h-[520px] w-full items-center justify-center">
       <PhantomGallery />
     </div>
   )
