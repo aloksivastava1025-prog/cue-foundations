@@ -19,7 +19,12 @@ const BAND_HALF = 17
 const SWEEP_START = -17
 const SWEEP_END = 117
 const TEXT_COLOR = "#2D2D2D"
-const DURATION_MS = 2200
+const DURATION_MS = 2800
+// Small delay so hydration + first paint settle before the sweep
+// starts — otherwise the effect fires under the fonts.ready flush
+// and users see the tail-end of the animation only ("aa raha hai
+// lekin start se nahi").
+const START_DELAY_MS = 350
 
 /** Framer's buildGradient — verbatim. */
 function buildGradient(pos: number, colors: string[], textColor: string) {
@@ -59,10 +64,12 @@ export function HeroHeadingReveal({ children }: { children: string }) {
     }
 
     let raf = 0
-    const start = performance.now()
+    let cancelled = false
+    let startTs = 0
 
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / DURATION_MS)
+      if (cancelled) return
+      const t = Math.min(1, (now - startTs) / DURATION_MS)
       const eased = sweepEase(t)
       const pos = SWEEP_START + eased * (SWEEP_END - SWEEP_START)
       if (ref.current) {
@@ -74,8 +81,26 @@ export function HeroHeadingReveal({ children }: { children: string }) {
       }
       if (t < 1) raf = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
+
+    // Wait for fonts to be ready (so the sweep doesn't fire while
+    // metric-shifting from fallback → Inter is still happening), then
+    // give the browser a beat to paint before starting.
+    const kick = () => {
+      if (cancelled) return
+      startTs = performance.now()
+      raf = requestAnimationFrame(tick)
+    }
+    const fontsReady = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts?.ready
+    if (fontsReady) {
+      fontsReady.then(() => setTimeout(kick, START_DELAY_MS))
+    } else {
+      setTimeout(kick, START_DELAY_MS)
+    }
+
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(raf)
+    }
   }, [])
 
   return (

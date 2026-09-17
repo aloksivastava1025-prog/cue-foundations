@@ -31,6 +31,16 @@ const SOURCE_JSON = 'C:/Users/Peeyush/Motion_sites/Exp/prompt.json'
 
 // ── helpers ────────────────────────────────────────────────────────
 
+/** kebab-case → PascalCase for auto-generated wrapper names. */
+function pascalCase(slug) {
+  return slug
+    .split(/[^a-zA-Z0-9]+/)
+    .filter(Boolean)
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join('')
+    .replace(/^([0-9])/, '_$1')
+}
+
 /** slugify a title into kebab-case, filename-safe. */
 function slugify(title) {
   return String(title)
@@ -109,6 +119,32 @@ function makeHeader(row, slug) {
  * ────────────────────────────────────────────
  */
 `
+}
+
+/** Detect if a component is safe to mount live in the docs UI.
+ *  Rules of thumb: it must be React (has a JSX export), and must not
+ *  touch global styles / `body` — those break the docs layout. */
+function detectLiveSafety(code) {
+  if (!code) return { safe: false, exportName: null, isDefault: false }
+  const isRawHtml = /^\s*(?:\/\*[\s\S]*?\*\/\s*)?(?:<!DOCTYPE|<html)/im.test(code)
+  if (isRawHtml) return { safe: false, exportName: null, isDefault: false }
+
+  // Global-style leaks — component would blow out the docs page.
+  const touchesGlobals =
+    /body\s*\{[^}]*(?:overflow|background|height|padding|margin)/i.test(code) ||
+    /html\s*,\s*body/i.test(code) ||
+    /document\.body\.style/i.test(code) ||
+    /document\.documentElement\.style/i.test(code)
+  if (touchesGlobals) return { safe: false, exportName: null, isDefault: false }
+
+  // Prefer `export default function X` first, then named export.
+  let m = code.match(/export\s+default\s+function\s+([A-Z][A-Za-z0-9_]*)/)
+  if (m) return { safe: true, exportName: m[1], isDefault: true }
+  m = code.match(/export\s+function\s+([A-Z][A-Za-z0-9_]*)/)
+  if (m) return { safe: true, exportName: m[1], isDefault: false }
+  m = code.match(/export\s+default\s+([A-Z][A-Za-z0-9_]*)/)
+  if (m) return { safe: true, exportName: m[1], isDefault: true }
+  return { safe: false, exportName: null, isDefault: false }
 }
 
 /** Cue's export sometimes wraps code with leading whitespace; keep the
@@ -204,6 +240,9 @@ async function main() {
 
   const registryEntries = []
   const usedSlugs = new Set()
+  // Slugs that will get an auto-generated preview wrapper + entry in
+  // preview-map.ts so their detail page shows the Video ⇄ Live toggle.
+  const liveSlugs = []
 
   // ── Pass 1: write files ────────────────────────────────────────
   for (const row of withCode) {
@@ -225,6 +264,38 @@ async function main() {
     await fs.mkdir(path.dirname(promptAbs), { recursive: true })
     await fs.writeFile(sourceAbs, decoratedCode, 'utf-8')
     await fs.writeFile(promptAbs, decoratedPrompt, 'utf-8')
+
+    // Live-preview auto-registration: if the component's source is
+    // safe to mount (no raw HTML, no global-style leaks) and exposes
+    // a JSX component, generate a small preview wrapper and add the
+    // slug to liveSlugs. preview-map.ts is regenerated at the end.
+    const liveInfo = detectLiveSafety(row.code)
+    if (liveInfo.safe) {
+      const wrapperRel = `components/previews/foundations/${slug}.tsx`
+      const wrapperAbs = path.join(ROOT, wrapperRel)
+      const importLine = liveInfo.isDefault
+        ? `import ${liveInfo.exportName} from "@/components/foundations/${slug}"`
+        : `import { ${liveInfo.exportName} } from "@/components/foundations/${slug}"`
+      const wrapper = `"use client"
+
+${importLine}
+
+/**
+ * Auto-generated live preview wrapper. Regenerated on every sync-kit
+ * run — do not edit by hand; changes will be overwritten.
+ */
+export function ${pascalCase(slug)}Preview() {
+  return (
+    <div className="flex min-h-[280px] items-center justify-center">
+      <${liveInfo.exportName} />
+    </div>
+  )
+}
+`
+      await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })
+      await fs.writeFile(wrapperAbs, wrapper, 'utf-8')
+      liveSlugs.push({ slug, exportName: `${pascalCase(slug)}Preview` })
+    }
 
     registryEntries.push({
       slug,
@@ -280,7 +351,58 @@ async function main() {
     after
   await fs.writeFile(REGISTRY_PATH, rebuilt, 'utf-8')
 
+  // ── Pass 4: regenerate preview-map.ts so every safe live-mount
+  //          slug auto-registers. Hand-crafted entries (button-
+  //          magnetic, tilt-card, theme-toggle, tabs-pill) stay
+  //          pinned at the top so their wrappers aren't overwritten.
+  const HAND_CRAFTED = [
+    { slug: 'button-magnetic', name: 'MagneticButtonPreview' },
+    { slug: 'tilt-card', name: 'TiltCardPreview' },
+    { slug: 'theme-toggle', name: 'ThemeTogglePreview' },
+    { slug: 'tabs-pill', name: 'TabsPillPreview' },
+  ]
+  // Merge — hand-crafted first, then auto-generated (dedupe by slug).
+  const seen = new Set(HAND_CRAFTED.map((e) => e.slug))
+  const merged = [...HAND_CRAFTED]
+  for (const l of liveSlugs) {
+    if (seen.has(l.slug)) continue
+    merged.push({ slug: l.slug, name: l.exportName })
+    seen.add(l.slug)
+  }
+
+  const importLines = merged
+    .map((e) =>
+      HAND_CRAFTED.some((h) => h.slug === e.slug)
+        ? `import { ${e.name} } from "@/components/previews/foundations/${e.slug}"`
+        : `import { ${e.name} } from "@/components/previews/foundations/${e.slug}"`,
+    )
+    .join('\n')
+  const safeSet = merged.map((e) => `  "${e.slug}",`).join('\n')
+  const mapEntries = merged.map((e) => `  "${e.slug}": ${e.name},`).join('\n')
+
+  const previewMap = `/**
+ * Cue Foundations · shared preview map.
+ * ─────────────────────────────────────────────────────
+ * AUTO-GENERATED by scripts/migrate-from-cue.mjs. Hand-crafted
+ * entries at the top are pinned; auto-generated ones follow.
+ * Regenerated on every \`npm run sync-kit\` — do not edit by hand.
+ * ─────────────────────────────────────────────────────
+ */
+
+${importLines}
+
+export const SAFE_LIVE_SLUGS = new Set([
+${safeSet}
+])
+
+export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
+${mapEntries}
+}
+`
+  await fs.writeFile(path.join(ROOT, 'lib/preview-map.ts'), previewMap, 'utf-8')
+
   console.log(`\n[migrate] wrote ${registryEntries.length} components + registry.ts`)
+  console.log(`[migrate] wrote ${liveSlugs.length} auto live-preview wrappers + preview-map.ts`)
   console.log(`[migrate] done.`)
 }
 
