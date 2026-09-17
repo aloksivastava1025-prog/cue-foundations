@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { registry } from "@/lib/registry"
 import { ComponentCard } from "@/components/docs/component-card"
+import { CueCtaButton } from "@/components/docs/cue-cta-button"
 
 /** Only show components with a real preview video. */
 const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
@@ -21,7 +22,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white text-[#111827]">
       {/* Nav */}
       <nav className="border-b border-[#E5E7EB]">
-        <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-5">
           <div className="flex items-baseline gap-2">
             <span className="text-[17px] font-semibold tracking-tight text-[#111827]">
               Cue<span className="text-[#5C6DFF]">.</span>
@@ -39,20 +40,15 @@ export default function HomePage() {
             >
               GitHub
             </a>
-            <a
-              href="https://cuedesign.space"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[13px] font-semibold text-white transition-colors hover:bg-black"
-            >
+            <CueCtaButton href="https://cuedesign.space" size="sm">
               Cue+ →
-            </a>
+            </CueCtaButton>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="mx-auto max-w-[1100px] px-6 pt-24 pb-16 text-center">
+      <section className="mx-auto max-w-[1280px] px-6 pt-24 pb-16 text-center">
         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-3 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
           {visibleRegistry.length} components · MIT · free
@@ -79,7 +75,7 @@ export default function HomePage() {
       </section>
 
       {/* Recently launched */}
-      <section id="recently-launched" className="mx-auto max-w-[1100px] px-6 pt-16 pb-8">
+      <section id="recently-launched" className="mx-auto max-w-[1280px] px-6 pt-16 pb-8">
         <div className="mb-3 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
           New
         </div>
@@ -94,7 +90,7 @@ export default function HomePage() {
       </section>
 
       {/* Components grid */}
-      <section id="components" className="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+      <section id="components" className="mx-auto max-w-[1280px] px-6 pt-16 pb-16">
         <div className="mb-3 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
           Components
         </div>
@@ -119,7 +115,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA to Cue+ */}
-      <section className="mx-auto max-w-[1100px] px-6 py-24 text-center">
+      <section className="mx-auto max-w-[1280px] px-6 py-24 text-center">
         <h2 className="mb-4 text-[40px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[44px]">
           Want the Awwwards-tier versions?
         </h2>
@@ -128,19 +124,12 @@ export default function HomePage() {
           scroll storyboards, custom cursors. Prompt + React code.
           $99 lifetime, first 50 founding members.
         </p>
-        <a
-          href="https://cuedesign.space"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] px-6 py-3 text-[13px] font-semibold text-white transition-colors hover:bg-black"
-        >
-          Explore Cue+ <span>→</span>
-        </a>
+        <CueCtaButton href="https://cuedesign.space">Explore Cue+</CueCtaButton>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-[#E5E7EB]">
-        <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-6 text-[13px] text-[#9CA3AF]">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-6 text-[13px] text-[#9CA3AF]">
           <span>
             Cue Foundations · MIT · built by{" "}
             <a

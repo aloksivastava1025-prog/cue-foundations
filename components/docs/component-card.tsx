@@ -44,8 +44,8 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
           loop
           muted
           playsInline
-          preload="metadata"
-          className="h-full w-full object-cover"
+          preload="auto"
+          className="h-full w-full object-contain"
         />
       )
     }
@@ -75,9 +75,10 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
           "0 12px 30px rgba(0,0,0,0.04), 0 4px 10px rgba(0,0,0,0.02)",
       }}
     >
-      {/* Inner preview well */}
+      {/* Inner preview well — tall enough that widescreen video
+          captures render at a proper size on every viewport. */}
       <div
-        className={`relative h-[260px] overflow-hidden rounded-[4px] border ${
+        className={`relative h-[300px] overflow-hidden rounded-[4px] border ${
           isLiveInGrid
             ? "border-transparent bg-transparent"
             : "border-[rgba(0,0,0,0.03)] bg-white"

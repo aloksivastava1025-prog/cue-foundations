@@ -6,7 +6,9 @@ import { getRegistryItem, registry, type RegistryItem } from "@/lib/registry"
 import { InstallBlock } from "@/components/docs/install-block"
 import { PreviewTabs } from "@/components/docs/preview-tabs"
 import { CopyBlock } from "@/components/docs/copy-block"
-import { PREVIEW_MAP } from "@/lib/preview-map"
+import { DocsSidebar } from "@/components/docs/sidebar"
+import { PREVIEW_MAP, SAFE_LIVE_SLUGS } from "@/lib/preview-map"
+import { CueCtaButton } from "@/components/docs/cue-cta-button"
 
 /**
  * Component detail page — Cue Foundations Design DNA applied.
@@ -59,15 +61,19 @@ export default async function ComponentPage({
   ])
 
   const Preview = PREVIEW_MAP[slug]
+  const canMountLive = item.previewMode === "live" && !!Preview && SAFE_LIVE_SLUGS.has(slug)
 
   // Preview panel — DNA feature-card treatment.
   const previewPanel = (() => {
-    if (item.previewMode === "live" && Preview) {
+    if (canMountLive) {
       return (
         <div
-          className="rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-16"
+          className="relative rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-16"
           style={{ boxShadow: DNA_SHADOW }}
         >
+          <div className="absolute left-4 top-4 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
+            You can interact
+          </div>
           <div className="flex min-h-[280px] items-center justify-center">
             <Preview />
           </div>
@@ -89,7 +95,9 @@ export default async function ComponentPage({
         </div>
       )
     }
-    if (item.previewMode === "video" && item.videoSrc) {
+    // Any live-marked component we can't safely mount falls back to
+    // its R2 video preview here — same treatment as previewMode video.
+    if (item.videoSrc) {
       return (
         <div
           className="overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA]"
@@ -157,14 +165,9 @@ export default async function ComponentPage({
         Cue+.
       </p>
       {item.premiumHref && (
-        <a
-          href={item.premiumHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] px-4 py-2 text-[13px] font-semibold text-white hover:bg-black"
-        >
+        <CueCtaButton href={item.premiumHref} size="sm">
           Get the polished version on Cue+ →
-        </a>
+        </CueCtaButton>
       )}
     </div>
   )
@@ -173,8 +176,10 @@ export default async function ComponentPage({
     .map((s) => getRegistryItem(s))
     .filter((r): r is RegistryItem => Boolean(r))
 
+  const isInteractive = canMountLive
+
   return (
-    <main className="min-h-screen bg-white text-[#111827]">
+    <main className="min-h-screen overflow-x-hidden bg-white text-[#111827]">
       {/* Nav — mirrors homepage */}
       <nav className="border-b border-[#E5E7EB]">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5">
@@ -197,19 +202,16 @@ export default async function ComponentPage({
             >
               GitHub
             </a>
-            <a
-              href="https://cuedesign.space"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-[#1A1A1A] px-4 py-1.5 text-[13px] font-semibold text-white hover:bg-black"
-            >
+            <CueCtaButton href="https://cuedesign.space" size="sm">
               Cue+ →
-            </a>
+            </CueCtaButton>
           </div>
         </div>
       </nav>
 
-      <div className="mx-auto max-w-4xl px-6 py-10">
+      <div className="mx-auto flex max-w-[1400px] gap-10 px-6 py-10">
+        <DocsSidebar activeSlug={item.slug} />
+        <div className="min-w-0 flex-1">
         {/* Breadcrumb */}
         <div className="mb-6 text-[13px] text-[#9CA3AF]">
           <Link href="/" className="hover:text-[#111827]">
@@ -228,6 +230,14 @@ export default async function ComponentPage({
             {item.isNew && (
               <span className="rounded-full border border-[#5C6DFF]/20 bg-[#EFF2FF] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#5C6DFF]">
                 New
+              </span>
+            )}
+            {isInteractive && (
+              <span
+                title="This component is fully interactive on this page — hover, click, drag."
+                className="rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]"
+              >
+                Interactive
               </span>
             )}
           </div>
@@ -288,22 +298,49 @@ export default async function ComponentPage({
                 <Link
                   key={r.slug}
                   href={`/components/${r.slug}`}
-                  className="group rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-4 transition-colors hover:border-[#D1D5DB]"
+                  className="group flex flex-col rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-2 transition-colors hover:border-[#D1D5DB]"
                   style={{ boxShadow: DNA_SHADOW }}
                 >
-                  <div className="mb-1 flex items-center gap-2">
-                    <span className="font-medium text-[#111827] group-hover:text-[#5C6DFF]">
-                      {r.name}
-                    </span>
-                    {r.isNew && (
-                      <span className="rounded-full border border-[#5C6DFF]/20 bg-[#EFF2FF] px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#5C6DFF]">
-                        New
-                      </span>
+                  <div className="mb-3 h-[160px] overflow-hidden rounded-[4px] border border-[rgba(0,0,0,0.03)] bg-white">
+                    {r.videoSrc ? (
+                      <video
+                        src={r.videoSrc}
+                        poster={r.posterSrc}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="h-full w-full object-contain"
+                      />
+                    ) : r.posterSrc ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={r.posterSrc}
+                        alt={r.name}
+                        className="h-full w-full object-contain"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-[11px] text-[#9CA3AF]">
+                        No preview
+                      </div>
                     )}
                   </div>
-                  <p className="line-clamp-2 text-[13px] leading-[1.5] text-[#6B7280]">
-                    {r.description}
-                  </p>
+                  <div className="px-1 pb-1">
+                    <div className="mb-1 flex items-center gap-2">
+                      <span className="text-[14px] font-semibold text-[#111827] group-hover:text-[#5C6DFF]">
+                        {r.name}
+                      </span>
+                      {r.isNew && (
+                        <span className="rounded-full border border-[#5C6DFF]/20 bg-[#EFF2FF] px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#5C6DFF]">
+                          New
+                        </span>
+                      )}
+                    </div>
+                    <p className="line-clamp-2 text-[12px] leading-[1.5] text-[#6B7280]">
+                      {r.description}
+                    </p>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -335,6 +372,7 @@ export default async function ComponentPage({
             </div>
           )}
         </section>
+        </div>
       </div>
     </main>
   )

@@ -21,6 +21,20 @@ import { DynamicIslandFeedbackNotchPreview } from "@/components/previews/foundat
 import { FlexGrowBenefitsRevealPreview } from "@/components/previews/foundations/flex-grow-benefits-reveal"
 import { SplitPanelImageSyncedFaqFeaturesPreview } from "@/components/previews/foundations/split-panel-image-synced-faq-features"
 
+/**
+ * Slugs that are safe to mount live in the docs UI (grid card AND
+ * detail page). The other entries in PREVIEW_MAP inject full-viewport
+ * styles / global CSS that break the docs layout — they still render
+ * live inside the shadcn-installed project, but on our docs site
+ * they play as a video preview instead.
+ */
+export const SAFE_LIVE_SLUGS = new Set([
+  "button-magnetic",
+  "tilt-card",
+  "theme-toggle",
+  "tabs-pill",
+])
+
 export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "button-magnetic": MagneticButtonPreview,
   "tilt-card": TiltCardPreview,
