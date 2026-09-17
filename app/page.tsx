@@ -6,6 +6,7 @@ import { HeroInstallChip } from "@/components/docs/hero-install-chip"
 import { SmoothScrollLink } from "@/components/docs/smooth-scroll-link"
 import { Faq } from "@/components/docs/faq"
 import { HeroHeadingReveal } from "@/components/docs/hero-heading-reveal"
+import { HashScrollClean } from "@/components/docs/hash-scroll-clean"
 
 /** Only show components with a real preview video. */
 const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
@@ -24,6 +25,7 @@ const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white text-[#111827]">
+      <HashScrollClean />
       {/* Nav */}
       <nav className="border-b border-[#E5E7EB]">
         <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-3 px-5 py-4 md:px-6 md:py-5">
