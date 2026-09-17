@@ -73,6 +73,27 @@ export default function HomePage() {
           Some ship with just the AI prompt, some ship with prompt + React code.
           Copy either into any AI tool of your choice.
         </p>
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] text-[#6B7280]">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+            <span>5 new components ship weekly to Cue Kit</span>
+          </span>
+          <span className="hidden text-[#E5E7EB] sm:inline">·</span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
+            <span>
+              10+ ship weekly to{" "}
+              <a
+                href="https://cuedesign.space"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#5C6DFF] underline decoration-[#5C6DFF]/30 underline-offset-2 hover:decoration-[#5C6DFF]"
+              >
+                Cue+
+              </a>
+            </span>
+          </span>
+        </div>
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
           <HeroInstallChip />
           <SmoothScrollLink
