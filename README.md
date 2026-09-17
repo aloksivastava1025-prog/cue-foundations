@@ -44,6 +44,14 @@ Site runs at `http://localhost:3000`.
 
 The site itself is styled per Cue's Design DNA — a taste-transferable design language extracted from Cue's Stacker Bento component: white canvas, Inter typography, 4px feature-card geometry, indigo `#5C6DFF` accent, subtle DNA-spec elevation.
 
+## Contributing
+
+Pull requests welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the component quality bar, structure, and PR checklist. For big changes, open an issue first.
+
+## License
+
+MIT — use anywhere, commercial or personal, no attribution required. See [LICENSE](LICENSE).
+
 ## Built by
 
 [@Alok619308](https://x.com/Alok619308) — solo founder of [Cue](https://cuedesign.space).
