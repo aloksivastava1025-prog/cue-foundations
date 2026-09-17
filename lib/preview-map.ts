@@ -20,6 +20,7 @@ import { CollapsingCardsAccordionPreview } from "@/components/previews/foundatio
 import { DynamicIslandFeedbackNotchPreview } from "@/components/previews/foundations/dynamic-island-feedback-notch"
 import { FlexGrowBenefitsRevealPreview } from "@/components/previews/foundations/flex-grow-benefits-reveal"
 import { SplitPanelImageSyncedFaqFeaturesPreview } from "@/components/previews/foundations/split-panel-image-synced-faq-features"
+import { GlossySliderCallButtonPreview } from "@/components/previews/foundations/glossy-slider-call-button"
 
 /**
  * Slugs that are safe to mount live in the docs UI (grid card AND
@@ -33,6 +34,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "glossy-slider-call-button",
 ])
 
 export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
@@ -45,4 +47,5 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "dynamic-island-feedback-notch": DynamicIslandFeedbackNotchPreview,
   "flex-grow-benefits-reveal": FlexGrowBenefitsRevealPreview,
   "split-panel-image-synced-faq-features": SplitPanelImageSyncedFaqFeaturesPreview,
+  "glossy-slider-call-button": GlossySliderCallButtonPreview,
 }
