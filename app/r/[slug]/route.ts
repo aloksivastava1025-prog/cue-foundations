@@ -26,6 +26,24 @@ export async function GET(
     })
   }
 
+  // Prompt-only entries ship no React source — surface a helpful 404
+  // instead of a 500 so the shadcn CLI prints a clean error.
+  if (item.codeAvailable === false || !item.sourcePath) {
+    return new Response(
+      JSON.stringify({
+        error: "Prompt-only component",
+        message:
+          "This component is shipped as an AI prompt only. Read the prompt at " +
+          `https://foundations.cuedesign.space/components/${item.slug} and paste it into v0, Cursor, Bolt, or Framer AI.`,
+        promptUrl: `https://foundations.cuedesign.space/components/${item.slug}`,
+      }, null, 2),
+      {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      },
+    )
+  }
+
   const abs = path.join(process.cwd(), item.sourcePath)
   let source: string
   try {

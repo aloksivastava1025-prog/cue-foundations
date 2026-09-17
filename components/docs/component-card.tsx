@@ -78,7 +78,7 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
       {/* Inner preview well — tall enough that widescreen video
           captures render at a proper size on every viewport. */}
       <div
-        className={`relative h-[300px] overflow-hidden rounded-[4px] border ${
+        className={`relative h-[220px] overflow-hidden rounded-[4px] border sm:h-[260px] lg:h-[300px] ${
           isLiveInGrid
             ? "border-transparent bg-transparent"
             : "border-[rgba(0,0,0,0.03)] bg-white"

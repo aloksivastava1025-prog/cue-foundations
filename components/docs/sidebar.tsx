@@ -90,7 +90,7 @@ export function DocsSidebar({ activeSlug }: { activeSlug: string }) {
   }
 
   return (
-    <aside className="w-full shrink-0 md:w-[220px]">
+    <aside className="hidden shrink-0 md:block md:w-[220px]">
       <nav className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto pr-2">
         <div className="mb-5">
           <div className="mb-2 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">

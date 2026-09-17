@@ -68,7 +68,7 @@ export default async function ComponentPage({
     if (canMountLive) {
       return (
         <div
-          className="relative rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-16"
+          className="relative rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-6 md:p-16"
           style={{ boxShadow: DNA_SHADOW }}
         >
           <div className="absolute left-4 top-4 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
@@ -90,7 +90,7 @@ export default async function ComponentPage({
             srcDoc={source}
             title={`${item.name} preview`}
             sandbox="allow-scripts allow-same-origin"
-            className="h-[560px] w-full border-0"
+            className="h-[400px] w-full border-0 md:h-[560px]"
           />
         </div>
       )
@@ -198,9 +198,19 @@ export default async function ComponentPage({
               href="https://github.com/aloksivastava1025-prog/cue-foundations"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#6B7280] hover:text-[#111827]"
+              className="inline-flex items-center gap-1.5 text-[#6B7280] hover:text-[#111827]"
+              aria-label="GitHub"
             >
-              GitHub
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.28-1.67-1.28-1.67-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.17.92-.26 1.91-.38 2.9-.39.98.01 1.98.13 2.9.39 2.2-1.48 3.17-1.17 3.17-1.17.63 1.59.24 2.76.12 3.05.73.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.26 5.65.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+              </svg>
+              <span>GitHub</span>
             </a>
             <CueCtaButton href="https://cuedesign.space" size="sm">
               Cue+ →
@@ -209,7 +219,7 @@ export default async function ComponentPage({
         </div>
       </nav>
 
-      <div className="mx-auto flex max-w-[1400px] gap-10 px-6 py-10">
+      <div className="mx-auto flex max-w-[1400px] gap-6 px-5 py-8 md:gap-10 md:px-6 md:py-10">
         <DocsSidebar activeSlug={item.slug} />
         <div className="min-w-0 flex-1">
         {/* Breadcrumb */}
@@ -224,7 +234,7 @@ export default async function ComponentPage({
         {/* Title row */}
         <div className="mb-3 flex items-start justify-between gap-6">
           <div className="flex items-baseline gap-3">
-            <h1 className="text-[40px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D]">
+            <h1 className="text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[40px]">
               {item.name}
             </h1>
             {item.isNew && (
