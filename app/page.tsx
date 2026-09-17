@@ -124,19 +124,9 @@ export default function HomePage() {
         <div className="mb-3 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
           Components
         </div>
-        <div className="mb-6 flex flex-col gap-2 md:mb-8 md:flex-row md:items-baseline md:justify-between md:gap-4">
-          <h2 className="text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[40px]">
-            Motion primitives
-          </h2>
-          <a
-            href="https://cuedesign.space"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[13px] text-[#6B7280] hover:text-[#111827]"
-          >
-            Browse animated React components →
-          </a>
-        </div>
+        <h2 className="mb-6 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:mb-8 md:text-[40px]">
+          Motion primitives
+        </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {visibleRegistry.slice(3).map((item) => (
             <ComponentCard key={item.slug} item={item} />
