@@ -5,13 +5,13 @@
  * component files + registry, commits, and pushes to GitHub.
  * Vercel auto-deploys → live on kit.cuedesign.space in ~3 min.
  *
- * Weekly workflow (5 min total):
- *   1. In Cue paid admin, add / mark new components as tier=free
- *   2. Export the free-tier rows to C:/Users/Peeyush/Motion_sites/Exp/prompt.json
- *   3. Run: npm run sync-kit
- *   4. Done — live in 3 min
+ * Weekly workflow (2 steps total):
+ *   1. In Cue paid admin, toggle a component to tier=free + save
+ *   2. Run: npm run sync-kit
+ *   3. Done — live on kit.cuedesign.space in 3 min
  *
  * The script:
+ *   • fetches latest tier=free rows from Supabase → prompt.json
  *   • runs migrate-from-cue.mjs      (with-code components)
  *   • runs migrate-prompt-only.mjs   (prompt-only components)
  *   • checks git status; commits only if there are real changes
@@ -39,11 +39,19 @@ console.log('╭─────────────────────�
 console.log('│  Cue Kit — one-command sync              │')
 console.log('╰──────────────────────────────────────────╯')
 
-// 1. Regenerate registry + component files from JSON export.
+// 1. Fetch latest tier=free rows from Supabase → prompt.json.
+try {
+  run('node scripts/fetch-from-supabase.mjs')
+} catch {
+  console.error('\n✗ Supabase fetch failed — check .env.local has SUPABASE_URL + SUPABASE_ANON_KEY. Abort.')
+  process.exit(1)
+}
+
+// 2. Regenerate registry + component files from JSON.
 try {
   run('node scripts/migrate-from-cue.mjs')
 } catch {
-  console.error('\n✗ Migrate (with-code) failed — abort. Check the JSON export exists at C:/Users/Peeyush/Motion_sites/Exp/prompt.json')
+  console.error('\n✗ Migrate (with-code) failed — abort.')
   process.exit(1)
 }
 
