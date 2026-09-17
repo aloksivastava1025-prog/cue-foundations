@@ -5,6 +5,7 @@ import { CueCtaButton } from "@/components/docs/cue-cta-button"
 import { HeroInstallChip } from "@/components/docs/hero-install-chip"
 import { SmoothScrollLink } from "@/components/docs/smooth-scroll-link"
 import { Faq } from "@/components/docs/faq"
+import { HeroHeadingReveal } from "@/components/docs/hero-heading-reveal"
 
 /** Only show components with a real preview video. */
 const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
@@ -66,9 +67,9 @@ export default function HomePage() {
           <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
           {visibleRegistry.length}+ components · weekly drops
         </div>
-        <h1 className="mb-5 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[44px]">
+        <HeroHeadingReveal>
           Awwwards-tier components you can use in your project.
-        </h1>
+        </HeroHeadingReveal>
         <p className="mx-auto mb-8 max-w-xl text-[15px] leading-[1.5] text-[#6B7280] md:text-[16px]">
           Some ship with just the AI prompt, some ship with prompt + React code.
           Copy either into any AI tool of your choice.
