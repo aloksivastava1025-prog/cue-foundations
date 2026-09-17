@@ -264,8 +264,7 @@ async function main() {
   }
 
   // ── Pass 3: rebuild registry.ts ───────────────────────────────
-  const REGISTRY_PATH = path.join(ROOT, 'lib/registry.ts')
-  const existing = await fs.readFile(REGISTRY_PATH, 'utf-8')
+  const existing = existingRegistry || (await fs.readFile(REGISTRY_PATH, 'utf-8'))
   // Everything before `export const registry` is the type section,
   // which we preserve. Everything after `export function` helpers
   // (or the end of the array) we preserve too.

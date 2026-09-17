@@ -50,17 +50,32 @@ async function sbSelect(table, query) {
 
 console.log('[fetch] querying tier=free rows…')
 
-// `prompts` table holds both prompt + code directly — no join needed.
-const merged = await sbSelect(
+// `prompts` table holds title + code but NOT the prompt text — the
+// actual prompt content lives in `prompt_contents.content` keyed
+// by prompt_id. Both queries are batched, then merged in-memory.
+const prompts = await sbSelect(
   'prompts',
-  'tier=eq.free&select=id,title,description,category,tags,hover_src,thumb_src,tier,created_at,use_case,prompt,code&order=created_at.desc',
+  'tier=eq.free&select=id,title,description,category,tags,hover_src,thumb_src,tier,created_at,use_case,code&order=created_at.desc',
 )
-console.log(`[fetch] ${merged.length} free-tier rows`)
+console.log(`[fetch] ${prompts.length} free-tier rows`)
 
-if (merged.length === 0) {
+if (prompts.length === 0) {
   console.error('[fetch] no free-tier rows — nothing to sync')
   process.exit(1)
 }
+
+const ids = prompts.map((p) => p.id)
+const idFilter = `prompt_id=in.(${ids.map((i) => `"${i}"`).join(',')})`
+const contents = await sbSelect(
+  'prompt_contents',
+  `${idFilter}&select=prompt_id,content`,
+)
+const contentByPromptId = new Map(contents.map((c) => [c.prompt_id, c.content]))
+
+const merged = prompts.map((p) => ({
+  ...p,
+  prompt: contentByPromptId.get(p.id) || null,
+}))
 
 const OUT = 'C:/Users/Peeyush/Motion_sites/Exp/prompt.json'
 await fs.mkdir(path.dirname(OUT), { recursive: true })
