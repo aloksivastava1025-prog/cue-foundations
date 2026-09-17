@@ -8,8 +8,19 @@ import { Faq } from "@/components/docs/faq"
 import { HeroHeadingReveal } from "@/components/docs/hero-heading-reveal"
 import { HashScrollClean } from "@/components/docs/hash-scroll-clean"
 
-/** Only show components with a real preview video. */
-const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
+/** Only show components with a real preview video. Sort newest
+ *  first (by addedAt desc) so weekly drops always land at the top
+ *  of the grid — a returning developer sees "what's new" without
+ *  scrolling. */
+const visibleRegistry = registry
+  .filter((item) => Boolean(item.videoSrc))
+  .slice()
+  .sort((a, b) => {
+    const at = a.addedAt || ""
+    const bt = b.addedAt || ""
+    if (at === bt) return 0
+    return at < bt ? 1 : -1
+  })
 
 /**
  * Cue Foundations homepage — StackerBento Design DNA applied.
