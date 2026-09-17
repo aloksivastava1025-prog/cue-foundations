@@ -144,9 +144,30 @@ export function Faq() {
       <div className="mb-3 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
         FAQ
       </div>
-      <h2 className="mb-8 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[40px]">
+      <h2 className="mb-4 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[40px]">
         Questions people ask
       </h2>
+      <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#6B7280]">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+          <span>5 new components ship weekly to Cue Kit</span>
+        </span>
+        <span className="hidden text-[#E5E7EB] sm:inline">·</span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
+          <span>
+            10+ ship weekly to{" "}
+            <a
+              href="https://cuedesign.space"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#5C6DFF] underline decoration-[#5C6DFF]/30 underline-offset-2 hover:decoration-[#5C6DFF]"
+            >
+              Cue+
+            </a>
+          </span>
+        </span>
+      </div>
 
       <div className="overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-white">
         {items.map((item, i) => {

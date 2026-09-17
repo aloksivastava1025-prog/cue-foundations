@@ -194,6 +194,9 @@ export default async function ComponentPage({
             <Link href="/" className="text-[#6B7280] hover:text-[#111827]">
               Components
             </Link>
+            <Link href="/#faq" className="text-[#6B7280] hover:text-[#111827]">
+              FAQ
+            </Link>
             <a
               href="https://github.com/aloksivastava1025-prog/cue-foundations"
               target="_blank"

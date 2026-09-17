@@ -36,6 +36,12 @@ export default function HomePage() {
             </span>
           </div>
           <div className="flex items-center gap-4 text-[13px] md:gap-6">
+            <SmoothScrollLink
+              targetId="faq"
+              className="text-[#6B7280] transition-colors hover:text-[#111827]"
+            >
+              FAQ
+            </SmoothScrollLink>
             <a
               href="https://github.com/aloksivastava1025-prog/cue-foundations"
               target="_blank"
@@ -65,7 +71,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-[1280px] px-5 pt-14 pb-12 text-center md:px-6 md:pt-24 md:pb-16">
         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-3 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
-          {visibleRegistry.length}+ components · weekly drops
+          {visibleRegistry.length}+ components · MIT · free
         </div>
         <HeroHeadingReveal>
           Awwwards-tier components you can use in your project.
@@ -74,27 +80,6 @@ export default function HomePage() {
           Some ship with just the AI prompt, some ship with prompt + React code.
           Copy either into any AI tool of your choice.
         </p>
-        <div className="mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] text-[#6B7280]">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-            <span>5 new components ship weekly to Cue Kit</span>
-          </span>
-          <span className="hidden text-[#E5E7EB] sm:inline">·</span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
-            <span>
-              10+ ship weekly to{" "}
-              <a
-                href="https://cuedesign.space"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#5C6DFF] underline decoration-[#5C6DFF]/30 underline-offset-2 hover:decoration-[#5C6DFF]"
-              >
-                Cue+
-              </a>
-            </span>
-          </span>
-        </div>
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
           <HeroInstallChip />
           <SmoothScrollLink
