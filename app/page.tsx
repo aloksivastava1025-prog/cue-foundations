@@ -2,6 +2,7 @@ import Link from "next/link"
 import { registry } from "@/lib/registry"
 import { ComponentCard } from "@/components/docs/component-card"
 import { CueCtaButton } from "@/components/docs/cue-cta-button"
+import { HeroInstallChip } from "@/components/docs/hero-install-chip"
 
 /** Only show components with a real preview video. */
 const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
@@ -71,12 +72,7 @@ export default function HomePage() {
           Copy either into v0, Cursor, Bolt, or Framer AI.
         </p>
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
-          <div className="max-w-full overflow-hidden rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-4 py-2 font-mono text-[11px] text-[#111827] md:px-5 md:text-[13px]">
-            <span className="truncate">
-              npx shadcn@latest add
-              <span className="text-[#5C6DFF]"> https://foundations.cuedesign.space/r/…</span>
-            </span>
-          </div>
+          <HeroInstallChip />
           <Link
             href="#recently-launched"
             className="rounded-full bg-[#1A1A1A] px-5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-black"
