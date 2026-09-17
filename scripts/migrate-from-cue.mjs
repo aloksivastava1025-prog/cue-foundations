@@ -150,31 +150,11 @@ function detectLiveSafety(code) {
   return { safe: false, exportName: null, isDefault: false }
 }
 
-/** Strip global body / html rules from inlined <style> blocks.
- *  These rules make the component "own the page" (fullscreen bg,
- *  height:100vh, overflow:hidden) — fine on the Cue paid site's
- *  isolated preview, but they blow up the docs layout when the
- *  component mounts inside a bounded pane. Replaces the selector
- *  with `.__cue-globals-stripped` (an unused class) so the CSS
- *  parser still succeeds and the rest of the stylesheet is intact.
- *  Runs on the source text before we write it to disk, so
- *  detectLiveSafety sees a clean file and enables live preview. */
-function sanitizeGlobalStyles(code) {
-  return code
-    // Rewrite `body` / `html, body` selectors to a scoped shim class.
-    // Preview wrappers add <div className="__cue-body-shim"> so the
-    // centering / fullscreen styles that were meant for <body> apply
-    // to a bounded element instead — no page-layout leak, but the
-    // component still renders as designed.
-    .replace(/(^|[\s,>+~;{}])(html\s*,\s*body|body)(\s*\{)/gm, '$1.__cue-body-shim$3')
-}
-
 /** Cue's export sometimes wraps code with leading whitespace; keep the
  *  raw content but prepend our header. Assume the code already has its
- *  own "use client" line if it needs one. Global body/html rules are
- *  auto-stripped so components stay mountable in the docs pane. */
+ *  own "use client" line if it needs one. */
 function decorateCode(row, slug) {
-  const raw = sanitizeGlobalStyles(String(row.code || '').trim())
+  const raw = String(row.code || '').trim()
   if (!raw) return null
 
   // If the code opens with a directive line like "use client";, keep
@@ -292,10 +272,7 @@ async function main() {
     // safe to mount (no raw HTML, no global-style leaks) and exposes
     // a JSX component, generate a small preview wrapper and add the
     // slug to liveSlugs. preview-map.ts is regenerated at the end.
-    // Detect on sanitized code — body/html rules auto-stripped, so
-    // a component that's ONLY unsafe because of those globals now
-    // qualifies for live-mount.
-    const liveInfo = detectLiveSafety(sanitizeGlobalStyles(String(row.code || '')))
+    const liveInfo = detectLiveSafety(row.code)
     if (liveInfo.safe) {
       const wrapperRel = `components/previews/foundations/${slug}.tsx`
       const wrapperAbs = path.join(ROOT, wrapperRel)
@@ -318,17 +295,12 @@ async function main() {
 ${importLine}
 
 /**
- * Auto-generated live preview wrapper. Renders the component inside
- * a __cue-body-shim scope so any body{} rules the sanitizer moved
- * off <body> (fullscreen bg, centering, min-height) apply here
- * instead. Regenerated on every sync-kit run — do not edit by hand.
+ * Auto-generated live preview wrapper. Renders the component at its
+ * natural size — the detail page's live pane supplies bounds + scroll.
+ * Regenerated on every sync-kit run — do not edit by hand.
  */
 export function ${pascalCase(slug)}Preview() {
-  return (
-    <div className="__cue-body-shim" style={{ minHeight: "100%", width: "100%" }}>
-      <${liveInfo.exportName} />
-    </div>
-  )
+  return <${liveInfo.exportName} />
 }
 `
       await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })

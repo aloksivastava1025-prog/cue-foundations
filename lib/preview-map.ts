@@ -11,14 +11,10 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
-import { CellToCardCalendarExpansionPreview } from "@/components/previews/foundations/cell-to-card-calendar-expansion"
 import { DotGraphCardPreview } from "@/components/previews/foundations/dot-graph-card"
 import { GlossySliderCallButtonPreview } from "@/components/previews/foundations/glossy-slider-call-button"
 import { StackerStyleBentoGridPreview } from "@/components/previews/foundations/stacker-style-bento-grid"
-import { StackedDeckScrollRevealPreview } from "@/components/previews/foundations/stacked-deck-scroll-reveal"
 import { PhantomInfiniteGalleryPreview } from "@/components/previews/foundations/phantom-infinite-gallery"
-import { SplitPanelImageSyncedFaqFeaturesPreview } from "@/components/previews/foundations/split-panel-image-synced-faq-features"
-import { CollapsingCardsAccordionPreview } from "@/components/previews/foundations/collapsing-cards-accordion"
 import { MinimalAiDevWorkspacePreview } from "@/components/previews/foundations/minimal-ai-dev-workspace"
 import { DynamicIslandFeedbackNotchPreview } from "@/components/previews/foundations/dynamic-island-feedback-notch"
 import { ExpandableBookSearchPalettePreview } from "@/components/previews/foundations/expandable-book-search-palette"
@@ -37,14 +33,10 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
-  "cell-to-card-calendar-expansion",
   "dot-graph-card",
   "glossy-slider-call-button",
   "stacker-style-bento-grid",
-  "stacked-deck-scroll-reveal",
   "phantom-infinite-gallery",
-  "split-panel-image-synced-faq-features",
-  "collapsing-cards-accordion",
   "minimal-ai-dev-workspace",
   "dynamic-island-feedback-notch",
   "expandable-book-search-palette",
@@ -64,14 +56,10 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
-  "cell-to-card-calendar-expansion": CellToCardCalendarExpansionPreview,
   "dot-graph-card": DotGraphCardPreview,
   "glossy-slider-call-button": GlossySliderCallButtonPreview,
   "stacker-style-bento-grid": StackerStyleBentoGridPreview,
-  "stacked-deck-scroll-reveal": StackedDeckScrollRevealPreview,
   "phantom-infinite-gallery": PhantomInfiniteGalleryPreview,
-  "split-panel-image-synced-faq-features": SplitPanelImageSyncedFaqFeaturesPreview,
-  "collapsing-cards-accordion": CollapsingCardsAccordionPreview,
   "minimal-ai-dev-workspace": MinimalAiDevWorkspacePreview,
   "dynamic-island-feedback-notch": DynamicIslandFeedbackNotchPreview,
   "expandable-book-search-palette": ExpandableBookSearchPalettePreview,

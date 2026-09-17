@@ -27,7 +27,7 @@
       --ball: #000000;
     }
 
-    .__cue-body-shim {
+    body {
       margin: 0;
       padding: 0;
       background-color: var(--bg);

@@ -87,7 +87,7 @@
             padding: 0;
         }
 
-        .__cue-body-shim {
+        body {
             display: flex;
             justify-content: center;
             align-items: center;

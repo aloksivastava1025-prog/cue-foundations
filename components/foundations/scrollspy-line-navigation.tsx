@@ -28,7 +28,7 @@
             padding: 0;
         }
 
-        .__cue-body-shim {
+        body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
             color: #333333;

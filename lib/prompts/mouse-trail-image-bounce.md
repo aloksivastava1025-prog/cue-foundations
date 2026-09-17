@@ -25,7 +25,7 @@ Paste-ready for Bolt / v0 / Cursor / any AI agent.
    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
    ```
 2. **Namespace with `.mif-*`** (mouse image fall). Do not use generic names like `.effect`, `.medias`, `.content-effect` that collide with host CSS.
-3. **Section is `100dvh` fullscreen.** Insert it as a standalone `<section>` block wherever it belongs in the page flow — do NOT put it inside a smaller container. It NEEDS the full viewport height.
+3. **Section is `100dvh` fullscreen.** Insert it as a standalone `<section>` block wherever it belongs in the page flow ��� do NOT put it inside a smaller container. It NEEDS the full viewport height.
 4. **`overflow: hidden` is required** on the section wrapper — spawned images travel past the section bounds during fall and must be clipped.
 5. **Do not touch `<body>` / `<html>` global styles.** The section is self-contained.
 6. **Wrap the JS in an IIFE** so nothing leaks to global scope.
