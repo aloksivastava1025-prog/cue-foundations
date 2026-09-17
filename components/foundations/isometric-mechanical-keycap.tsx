@@ -87,7 +87,7 @@
             padding: 0;
         }
 
-        body {
+        .__cue-globals-stripped {
             display: flex;
             justify-content: center;
             align-items: center;

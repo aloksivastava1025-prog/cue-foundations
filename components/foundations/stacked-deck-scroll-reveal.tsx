@@ -225,9 +225,9 @@ export default function StackScroll({
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-        html, body { margin: 0; padding: 0; background: #ffffff; }
+        .__cue-globals-stripped { margin: 0; padding: 0; background: #ffffff; }
         html { scroll-behavior: auto; }
-        html.lenis, html.lenis body { height: auto; }
+        html.lenis, html.lenis .__cue-globals-stripped { height: auto; }
 
         .ss-card, .ss-plain, .ss-stack, .ss-stack * {
           box-sizing: border-box;

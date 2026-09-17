@@ -152,8 +152,8 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; padding: 0; }
-body {
+.__cue-globals-stripped { height: 100%; margin: 0; padding: 0; }
+.__cue-globals-stripped {
   min-height: 100vh;
   font-family: 'Inter Tight', 'Inter', -apple-system, sans-serif;
   background: #000;
