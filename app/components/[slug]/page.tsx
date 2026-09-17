@@ -188,7 +188,7 @@ export default async function ComponentPage({
             className="text-[17px] font-semibold tracking-tight text-[#111827] hover:text-[#5C6DFF]"
           >
             Cue<span className="text-[#5C6DFF]">.</span>{" "}
-            <span className="text-[13px] font-normal text-[#6B7280]">Foundations</span>
+            <span className="text-[13px] font-normal text-[#6B7280]">Kit</span>
           </Link>
           <div className="flex items-center gap-6 text-[13px]">
             <Link href="/" className="text-[#6B7280] hover:text-[#111827]">

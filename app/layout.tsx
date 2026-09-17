@@ -15,9 +15,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cue Foundations — components with the AI prompts that designed them",
+  title: "Cue Kit — Awwwards-tier React components with the AI prompts that designed them",
   description:
-    "Free MIT-licensed React components curated from Cue's premium library. Every one ships with the AI prompt used to design it.",
+    "Free MIT-licensed React components curated from Cue's premium library. Every one ships with the AI prompt used to design it. Install with shadcn CLI.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

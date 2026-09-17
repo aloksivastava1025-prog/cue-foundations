@@ -30,7 +30,7 @@ export default function HomePage() {
             <span className="text-[17px] font-semibold tracking-tight text-[#111827]">
               Cue<span className="text-[#5C6DFF]">.</span>
               <span className="ml-1 hidden text-[13px] font-normal text-[#6B7280] sm:inline">
-                Foundations
+                Kit
               </span>
             </span>
           </div>
