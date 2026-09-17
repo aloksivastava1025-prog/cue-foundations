@@ -121,7 +121,18 @@ export default async function ComponentPage({
       <div className="absolute left-4 top-4 z-10 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
         You can interact
       </div>
-      <div className="relative min-h-[520px] max-h-[80vh] w-full overflow-auto">
+      <div
+        className="relative min-h-[520px] max-h-[80vh] w-full overflow-auto"
+        style={{
+          // CSS containment — hardware-level isolation. Browser is
+          // told this element is a self-contained render root: any
+          // layout / paint / size overflow from children is CLIPPED
+          // at the edge, regardless of position:fixed / absolute /
+          // 100vw children escapes.
+          contain: "layout size paint",
+          isolation: "isolate",
+        }}
+      >
         <Preview />
       </div>
     </div>
