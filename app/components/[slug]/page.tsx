@@ -128,6 +128,19 @@ export default async function ComponentPage({
       <div className="absolute left-4 top-4 z-10 rounded-[4px] border border-[#E5E7EB] bg-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280] shadow-sm">
         You can interact
       </div>
+      <a
+        href={`/preview/${item.slug}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Open full-page preview in a new tab"
+        className="absolute right-4 top-4 z-10 inline-flex items-center gap-1 rounded-[4px] border border-[#E5E7EB] bg-white px-2 py-1 text-[10px] font-semibold text-[#6B7280] shadow-sm transition-colors hover:text-[#111827]"
+      >
+        <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M7 17L17 7" />
+          <path d="M7 7h10v10" />
+        </svg>
+        <span>Fullscreen</span>
+      </a>
       <iframe
         src={`/preview/${item.slug}`}
         title={`${item.name} live preview`}
