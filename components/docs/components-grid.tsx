@@ -23,28 +23,28 @@ export function ComponentsGrid({ items }: { items: RegistryItem[] }) {
 
   return (
     <>
-      <div className="mb-6 hidden items-center gap-2 md:flex">
-        <button
-          type="button"
-          onClick={() => setLiveOnly((v) => !v)}
-          aria-pressed={liveOnly}
-          className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
-            liveOnly
-              ? "border-[#111827] bg-[#1A1A1A] text-white"
-              : "border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#D1D5DB] hover:text-[#111827]"
-          }`}
-        >
-          Show preview only
-          <span
-            className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${
-              liveOnly
-                ? "bg-white/15 text-white"
-                : "bg-[#F3F4F6] text-[#6B7280]"
-            }`}
-          >
+      <div className="mb-6 hidden items-center gap-3 md:flex">
+        <label className="inline-flex cursor-pointer items-center gap-2.5 text-[13px] text-[#6B7280] hover:text-[#111827]">
+          <span className="font-medium">Live preview only</span>
+          <span className="rounded-full bg-[#F3F4F6] px-1.5 py-0.5 text-[10px] font-semibold text-[#6B7280]">
             {items.filter((it) => SAFE_LIVE_SLUGS.has(it.slug) && !!it.videoSrc).length}
           </span>
-        </button>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={liveOnly}
+            onClick={() => setLiveOnly((v) => !v)}
+            className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${
+              liveOnly ? "bg-[#1A1A1A]" : "bg-[#E5E7EB]"
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform ${
+                liveOnly ? "translate-x-[18px]" : "translate-x-[2px]"
+              }`}
+            />
+          </button>
+        </label>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
