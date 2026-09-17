@@ -46,9 +46,9 @@ The site itself is styled per Cue's Design DNA — a taste-transferable design l
 
 ## Contributing
 
-**Now:** bug fixes and docs PRs welcome — read [CONTRIBUTING.md](CONTRIBUTING.md) for the structure and PR checklist.
+Pull requests welcome — new components, bug fixes, docs improvements. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the component quality bar, structure, and PR checklist. For big changes, open an issue first so we can align before you write code.
 
-**Later (Q1 2026):** new component contributions open once I have the review bandwidth to keep the taste bar tight. Star the repo to get notified.
+Solo maintainer — reviews in 3–5 days. If your component meets the taste bar, it ships and you get contributor credit on the detail page.
 
 ## License
 
