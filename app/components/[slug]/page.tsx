@@ -125,12 +125,12 @@ export default async function ComponentPage({
       <div
         className="relative min-h-[520px] max-h-[80vh] w-full overflow-auto"
         style={{
-          // CSS containment — hardware-level isolation. Browser is
-          // told this element is a self-contained render root: any
-          // layout / paint / size overflow from children is CLIPPED
-          // at the edge, regardless of position:fixed / absolute /
-          // 100vw children escapes.
-          contain: "layout size paint",
+          // `contain: paint` clips escaping paint without breaking
+          // sticky / absolute positioning inside. `layout` + `size`
+          // would create a layout containment root, which disables
+          // position:sticky bounds — components like Sticky Cascade
+          // relied on the pane being a normal scroll container.
+          contain: "paint",
           isolation: "isolate",
         }}
       >
