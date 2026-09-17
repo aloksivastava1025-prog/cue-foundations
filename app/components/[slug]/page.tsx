@@ -108,18 +108,20 @@ export default async function ComponentPage({
   // detail-page column; give the live pane its own min-h + horizontal
   // overflow-x-auto so wide layouts stay visible without pushing the
   // whole page sideways.
+  // Live pane — no forced sizing. Component renders at its natural
+  // width/height; the container just supplies a bounded viewport
+  // with scroll if the component is bigger than the column. Nothing
+  // squishes, stretches, or compresses.
   const livePane = Preview ? (
     <div
-      className="relative overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-3 md:p-6"
+      className="relative rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA]"
       style={{ boxShadow: DNA_SHADOW }}
     >
       <div className="absolute left-4 top-4 z-10 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
         You can interact
       </div>
-      <div className="flex min-h-[520px] items-center justify-center overflow-x-auto overflow-y-hidden">
-        <div className="w-full">
-          <Preview />
-        </div>
+      <div className="min-h-[520px] max-h-[80vh] overflow-auto">
+        <Preview />
       </div>
     </div>
   ) : null
