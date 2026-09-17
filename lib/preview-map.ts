@@ -11,6 +11,7 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
+import { DotGraphCardPreview } from "@/components/previews/foundations/dot-graph-card"
 import { GlossySliderCallButtonPreview } from "@/components/previews/foundations/glossy-slider-call-button"
 import { StackerStyleBentoGridPreview } from "@/components/previews/foundations/stacker-style-bento-grid"
 import { PhantomInfiniteGalleryPreview } from "@/components/previews/foundations/phantom-infinite-gallery"
@@ -19,6 +20,7 @@ import { DynamicIslandFeedbackNotchPreview } from "@/components/previews/foundat
 import { ExpandableBookSearchPalettePreview } from "@/components/previews/foundations/expandable-book-search-palette"
 import { _3dBookCarouselReadingModePreview } from "@/components/previews/foundations/3d-book-carousel-reading-mode"
 import { DynamicNotchActivityIndicatorPreview } from "@/components/previews/foundations/dynamic-notch-activity-indicator"
+import { FlexGrowBenefitsRevealPreview } from "@/components/previews/foundations/flex-grow-benefits-reveal"
 import { StickyCascadeServicesAndTimelinePreview } from "@/components/previews/foundations/sticky-cascade-services-and-timeline"
 import { AddProductWizardModalPreview } from "@/components/previews/foundations/add-product-wizard-modal"
 import { ChainedSpringArcCarouselPreview } from "@/components/previews/foundations/chained-spring-arc-carousel"
@@ -31,6 +33,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "dot-graph-card",
   "glossy-slider-call-button",
   "stacker-style-bento-grid",
   "phantom-infinite-gallery",
@@ -39,6 +42,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "expandable-book-search-palette",
   "3d-book-carousel-reading-mode",
   "dynamic-notch-activity-indicator",
+  "flex-grow-benefits-reveal",
   "sticky-cascade-services-and-timeline",
   "add-product-wizard-modal",
   "chained-spring-arc-carousel",
@@ -52,6 +56,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
+  "dot-graph-card": DotGraphCardPreview,
   "glossy-slider-call-button": GlossySliderCallButtonPreview,
   "stacker-style-bento-grid": StackerStyleBentoGridPreview,
   "phantom-infinite-gallery": PhantomInfiniteGalleryPreview,
@@ -60,6 +65,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "expandable-book-search-palette": ExpandableBookSearchPalettePreview,
   "3d-book-carousel-reading-mode": _3dBookCarouselReadingModePreview,
   "dynamic-notch-activity-indicator": DynamicNotchActivityIndicatorPreview,
+  "flex-grow-benefits-reveal": FlexGrowBenefitsRevealPreview,
   "sticky-cascade-services-and-timeline": StickyCascadeServicesAndTimelinePreview,
   "add-product-wizard-modal": AddProductWizardModalPreview,
   "chained-spring-arc-carousel": ChainedSpringArcCarouselPreview,
