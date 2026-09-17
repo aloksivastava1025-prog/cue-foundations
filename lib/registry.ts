@@ -93,6 +93,25 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
+    slug: "glossy-slider-call-button",
+    name: "Glossy Slider Call Button",
+    description: "A dark pill button whose acid-green slider expands on hover, swapping a dotted arrow icon for a phone icon while the label fades away.",
+    category: "buttons",
+    tags: ["hover","slider","icon-morph","glossy"],
+    dependencies: [],
+    sourcePath: "components/foundations/glossy-slider-call-button.tsx",
+    promptPath: "lib/prompts/glossy-slider-call-button.md",
+    previewMode: "video",
+    videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789673292761-227f192116af47879ce5ca8aa26549f0.mp4",
+    posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789673293756-c9f5ff1a387e4251b1f4da79d4f61fa0.jpg",
+    premiumHref: "https://cuedesign.space/component/cue172",
+    addedAt: "2026-09-17",
+    updatedAt: "2026-09-17",
+    isNew: true,
+    contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["isometric-mechanical-keycap"],
+  },
+  {
     slug: "stacker-style-bento-grid",
     name: "Stacker Style Bento Grid",
     description: "A white-page features section with a masked headline reveal and a 3/2/2/3 bento grid of animated flowchart, profile, and network cards.",
@@ -298,6 +317,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["glossy-slider-call-button"],
   },
   {
     slug: "expandable-book-search-palette",
