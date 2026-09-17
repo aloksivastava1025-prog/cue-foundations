@@ -91,7 +91,10 @@ export function DocsSidebar({ activeSlug }: { activeSlug: string }) {
 
   return (
     <aside className="hidden shrink-0 md:block md:w-[220px]">
-      <nav className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto pr-2">
+      {/* Independent scroll: sidebar pinned to viewport top, own
+          overflow-y-auto so scrolling the main content never moves
+          the sidebar and vice versa. */}
+      <nav className="sticky top-0 -mt-8 h-screen overflow-y-auto py-8 pr-3">
         <div className="mb-5">
           <div className="mb-2 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
             Intro

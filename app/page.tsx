@@ -3,6 +3,7 @@ import { registry } from "@/lib/registry"
 import { ComponentCard } from "@/components/docs/component-card"
 import { CueCtaButton } from "@/components/docs/cue-cta-button"
 import { HeroInstallChip } from "@/components/docs/hero-install-chip"
+import { SmoothScrollLink } from "@/components/docs/smooth-scroll-link"
 
 /** Only show components with a real preview video. */
 const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
@@ -73,12 +74,12 @@ export default function HomePage() {
         </p>
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
           <HeroInstallChip />
-          <Link
-            href="#recently-launched"
+          <SmoothScrollLink
+            targetId="recently-launched"
             className="rounded-full bg-[#1A1A1A] px-5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-black"
           >
             Browse components →
-          </Link>
+          </SmoothScrollLink>
         </div>
       </section>
 
