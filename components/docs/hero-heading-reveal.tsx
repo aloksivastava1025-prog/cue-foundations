@@ -19,12 +19,10 @@ const BAND_HALF = 17
 const SWEEP_START = -17
 const SWEEP_END = 117
 const TEXT_COLOR = "#2D2D2D"
-const DURATION_MS = 2800
-// Small delay so hydration + first paint settle before the sweep
-// starts — otherwise the effect fires under the fonts.ready flush
-// and users see the tail-end of the animation only ("aa raha hai
-// lekin start se nahi").
-const START_DELAY_MS = 350
+// Medium pacing — fast enough to feel snappy on refresh, slow
+// enough that the rainbow sweep reads as intentional (not a flash).
+const DURATION_MS = 1600
+const START_DELAY_MS = 150
 
 /** Framer's buildGradient — verbatim. */
 function buildGradient(pos: number, colors: string[], textColor: string) {
