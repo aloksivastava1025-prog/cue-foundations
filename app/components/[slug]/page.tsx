@@ -103,17 +103,23 @@ export default async function ComponentPage({
   const hasVideoToggle = !!Preview && SAFE_LIVE_SLUGS.has(slug) && !!item.videoSrc
 
   // Reusable live-mount block (used by both the plain-live branch
-  // and the Live half of the Video⇄Live toggle).
+  // and the Live half of the Video⇄Live toggle). Wide fanned /
+  // scroll-driven components would otherwise clip against the
+  // detail-page column; give the live pane its own min-h + horizontal
+  // overflow-x-auto so wide layouts stay visible without pushing the
+  // whole page sideways.
   const livePane = Preview ? (
     <div
-      className="relative rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-6 md:p-16"
+      className="relative overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-3 md:p-6"
       style={{ boxShadow: DNA_SHADOW }}
     >
-      <div className="absolute left-4 top-4 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
+      <div className="absolute left-4 top-4 z-10 rounded-full border border-[#10B981]/20 bg-[#DCFCE7] px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-[#10B981]">
         You can interact
       </div>
-      <div className="flex min-h-[280px] items-center justify-center">
-        <Preview />
+      <div className="flex min-h-[520px] items-center justify-center overflow-x-auto overflow-y-hidden">
+        <div className="w-full">
+          <Preview />
+        </div>
       </div>
     </div>
   ) : null
