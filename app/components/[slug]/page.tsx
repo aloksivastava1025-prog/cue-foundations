@@ -132,7 +132,7 @@ export default async function ComponentPage({
         src={`/preview/${item.slug}`}
         title={`${item.name} live preview`}
         loading="lazy"
-        className="block h-[640px] w-full border-0"
+        className="block h-[600px] w-full border-0 md:h-[720px]"
       />
     </div>
   ) : null
