@@ -114,46 +114,26 @@ export default async function ComponentPage({
   // can't blow the page layout sideways. Inner is a relative,
   // scrollable container — component renders at its natural size and
   // the user scrolls if it's bigger than the frame. Zero compression.
+  // Iframe-based live preview — each safe-live component has its
+  // own /preview/[slug] route that renders it alone in a fresh
+  // document. Iframing that gives the component:
+  //   • its own window / scroll / resize (ScrollTrigger etc. work)
+  //   • its own body / html — component body{} rules stay scoped
+  //   • zero CSS leak to the docs page
   const livePane = Preview ? (
-    <div>
-      <div className="mb-2 flex items-center gap-1.5 text-[11px] text-[#9CA3AF]">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 8v4" />
-          <path d="M12 16h.01" />
-        </svg>
-        <span>
-          Live preview may look different from the video — the
-          component is scaled + scroll-clipped to fit this container.
-          For the true experience, install and run it in your project.
-        </span>
-      </div>
     <div
       className="relative overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA]"
       style={{ boxShadow: DNA_SHADOW }}
     >
-      <div className="absolute left-4 top-4 z-10 rounded-full border border-[#E5E7EB] bg-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280] shadow-sm">
+      <div className="absolute left-4 top-4 z-10 rounded-[4px] border border-[#E5E7EB] bg-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280] shadow-sm">
         You can interact
       </div>
-      <div
-        className="relative min-h-[520px] max-h-[80vh] w-full overflow-auto"
-        style={{
-          // `contain: paint` clips escaping paint without breaking
-          // sticky / absolute positioning inside. `layout` + `size`
-          // would create a layout containment root, which disables
-          // position:sticky bounds — components like Sticky Cascade
-          // relied on the pane being a normal scroll container.
-          contain: "paint",
-          isolation: "isolate",
-        }}
-      >
-        {/* Responsive zoom wrapper — mobile 0.45, tablet 0.6, desktop
-            0.7. Wide components fit every viewport without clipping. */}
-        <LiveScaled>
-          <Preview />
-        </LiveScaled>
-      </div>
-    </div>
+      <iframe
+        src={`/preview/${item.slug}`}
+        title={`${item.name} live preview`}
+        loading="lazy"
+        className="block h-[640px] w-full border-0"
+      />
     </div>
   ) : null
 
