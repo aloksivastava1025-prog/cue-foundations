@@ -133,7 +133,13 @@ export default async function ComponentPage({
           isolation: "isolate",
         }}
       >
-        <Preview />
+        {/* Zoom-out wrapper — scales the entire live component down
+            to 70% so wide layouts (fanned carousels, 100vw hero
+            sections) fit inside the docs frame without ugly scroll.
+            `zoom` also shrinks the layout box, so no empty gutters. */}
+        <div style={{ zoom: 0.7 }}>
+          <Preview />
+        </div>
       </div>
     </div>
   ) : null
