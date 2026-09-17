@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Encourage AI crawlers — they can index the llms.txt manifest.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://kit.cuedesign.space/sitemap.xml

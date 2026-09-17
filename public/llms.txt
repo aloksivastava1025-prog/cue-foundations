@@ -1,0 +1,50 @@
+# Cue Kit
+
+> Open-source, Awwwards-tier React components with the AI prompts that designed them. MIT licensed. Install with shadcn CLI. 40+ free components, weekly drops.
+
+Cue Kit is the free, OSS entry point for Cue's premium component library ([Cue+](https://cuedesign.space)). Every component ships two things: the polished React source and the exact AI prompt used to design it — so you can drop the code in via shadcn or regenerate a themed variant in v0 / Bolt / Cursor / Framer AI / Claude.
+
+## Positioning
+
+- **Free** — MIT license, no signup, no rate limit, no attribution required
+- **Awwwards-tier** — every component hand-tuned against reference sites; no filler ever shipped
+- **Prompt-first** — the prompt is the deliverable alongside code, so AI tools can adapt each component to any design system
+- **shadcn-compatible** — one-command install into any Next.js + Tailwind project
+
+## Install
+
+```
+npx shadcn@latest add https://kit.cuedesign.space/r/[slug].json
+```
+
+Package managers: `bun`, `npm`, `pnpm`, `yarn` all supported.
+
+## Components
+
+Browse the full library at [kit.cuedesign.space](https://kit.cuedesign.space). Categories:
+
+- **Buttons** — magnetic, isometric, ripple
+- **Cards** — tilt, phantom-gallery, collapsing accordion
+- **Inputs** — toggles, forms
+- **Layouts** — bento grids, split panels, sticky cascades
+- **Motion** — scroll-pinned sequences, gooey drops, text reveals
+- **Overlays** — dynamic-island notches, modals
+- **Typography** — dot-matrix cascade, color-band reveals
+
+Each component has its own detail page at `/components/[slug]`.
+
+## Docs
+
+- [FAQ](https://kit.cuedesign.space/#faq) — positioning, license, install
+- [GitHub](https://github.com/aloksivastava1025-prog/cue-foundations) — source, contribute
+- [CONTRIBUTING.md](https://github.com/aloksivastava1025-prog/cue-foundations/blob/main/CONTRIBUTING.md) — quality bar for new components
+- [Cue+ (paid tier)](https://cuedesign.space) — 120+ premium components, Design DNA, Adapt API
+
+## Weekly cadence
+
+- 5 new components ship weekly to Cue Kit
+- 10+ ship weekly to Cue+
+
+## Built by
+
+[Alok Srivastava](https://x.com/Alok619308) — solo founder of Cue. Open-source and premium tiers under one taste bar.

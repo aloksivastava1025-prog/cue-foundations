@@ -21,6 +21,40 @@ export async function generateStaticParams() {
   return registry.map((item) => ({ slug: item.slug }))
 }
 
+/** Per-component metadata for SEO + social sharing. Uses the poster
+ *  as the OG image; falls back to the site default. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const item = getRegistryItem(slug)
+  if (!item) return {}
+  const url = `https://kit.cuedesign.space/components/${item.slug}`
+  const title = `${item.name} — Cue Kit`
+  const desc = item.description
+  return {
+    title,
+    description: desc,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description: desc,
+      siteName: "Cue Kit",
+      images: item.posterSrc ? [item.posterSrc] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description: desc,
+      images: item.posterSrc ? [item.posterSrc] : undefined,
+    },
+  }
+}
+
 function formatDate(iso?: string) {
   if (!iso) return null
   const d = new Date(iso)
