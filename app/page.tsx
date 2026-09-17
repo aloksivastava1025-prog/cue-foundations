@@ -4,6 +4,7 @@ import { ComponentCard } from "@/components/docs/component-card"
 import { CueCtaButton } from "@/components/docs/cue-cta-button"
 import { HeroInstallChip } from "@/components/docs/hero-install-chip"
 import { SmoothScrollLink } from "@/components/docs/smooth-scroll-link"
+import { Faq } from "@/components/docs/faq"
 
 /** Only show components with a real preview video. */
 const visibleRegistry = registry.filter((item) => Boolean(item.videoSrc))
@@ -122,6 +123,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* FAQ */}
+      <Faq />
 
       {/* CTA to Cue+ */}
       <section className="mx-auto max-w-[1280px] px-5 py-16 text-center md:px-6 md:py-24">
