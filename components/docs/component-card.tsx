@@ -1,6 +1,6 @@
 import Link from "next/link"
 import type { RegistryItem } from "@/lib/registry"
-import { PREVIEW_MAP } from "@/lib/preview-map"
+import { PREVIEW_MAP, SAFE_LIVE_SLUGS } from "@/lib/preview-map"
 import { GridAutoMotion } from "@/components/docs/grid-auto-motion"
 
 /**
@@ -26,6 +26,9 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
   const Preview = PREVIEW_MAP[item.slug]
   const isLiveInGrid =
     item.previewMode === "live" && Preview && GRID_LIVE_SLUGS.has(item.slug)
+  // Live-toggle available on the detail page? Show a "Live" pill on
+  // the card so browsing users know they can go interact.
+  const hasLiveToggle = !!Preview && SAFE_LIVE_SLUGS.has(item.slug) && !!item.videoSrc
 
   const previewContent = (() => {
     if (isLiveInGrid) {
@@ -85,6 +88,15 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
         }`}
       >
         {previewContent}
+        {hasLiveToggle && (
+          <span
+            className="pointer-events-none absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full border border-[#10B981]/25 bg-white/95 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#10B981] shadow-sm backdrop-blur"
+            title="Live interactive preview available on the detail page"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+            Live preview
+          </span>
+        )}
       </div>
 
       {/* Footer — 32px-ish internal breathing (card p-3 outer + these) */}
