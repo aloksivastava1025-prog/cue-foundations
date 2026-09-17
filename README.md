@@ -46,7 +46,9 @@ The site itself is styled per Cue's Design DNA — a taste-transferable design l
 
 ## Contributing
 
-Pull requests welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the component quality bar, structure, and PR checklist. For big changes, open an issue first.
+**Now:** bug fixes and docs PRs welcome — read [CONTRIBUTING.md](CONTRIBUTING.md) for the structure and PR checklist.
+
+**Later (Q1 2026):** new component contributions open once I have the review bandwidth to keep the taste bar tight. Star the repo to get notified.
 
 ## License
 

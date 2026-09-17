@@ -84,7 +84,7 @@ export function Faq() {
       q: "Can I contribute a component?",
       a: (
         <>
-          Yes — fork the{" "}
+          Bug fixes and docs PRs welcome now on the{" "}
           <a
             href="https://github.com/aloksivastava1025-prog/cue-foundations"
             target="_blank"
@@ -93,16 +93,9 @@ export function Faq() {
           >
             GitHub repo
           </a>
-          , add your component + prompt + registry entry, open a PR. Read{" "}
-          <a
-            href="https://github.com/aloksivastava1025-prog/cue-foundations/blob/main/CONTRIBUTING.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#5C6DFF] underline decoration-[#5C6DFF]/30 underline-offset-2 hover:decoration-[#5C6DFF]"
-          >
-            CONTRIBUTING.md
-          </a>{" "}
-          for the quality bar. Solo maintainer, reviews in 3–5 days.
+          . New component contributions open Q1 2026 — I&apos;m still
+          the solo curator and want to keep the taste bar tight during
+          launch. Star the repo to follow.
         </>
       ),
     },
