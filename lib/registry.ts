@@ -93,6 +93,25 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
+    slug: "dot-graph-card",
+    name: "Dot Graph Card",
+    description: "A minimalist revenue card with an animated percentage counter and a dot-matrix bar chart that pops in and reveals tooltips on hover.",
+    category: "layouts",
+    tags: ["data-viz","dot-chart","micro-interaction","counter-animation","graph"],
+    dependencies: [],
+    sourcePath: "components/foundations/dot-graph-card.tsx",
+    promptPath: "lib/prompts/dot-graph-card.md",
+    previewMode: "video",
+    videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789677901186-ed6fe0afd3cb4d0a84e8f67c8e4fefb5.mp4",
+    posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789677902484-b010ae33695d488b8a406c2622ec7242.jpg",
+    premiumHref: "https://cuedesign.space/component/cue174",
+    addedAt: "2026-09-17",
+    updatedAt: "2026-09-17",
+    isNew: true,
+    contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+  },
+  {
     slug: "glossy-slider-call-button",
     name: "Glossy Slider Call Button",
     description: "A dark pill button whose acid-green slider expands on hover, swapping a dotted arrow icon for a phone icon while the label fades away.",
@@ -128,7 +147,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["split-panel-image-synced-faq-features","minimal-ai-dev-workspace","scrollspy-line-navigation"],
+    related: ["dot-graph-card","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
   },
   {
     slug: "stacked-deck-scroll-reveal",
@@ -185,7 +204,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","minimal-ai-dev-workspace","scrollspy-line-navigation"],
+    related: ["dot-graph-card","stacker-style-bento-grid","minimal-ai-dev-workspace"],
   },
   {
     slug: "collapsing-cards-accordion",
@@ -223,7 +242,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","scrollspy-line-navigation"],
+    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
   },
   {
     slug: "dynamic-island-feedback-notch",
@@ -298,7 +317,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
   },
   {
     slug: "isometric-mechanical-keycap",
@@ -393,7 +412,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
   },
   {
     slug: "sticky-cascade-services-and-timeline",
@@ -412,7 +431,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
   },
   {
     slug: "add-product-wizard-modal",
@@ -469,7 +488,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
   },
   {
     slug: "fisheye-chromatic-card-grid",

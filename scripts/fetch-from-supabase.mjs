@@ -9,6 +9,11 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+// Use undici's fetch — works on every Node version (Node 18 global
+// fetch has been flaky under some shells; undici is what Node uses
+// under the hood anyway and is explicit + stable).
+const { fetch } = await import('undici')
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 
