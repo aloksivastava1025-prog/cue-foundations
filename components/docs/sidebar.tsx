@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import { registry, type RegistryItem } from "@/lib/registry"
 
@@ -80,6 +83,8 @@ function SidebarLink({
 }
 
 export function DocsSidebar({ activeSlug }: { activeSlug: string }) {
+  const [open, setOpen] = useState(true)
+
   const interactiveItems = registry.filter(isInteractive)
 
   const byCategory = new Map<RegistryItem["category"], RegistryItem[]>()
@@ -89,12 +94,54 @@ export function DocsSidebar({ activeSlug }: { activeSlug: string }) {
     byCategory.get(item.category)!.push(item)
   }
 
+  // Collapsed state — render a slim vertical rail with just a
+  // "chevron right" button to reopen. Takes ~40px of column width so
+  // the detail-page content flexes to fill the freed space.
+  if (!open) {
+    return (
+      <aside className="hidden shrink-0 md:block md:w-[36px]">
+        <div className="sticky top-6">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Open sidebar"
+            title="Open sidebar"
+            className="flex h-8 w-8 items-center justify-center rounded-[4px] border border-[#E5E7EB] bg-white text-[#6B7280] transition-colors hover:border-[#D1D5DB] hover:text-[#111827]"
+          >
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+      </aside>
+    )
+  }
+
   return (
     <aside className="hidden shrink-0 md:block md:w-[220px]">
       {/* Independent scroll: sidebar pinned to viewport top, own
           overflow-y-auto so scrolling the main content never moves
           the sidebar and vice versa. */}
       <nav className="sticky top-0 -mt-8 h-screen overflow-y-auto py-8 pr-3">
+        {/* Collapse toggle — sits above the Intro group so users can
+            reclaim the ~220px column for wide-component previews. */}
+        <div className="mb-4 flex items-center justify-between">
+          <div className="text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
+            Docs
+          </div>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Collapse sidebar"
+            title="Collapse sidebar"
+            className="flex h-6 w-6 items-center justify-center rounded-[4px] text-[#9CA3AF] transition-colors hover:bg-[#F3F4F6] hover:text-[#111827]"
+          >
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </div>
+
         <div className="mb-5">
           <div className="mb-2 text-[9px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
             Intro
