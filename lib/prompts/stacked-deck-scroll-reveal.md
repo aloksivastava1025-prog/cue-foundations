@@ -402,7 +402,7 @@ tl.to({}, { duration: 0.4 });   /* final hold */
 - Cards behind advance simultaneously: `behind[j]` becomes `stackPose(j)` (formerly `stackPose(j+1)`)
 - Runs at `time` = end-of-phase-1 + fly-index
 
-`ease: "none"` on both because the timeline itself is scrubbed by Lenis �� adding an ease would double-ease and break the linear scroll mapping.
+`ease: "none"` on both because the timeline itself is scrubbed by Lenis — adding an ease would double-ease and break the linear scroll mapping.
 
 ### Resize
 

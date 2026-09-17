@@ -140,6 +140,17 @@ function detectLiveSafety(code) {
     /document\.documentElement\.style/i.test(code)
   if (touchesGlobals) return { safe: false, exportName: null, isDefault: false }
 
+  // Fullscreen scroll journeys — components with 2+ occurrences of
+  // 100vh / h-screen AND scroll trigger patterns can't be honestly
+  // represented inside a 720px iframe (heights collapse, sticky
+  // math breaks). Better to keep them video-only than to ship a
+  // subtly-wrong live experience.
+  const fullscreenHits = (code.match(/100vh|h-screen|min-h-screen/g) || []).length
+  const scrollHits = (code.match(/ScrollTrigger|window\.scroll|scrollY|IntersectionObserver/g) || []).length
+  if (fullscreenHits >= 2 && scrollHits >= 1) {
+    return { safe: false, exportName: null, isDefault: false }
+  }
+
   // Prefer `export default function X` first, then named export.
   let m = code.match(/export\s+default\s+function\s+([A-Z][A-Za-z0-9_]*)/)
   if (m) return { safe: true, exportName: m[1], isDefault: true }

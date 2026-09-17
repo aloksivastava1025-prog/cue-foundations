@@ -21,10 +21,8 @@ import { ExpandableBookSearchPalettePreview } from "@/components/previews/founda
 import { _3dBookCarouselReadingModePreview } from "@/components/previews/foundations/3d-book-carousel-reading-mode"
 import { DynamicNotchActivityIndicatorPreview } from "@/components/previews/foundations/dynamic-notch-activity-indicator"
 import { FlexGrowBenefitsRevealPreview } from "@/components/previews/foundations/flex-grow-benefits-reveal"
-import { StickyCascadeServicesAndTimelinePreview } from "@/components/previews/foundations/sticky-cascade-services-and-timeline"
 import { AddProductWizardModalPreview } from "@/components/previews/foundations/add-product-wizard-modal"
 import { ChainedSpringArcCarouselPreview } from "@/components/previews/foundations/chained-spring-arc-carousel"
-import { StickerCollagePeelFooterPreview } from "@/components/previews/foundations/sticker-collage-peel-footer"
 import { FisheyeChromaticCardGridPreview } from "@/components/previews/foundations/fisheye-chromatic-card-grid"
 import { SyntXHardwareMediaPlayerPreview } from "@/components/previews/foundations/synt-x-hardware-media-player"
 
@@ -43,10 +41,8 @@ export const SAFE_LIVE_SLUGS = new Set([
   "3d-book-carousel-reading-mode",
   "dynamic-notch-activity-indicator",
   "flex-grow-benefits-reveal",
-  "sticky-cascade-services-and-timeline",
   "add-product-wizard-modal",
   "chained-spring-arc-carousel",
-  "sticker-collage-peel-footer",
   "fisheye-chromatic-card-grid",
   "synt-x-hardware-media-player",
 ])
@@ -66,10 +62,8 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "3d-book-carousel-reading-mode": _3dBookCarouselReadingModePreview,
   "dynamic-notch-activity-indicator": DynamicNotchActivityIndicatorPreview,
   "flex-grow-benefits-reveal": FlexGrowBenefitsRevealPreview,
-  "sticky-cascade-services-and-timeline": StickyCascadeServicesAndTimelinePreview,
   "add-product-wizard-modal": AddProductWizardModalPreview,
   "chained-spring-arc-carousel": ChainedSpringArcCarouselPreview,
-  "sticker-collage-peel-footer": StickerCollagePeelFooterPreview,
   "fisheye-chromatic-card-grid": FisheyeChromaticCardGridPreview,
   "synt-x-hardware-media-player": SyntXHardwareMediaPlayerPreview,
 }
