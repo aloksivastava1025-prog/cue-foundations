@@ -30,6 +30,11 @@ export function PreviewToggle({
     return () => window.removeEventListener("resize", check)
   }, [])
 
+  // On mobile: skip the toggle entirely, just show the video. Live
+  // preview needs pointer + hover + real screen space; a phone can't
+  // do it justice, so we don't tempt the user with a broken option.
+  if (isMobile) return <div>{video}</div>
+
   return (
     <div>
       <div className="mb-4 inline-flex items-center gap-1 rounded-full border border-[#E5E7EB] bg-white p-1 text-[11px]">
@@ -52,36 +57,7 @@ export function PreviewToggle({
         ))}
       </div>
 
-      {mode === "video" ? (
-        video
-      ) : isMobile ? (
-        <div className="rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] p-8 text-center">
-          <div className="mx-auto max-w-sm">
-            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white border border-[#E5E7EB]">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="2" y="4" width="20" height="14" rx="2" />
-                <path d="M8 20h8" />
-                <path d="M12 18v2" />
-              </svg>
-            </div>
-            <h3 className="mb-1 text-[15px] font-semibold text-[#111827]">
-              Live preview is desktop-only
-            </h3>
-            <p className="mb-4 text-[13px] leading-[1.5] text-[#6B7280]">
-              Interactive components need pointer + hover + real screen space to feel right. Switch back to the video to see it in motion, or open this page on a laptop to play with the real thing.
-            </p>
-            <button
-              type="button"
-              onClick={() => setMode("video")}
-              className="rounded-full bg-[#1A1A1A] px-4 py-2 text-[12px] font-semibold text-white hover:bg-black"
-            >
-              Watch the video →
-            </button>
-          </div>
-        </div>
-      ) : (
-        live
-      )}
+      {mode === "video" ? video : live}
     </div>
   )
 }

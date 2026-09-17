@@ -23,7 +23,7 @@ export function ComponentsGrid({ items }: { items: RegistryItem[] }) {
 
   return (
     <>
-      <div className="mb-6 flex items-center gap-2">
+      <div className="mb-6 hidden items-center gap-2 md:flex">
         <button
           type="button"
           onClick={() => setLiveOnly((v) => !v)}
