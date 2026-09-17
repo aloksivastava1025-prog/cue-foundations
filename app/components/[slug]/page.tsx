@@ -282,7 +282,7 @@ export default async function ComponentPage({
   const isInteractive = canMountLive
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-white text-[#111827]">
+    <main className="min-h-screen overflow-x-clip bg-white text-[#111827]">
       {/* Nav — mirrors homepage */}
       <nav className="border-b border-[#E5E7EB]">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5">
