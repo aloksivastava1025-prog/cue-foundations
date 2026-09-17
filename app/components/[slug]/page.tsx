@@ -10,6 +10,7 @@ import { DocsSidebar } from "@/components/docs/sidebar"
 import { PREVIEW_MAP, SAFE_LIVE_SLUGS } from "@/lib/preview-map"
 import { CueCtaButton } from "@/components/docs/cue-cta-button"
 import { PreviewToggle } from "@/components/docs/preview-toggle"
+import { LiveScaled } from "@/components/docs/live-scaled"
 
 /**
  * Component detail page — Cue Foundations Design DNA applied.
@@ -33,7 +34,7 @@ export async function generateMetadata({
   const item = getRegistryItem(slug)
   if (!item) return {}
   const url = `https://kit.cuedesign.space/components/${item.slug}`
-  const title = `${item.name} — Cue Kit`
+  const title = item.name // root layout template appends " — Cue Kit"
   const desc = item.description
   return {
     title,
@@ -133,13 +134,11 @@ export default async function ComponentPage({
           isolation: "isolate",
         }}
       >
-        {/* Zoom-out wrapper — scales the entire live component down
-            to 70% so wide layouts (fanned carousels, 100vw hero
-            sections) fit inside the docs frame without ugly scroll.
-            `zoom` also shrinks the layout box, so no empty gutters. */}
-        <div style={{ zoom: 0.7 }}>
+        {/* Responsive zoom wrapper — mobile 0.45, tablet 0.6, desktop
+            0.7. Wide components fit every viewport without clipping. */}
+        <LiveScaled>
           <Preview />
-        </div>
+        </LiveScaled>
       </div>
     </div>
   ) : null
