@@ -33,13 +33,13 @@ export function HeroInstallChip() {
   }
 
   return (
-    <div className="relative inline-flex max-w-full items-center overflow-hidden rounded-full border border-[#E5E7EB] bg-[#FAFAFA] py-1 pl-1 pr-2 font-mono text-[11px] text-[#111827] md:text-[13px]">
+    <div className="relative inline-flex max-w-full items-center overflow-visible rounded-[8px] border border-[#E5E7EB] bg-[#FAFAFA] py-1 pl-1 pr-2 font-mono text-[11px] text-[#111827] md:text-[13px]">
       {/* Package manager dropdown */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="inline-flex items-center gap-1 rounded-full bg-white border border-[#E5E7EB] px-2 py-1 text-[#111827] transition-colors hover:border-[#D1D5DB]"
+        className="inline-flex items-center gap-1 rounded-[4px] bg-white border border-[#E5E7EB] px-2 py-1 text-[#111827] transition-colors hover:border-[#D1D5DB]"
       >
         <span>{pm}</span>
         <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
