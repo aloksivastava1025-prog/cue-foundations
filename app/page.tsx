@@ -64,7 +64,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-[1280px] px-5 pt-14 pb-12 text-center md:px-6 md:pt-24 md:pb-16">
         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-3 py-1 text-[9px] font-semibold uppercase tracking-widest text-[#6B7280]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#5C6DFF]" />
-          {visibleRegistry.length} components · MIT · free
+          {visibleRegistry.length}+ components · weekly drops
         </div>
         <h1 className="mb-5 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[44px]">
           Awwwards-tier components you can use in your project.
