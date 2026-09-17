@@ -19,10 +19,11 @@ const BAND_HALF = 17
 const SWEEP_START = -17
 const SWEEP_END = 117
 const TEXT_COLOR = "#2D2D2D"
-// Medium pacing — fast enough to feel snappy on refresh, slow
-// enough that the rainbow sweep reads as intentional (not a flash).
-const DURATION_MS = 1600
-const START_DELAY_MS = 150
+// Medium pacing — 2.2s reads as intentional on desktop without
+// dragging; 200ms delay lets hydration settle before the sweep
+// starts so the reveal always begins from the very start.
+const DURATION_MS = 2200
+const START_DELAY_MS = 200
 
 /** Framer's buildGradient — verbatim. */
 function buildGradient(pos: number, colors: string[], textColor: string) {
