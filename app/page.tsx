@@ -7,6 +7,7 @@ import { SmoothScrollLink } from "@/components/docs/smooth-scroll-link"
 import { Faq } from "@/components/docs/faq"
 import { HeroHeadingReveal } from "@/components/docs/hero-heading-reveal"
 import { HashScrollClean } from "@/components/docs/hash-scroll-clean"
+import { ComponentsGrid } from "@/components/docs/components-grid"
 
 /** Only show components with a real preview video. Sort newest
  *  first (by addedAt desc) so weekly drops always land at the top
@@ -127,11 +128,7 @@ export default function HomePage() {
         <h2 className="mb-6 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:mb-8 md:text-[40px]">
           Motion primitives
         </h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleRegistry.slice(3).map((item) => (
-            <ComponentCard key={item.slug} item={item} />
-          ))}
-        </div>
+        <ComponentsGrid items={visibleRegistry.slice(3)} />
       </section>
 
       {/* FAQ */}
