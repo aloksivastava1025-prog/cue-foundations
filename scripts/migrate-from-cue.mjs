@@ -161,9 +161,12 @@ function detectLiveSafety(code) {
  *  detectLiveSafety sees a clean file and enables live preview. */
 function sanitizeGlobalStyles(code) {
   return code
-    // Match a leading `body` OR `html, body` (word-bounded) selector
-    // at the start of a CSS rule and rename it so it doesn't leak.
-    .replace(/(^|[\s,>+~;{}])(html\s*,\s*body|body)(\s*\{)/gm, '$1.__cue-globals-stripped$3')
+    // Rewrite `body` / `html, body` selectors to a scoped shim class.
+    // Preview wrappers add <div className="__cue-body-shim"> so the
+    // centering / fullscreen styles that were meant for <body> apply
+    // to a bounded element instead — no page-layout leak, but the
+    // component still renders as designed.
+    .replace(/(^|[\s,>+~;{}])(html\s*,\s*body|body)(\s*\{)/gm, '$1.__cue-body-shim$3')
 }
 
 /** Cue's export sometimes wraps code with leading whitespace; keep the
@@ -315,12 +318,17 @@ async function main() {
 ${importLine}
 
 /**
- * Auto-generated live preview wrapper. Renders the component at its
- * natural size — the detail page's live pane supplies bounds + scroll.
- * Regenerated on every sync-kit run — do not edit by hand.
+ * Auto-generated live preview wrapper. Renders the component inside
+ * a __cue-body-shim scope so any body{} rules the sanitizer moved
+ * off <body> (fullscreen bg, centering, min-height) apply here
+ * instead. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function ${pascalCase(slug)}Preview() {
-  return <${liveInfo.exportName} />
+  return (
+    <div className="__cue-body-shim" style={{ minHeight: "100%", width: "100%" }}>
+      <${liveInfo.exportName} />
+    </div>
+  )
 }
 `
       await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })

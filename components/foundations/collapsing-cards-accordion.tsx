@@ -104,8 +104,8 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; }
-.__cue-globals-stripped { height: 100%; margin: 0; padding: 0; }
-.__cue-globals-stripped {
+.__cue-body-shim { height: 100%; margin: 0; padding: 0; }
+.__cue-body-shim {
   height: 100vh;
   background: #0A0A0B;
   color: #FFFFFF;
@@ -215,7 +215,7 @@ const CSS = `
   .cc-title { font-size: 18px; }
 }
 @media (max-width: 640px) {
-  .__cue-globals-stripped { padding: 16px; }
+  .__cue-body-shim { padding: 16px; }
   .cc-cards { flex-direction: column; gap: 6px; }
   .cc-card { flex: 0.8; min-height: 0; }
   .cc-card.active { flex: 3; }

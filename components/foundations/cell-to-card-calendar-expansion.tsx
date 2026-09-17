@@ -289,7 +289,7 @@ const CSS = `
     --btn-bg: rgba(0,0,0,0.05); --btn-hover-bg: rgba(0,0,0,0.1);
     --toggle-bg: #e5e5ea; --toggle-thumb: #ffffff; --toggle-icon: #8e8e93;
   }
-  .__cue-globals-stripped {
+  .__cue-body-shim {
     background-color: var(--bg-color); color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     display: flex; justify-content: center; align-items: center;

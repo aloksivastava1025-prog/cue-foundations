@@ -106,7 +106,7 @@ Motion curve used throughout: `cubic-bezier(0.22, 1, 0.36, 1)` (expo-out feel).
 - Transitions: opacity + transform on 0.5s expo-out
 - Persists user choice in `localStorage` under key `pill-nav-theme`
 
-**Time pill** ��� height 36px, padding `0 6px`, font 13px `--control-fg-dim`, `font-variant-numeric: tabular-nums`, opacity 0.8
+**Time pill** — height 36px, padding `0 6px`, font 13px `--control-fg-dim`, `font-variant-numeric: tabular-nums`, opacity 0.8
 - Live HH:MM from `new Date()` — tick every 30s
 - Not a static "09:41"
 

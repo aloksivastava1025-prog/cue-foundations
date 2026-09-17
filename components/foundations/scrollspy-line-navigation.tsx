@@ -28,7 +28,7 @@
             padding: 0;
         }
 
-        .__cue-globals-stripped {
+        .__cue-body-shim {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
             color: #333333;
