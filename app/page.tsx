@@ -4,6 +4,7 @@ import { ComponentCard } from "@/components/docs/component-card"
 import { CueCtaButton } from "@/components/docs/cue-cta-button"
 import { HeroInstallChip } from "@/components/docs/hero-install-chip"
 import { SmoothScrollLink } from "@/components/docs/smooth-scroll-link"
+import { SlideText } from "@/components/docs/slide-text"
 import { Faq } from "@/components/docs/faq"
 import { HeroHeadingReveal } from "@/components/docs/hero-heading-reveal"
 import { HashScrollClean } from "@/components/docs/hash-scroll-clean"
@@ -98,9 +99,9 @@ export default function HomePage() {
           <HeroInstallChip />
           <SmoothScrollLink
             targetId="recently-launched"
-            className="rounded-[4px] bg-[#1A1A1A] px-5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-black"
+            className="group rounded-[4px] bg-[#1A1A1A] px-5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-black"
           >
-            Browse components →
+            <SlideText>Browse components →</SlideText>
           </SmoothScrollLink>
         </div>
       </section>
