@@ -273,6 +273,17 @@ async function main() {
     if (liveInfo.safe) {
       const wrapperRel = `components/previews/foundations/${slug}.tsx`
       const wrapperAbs = path.join(ROOT, wrapperRel)
+
+      // Hand-crafted wrapper marker — if the existing file starts
+      // with `/* @preview-handcrafted`, leave it alone. Prevents the
+      // sync from overwriting per-component customisations (e.g.
+      // modals that need stateful open/close control).
+      let handCrafted = false
+      try {
+        const existing = await fs.readFile(wrapperAbs, 'utf-8')
+        if (existing.includes('@preview-handcrafted')) handCrafted = true
+      } catch {}
+
       const importLine = liveInfo.isDefault
         ? `import ${liveInfo.exportName} from "@/components/foundations/${slug}"`
         : `import { ${liveInfo.exportName} } from "@/components/foundations/${slug}"`
@@ -290,7 +301,7 @@ export function ${pascalCase(slug)}Preview() {
 }
 `
       await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })
-      await fs.writeFile(wrapperAbs, wrapper, 'utf-8')
+      if (!handCrafted) await fs.writeFile(wrapperAbs, wrapper, 'utf-8')
       liveSlugs.push({ slug, exportName: `${pascalCase(slug)}Preview` })
     }
 
