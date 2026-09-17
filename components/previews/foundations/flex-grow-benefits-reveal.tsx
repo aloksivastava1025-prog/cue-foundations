@@ -9,9 +9,5 @@ import CueBenefits from "@/components/foundations/flex-grow-benefits-reveal"
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function FlexGrowBenefitsRevealPreview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <CueBenefits />
-    </div>
-  )
+  return <CueBenefits />
 }

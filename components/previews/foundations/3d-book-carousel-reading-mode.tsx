@@ -9,9 +9,5 @@ import BookCarousel3D from "@/components/foundations/3d-book-carousel-reading-mo
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function _3dBookCarouselReadingModePreview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <BookCarousel3D />
-    </div>
-  )
+  return <BookCarousel3D />
 }

@@ -9,9 +9,5 @@ import SyntXPlayer from "@/components/foundations/synt-x-hardware-media-player"
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function SyntXHardwareMediaPlayerPreview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <SyntXPlayer />
-    </div>
-  )
+  return <SyntXPlayer />
 }

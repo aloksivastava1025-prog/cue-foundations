@@ -9,9 +9,5 @@ import TruusFooter from "@/components/foundations/sticker-collage-peel-footer"
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function StickerCollagePeelFooterPreview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <TruusFooter />
-    </div>
-  )
+  return <TruusFooter />
 }

@@ -9,9 +9,5 @@ import EdgeDistortionGallery from "@/components/foundations/fisheye-chromatic-ca
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function FisheyeChromaticCardGridPreview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <EdgeDistortionGallery />
-    </div>
-  )
+  return <EdgeDistortionGallery />
 }

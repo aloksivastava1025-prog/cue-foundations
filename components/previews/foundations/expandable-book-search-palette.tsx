@@ -9,9 +9,5 @@ import BookSearchPalette from "@/components/foundations/expandable-book-search-p
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function ExpandableBookSearchPalettePreview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <BookSearchPalette />
-    </div>
-  )
+  return <BookSearchPalette />
 }

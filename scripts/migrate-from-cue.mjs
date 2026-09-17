@@ -308,11 +308,7 @@ ${importLine}
  * corner. Regenerated on every sync-kit run — do not edit by hand.
  */
 export function ${pascalCase(slug)}Preview() {
-  return (
-    <div className="flex min-h-[520px] w-full items-center justify-center">
-      <${liveInfo.exportName} />
-    </div>
-  )
+  return <${liveInfo.exportName} />
 }
 `
       await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })
