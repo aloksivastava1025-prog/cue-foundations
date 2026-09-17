@@ -115,6 +115,19 @@ export default async function ComponentPage({
   // scrollable container — component renders at its natural size and
   // the user scrolls if it's bigger than the frame. Zero compression.
   const livePane = Preview ? (
+    <div>
+      <div className="mb-2 flex items-center gap-1.5 text-[11px] text-[#9CA3AF]">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 8v4" />
+          <path d="M12 16h.01" />
+        </svg>
+        <span>
+          Live preview may look different from the video — the
+          component is scaled + scroll-clipped to fit this container.
+          For the true experience, install and run it in your project.
+        </span>
+      </div>
     <div
       className="relative overflow-hidden rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA]"
       style={{ boxShadow: DNA_SHADOW }}
@@ -140,6 +153,7 @@ export default async function ComponentPage({
           <Preview />
         </LiveScaled>
       </div>
+    </div>
     </div>
   ) : null
 
