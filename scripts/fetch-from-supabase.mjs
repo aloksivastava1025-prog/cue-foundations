@@ -7,12 +7,30 @@
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import https from 'node:https'
 import { fileURLToPath } from 'node:url'
 
-// Use undici's fetch — works on every Node version (Node 18 global
-// fetch has been flaky under some shells; undici is what Node uses
-// under the hood anyway and is explicit + stable).
-const { fetch } = await import('undici')
+// Built-in Node https.request — works on every Node ≥ 14 without
+// any dep. Global fetch / undici were both flaky on the user's shell.
+function httpsGet(url, headers) {
+  return new Promise((resolve, reject) => {
+    const req = https.get(url, { headers }, (res) => {
+      let body = ''
+      res.on('data', (c) => (body += c))
+      res.on('end', () =>
+        resolve({
+          ok: res.statusCode >= 200 && res.statusCode < 300,
+          status: res.statusCode,
+          text: () => Promise.resolve(body),
+          json: () => Promise.resolve(JSON.parse(body)),
+        }),
+      )
+    })
+    req.on('error', reject)
+    req.end()
+  })
+}
+const fetch = (url, opts = {}) => httpsGet(url, opts.headers || {})
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')

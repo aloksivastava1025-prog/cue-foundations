@@ -93,6 +93,25 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
+    slug: "cell-to-card-calendar-expansion",
+    name: "Cell-to-Card Calendar Expansion",
+    description: "A themeable weekly calendar grid where clicking an event cell performs a FLIP animation into a centered detail card with backdrop blur.",
+    category: "layouts",
+    tags: ["flip-animation","calendar","light-dark-theme","css-variables"],
+    dependencies: [],
+    sourcePath: "components/foundations/cell-to-card-calendar-expansion.tsx",
+    promptPath: "lib/prompts/cell-to-card-calendar-expansion.md",
+    previewMode: "video",
+    videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789679555646-30d091fc46c7400ba021d976ca9f7069.mp4",
+    posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789679557096-1f4e849f5d1745358e98d1fb5ae8c299.jpg",
+    premiumHref: "https://cuedesign.space/component/cue175",
+    addedAt: "2026-09-17",
+    updatedAt: "2026-09-17",
+    isNew: true,
+    contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
+  },
+  {
     slug: "dot-graph-card",
     name: "Dot Graph Card",
     description: "A minimalist revenue card with an animated percentage counter and a dot-matrix bar chart that pops in and reveals tooltips on hover.",
@@ -109,7 +128,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["stacker-style-bento-grid","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+    related: ["cell-to-card-calendar-expansion","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
   },
   {
     slug: "glossy-slider-call-button",
@@ -147,7 +166,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","split-panel-image-synced-faq-features","minimal-ai-dev-workspace"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","split-panel-image-synced-faq-features"],
   },
   {
     slug: "stacked-deck-scroll-reveal",
@@ -204,7 +223,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","stacker-style-bento-grid","minimal-ai-dev-workspace"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","stacker-style-bento-grid"],
   },
   {
     slug: "collapsing-cards-accordion",
@@ -242,7 +261,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","stacker-style-bento-grid"],
   },
   {
     slug: "dynamic-island-feedback-notch",
@@ -317,7 +336,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","stacker-style-bento-grid"],
   },
   {
     slug: "isometric-mechanical-keycap",
@@ -412,7 +431,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","stacker-style-bento-grid"],
   },
   {
     slug: "sticky-cascade-services-and-timeline",
@@ -431,7 +450,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","stacker-style-bento-grid"],
   },
   {
     slug: "add-product-wizard-modal",
@@ -488,7 +507,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-17",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["dot-graph-card","stacker-style-bento-grid","split-panel-image-synced-faq-features"],
+    related: ["cell-to-card-calendar-expansion","dot-graph-card","stacker-style-bento-grid"],
   },
   {
     slug: "fisheye-chromatic-card-grid",
