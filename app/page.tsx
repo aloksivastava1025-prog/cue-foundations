@@ -98,7 +98,7 @@ export default function HomePage() {
           <HeroInstallChip />
           <SmoothScrollLink
             targetId="recently-launched"
-            className="rounded-full bg-[#1A1A1A] px-5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-black"
+            className="rounded-[4px] bg-[#1A1A1A] px-5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-black"
           >
             Browse components →
           </SmoothScrollLink>

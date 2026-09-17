@@ -33,7 +33,7 @@ export function HeroInstallChip() {
   }
 
   return (
-    <div className="relative inline-flex max-w-full items-center overflow-visible rounded-[8px] border border-[#E5E7EB] bg-[#FAFAFA] py-1 pl-1 pr-2 font-mono text-[11px] text-[#111827] md:text-[13px]">
+    <div className="relative inline-flex max-w-full items-center overflow-visible rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] py-1 pl-1 pr-2 font-mono text-[11px] text-[#111827] md:text-[13px]">
       {/* Package manager dropdown */}
       <button
         type="button"

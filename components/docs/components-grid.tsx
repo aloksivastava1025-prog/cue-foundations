@@ -34,12 +34,12 @@ export function ComponentsGrid({ items }: { items: RegistryItem[] }) {
             role="switch"
             aria-checked={liveOnly}
             onClick={() => setLiveOnly((v) => !v)}
-            className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200 ${
+            className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-[4px] transition-colors duration-200 ${
               liveOnly ? "bg-[#1A1A1A]" : "bg-[#E5E7EB]"
             }`}
           >
             <span
-              className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform duration-200 ${
+              className={`inline-block h-5 w-5 transform rounded-[3px] bg-white shadow-sm transition-transform duration-200 ${
                 liveOnly ? "translate-x-5" : "translate-x-0.5"
               }`}
             />
