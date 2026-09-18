@@ -15,6 +15,8 @@ import { DotGraphCardPreview } from "@/components/previews/foundations/dot-graph
 import { GlossySliderCallButtonPreview } from "@/components/previews/foundations/glossy-slider-call-button"
 import { StackerStyleBentoGridPreview } from "@/components/previews/foundations/stacker-style-bento-grid"
 import { PhantomInfiniteGalleryPreview } from "@/components/previews/foundations/phantom-infinite-gallery"
+import { SplitPanelImageSyncedFaqFeaturesPreview } from "@/components/previews/foundations/split-panel-image-synced-faq-features"
+import { CollapsingCardsAccordionPreview } from "@/components/previews/foundations/collapsing-cards-accordion"
 import { MinimalAiDevWorkspacePreview } from "@/components/previews/foundations/minimal-ai-dev-workspace"
 import { DynamicIslandFeedbackNotchPreview } from "@/components/previews/foundations/dynamic-island-feedback-notch"
 import { ExpandableBookSearchPalettePreview } from "@/components/previews/foundations/expandable-book-search-palette"
@@ -35,6 +37,8 @@ export const SAFE_LIVE_SLUGS = new Set([
   "glossy-slider-call-button",
   "stacker-style-bento-grid",
   "phantom-infinite-gallery",
+  "split-panel-image-synced-faq-features",
+  "collapsing-cards-accordion",
   "minimal-ai-dev-workspace",
   "dynamic-island-feedback-notch",
   "expandable-book-search-palette",
@@ -56,6 +60,8 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "glossy-slider-call-button": GlossySliderCallButtonPreview,
   "stacker-style-bento-grid": StackerStyleBentoGridPreview,
   "phantom-infinite-gallery": PhantomInfiniteGalleryPreview,
+  "split-panel-image-synced-faq-features": SplitPanelImageSyncedFaqFeaturesPreview,
+  "collapsing-cards-accordion": CollapsingCardsAccordionPreview,
   "minimal-ai-dev-workspace": MinimalAiDevWorkspacePreview,
   "dynamic-island-feedback-notch": DynamicIslandFeedbackNotchPreview,
   "expandable-book-search-palette": ExpandableBookSearchPalettePreview,

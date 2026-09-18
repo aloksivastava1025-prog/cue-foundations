@@ -129,16 +129,11 @@ function detectLiveSafety(code) {
   const isRawHtml = /^\s*(?:\/\*[\s\S]*?\*\/\s*)?(?:<!DOCTYPE|<html)/im.test(code)
   if (isRawHtml) return { safe: false, exportName: null, isDefault: false }
 
-  // Global-style leaks — component would blow out the docs page.
-  // The `body` regex requires a word boundary before it (start / space
-  // / combinator) so class names like `.card-body` or `.email-body`
-  // don't trigger a false positive.
-  const touchesGlobals =
-    /(?:^|[\s,>+~])body\s*\{[^}]*(?:overflow|background|height|padding|margin)/im.test(code) ||
-    /(?:^|[\s,>+~])html\s*,\s*body/im.test(code) ||
-    /document\.body\.style/i.test(code) ||
-    /document\.documentElement\.style/i.test(code)
-  if (touchesGlobals) return { safe: false, exportName: null, isDefault: false }
+  // Note: `body {}` / `html, body {}` styles used to disqualify a
+  // component (they leaked when we mounted inline). Since previews
+  // now render inside their own iframe at /preview/[slug], global
+  // styles are contained — safe to allow. Only truly document-level
+  // things (raw <html> above) still fail the check.
 
   // Fullscreen scroll journeys — components with 2+ occurrences of
   // 100vh / h-screen AND scroll trigger patterns can't be honestly
