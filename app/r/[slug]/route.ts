@@ -44,7 +44,11 @@ export async function GET(
     )
   }
 
-  const abs = path.join(process.cwd(), item.sourcePath)
+  // turbopackIgnore silences the "dynamic filesystem access" warning
+  // — the tracing config in next.config.ts already scopes bundled
+  // files to components/foundations + lib/prompts, so tracing isn't
+  // uncontrolled despite the dynamic path.
+  const abs = path.join(/*turbopackIgnore: true*/ process.cwd(), item.sourcePath)
   let source: string
   try {
     source = await fs.readFile(abs, "utf-8")

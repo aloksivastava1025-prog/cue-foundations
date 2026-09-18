@@ -91,9 +91,9 @@ export default async function ComponentPage({
   const hasCode = item.codeAvailable !== false && !!item.sourcePath
   const [source, prompt] = await Promise.all([
     hasCode
-      ? fs.readFile(path.join(process.cwd(), item.sourcePath), "utf-8")
+      ? fs.readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), item.sourcePath), "utf-8")
       : Promise.resolve(""),
-    fs.readFile(path.join(process.cwd(), item.promptPath), "utf-8"),
+    fs.readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), item.promptPath), "utf-8"),
   ])
 
   const Preview = PREVIEW_MAP[slug]
