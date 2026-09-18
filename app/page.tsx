@@ -10,14 +10,18 @@ import { HeroHeadingReveal } from "@/components/docs/hero-heading-reveal"
 import { HashScrollClean } from "@/components/docs/hash-scroll-clean"
 import { ComponentsGrid } from "@/components/docs/components-grid"
 
-/** Only show components with a real preview video. Sort newest
- *  first (by addedAt desc) so weekly drops always land at the top
- *  of the grid — a returning developer sees "what's new" without
- *  scrolling. */
+/** Homepage grid ordering:
+ *   1. Manual sortOrder (from Cue paid `display_order`) — ascending,
+ *      so lower numbers pin higher on the grid. Undefined = no pin.
+ *   2. addedAt desc — recent drops surface without touching sortOrder.
+ *  Only show components with a real preview video. */
 const visibleRegistry = registry
   .filter((item) => Boolean(item.videoSrc))
   .slice()
   .sort((a, b) => {
+    const ao = typeof a.sortOrder === "number" ? a.sortOrder : Number.POSITIVE_INFINITY
+    const bo = typeof b.sortOrder === "number" ? b.sortOrder : Number.POSITIVE_INFINITY
+    if (ao !== bo) return ao - bo
     const at = a.addedAt || ""
     const bt = b.addedAt || ""
     if (at === bt) return 0

@@ -221,6 +221,9 @@ function registryEntryLiteral(entry) {
   if (entry.related && entry.related.length) {
     lines.push(`    related: ${JSON.stringify(entry.related)},`)
   }
+  if (typeof entry.sortOrder === 'number') {
+    lines.push(`    sortOrder: ${entry.sortOrder},`)
+  }
   lines.push('  },')
   return lines.join('\n')
 }
@@ -348,6 +351,7 @@ export function ${pascalCase(slug)}Preview() {
       isNew: true,
       contributor: { name: 'Alok', href: 'https://x.com/Alok619308' },
       related: [],
+      sortOrder: typeof row.display_order === 'number' ? row.display_order : undefined,
     })
 
     console.log(`[migrate] ✓ ${row.id.padEnd(8)} → ${slug}`)

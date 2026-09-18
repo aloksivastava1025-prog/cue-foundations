@@ -381,7 +381,7 @@ document.querySelectorAll('.rise').forEach(el => {
 
 ### C. Word-by-word IntersectionObserver reveal for intro + mission
 
-Both `#intro-text` and `#mission-text` split into `.word` spans; when the paragraph enters view (threshold 0.25) each word blurs → sharp with a 20ms stagger.
+Both `#intro-text` and `#mission-text` split into `.word` spans; when the paragraph enters view (threshold 0.25) each word blurs ��� sharp with a 20ms stagger.
 
 ```css
 .word {

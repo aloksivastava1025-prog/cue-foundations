@@ -78,7 +78,7 @@ console.log('[fetch] querying tier=free rows…')
 // by prompt_id. Both queries are batched, then merged in-memory.
 const prompts = await sbSelect(
   'prompts',
-  'tier=eq.free&select=id,title,description,category,tags,hover_src,thumb_src,tier,created_at,use_case,code&order=created_at.desc',
+  'tier=eq.free&select=id,title,description,category,tags,hover_src,thumb_src,tier,created_at,use_case,code,display_order&order=created_at.desc',
 )
 console.log(`[fetch] ${prompts.length} free-tier rows`)
 
