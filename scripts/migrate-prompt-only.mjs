@@ -145,7 +145,7 @@ async function main() {
       videoSrc: row.hover_src || undefined,
       posterSrc: row.thumb_src || undefined,
       premiumHref: `https://cuedesign.space/component/${row.id}`,
-      addedAt: existingAddedAt.get(slug) || today,
+      addedAt: (row.created_at || '').slice(0, 10) || today,
       updatedAt: today,
       sortOrder:
         typeof pins[slug] === 'number'

@@ -353,10 +353,12 @@ export function ${pascalCase(slug)}Preview() {
       videoSrc: row.hover_src || undefined,
       posterSrc: row.thumb_src || undefined,
       premiumHref: `https://cuedesign.space/component/${row.id}`,
-      // addedAt = when this slug first appeared in Kit (preserved
-      // across syncs so old components don't jump to the top on each
-      // regeneration). Slugs new to Kit get today's date.
-      addedAt: existingAddedAt.get(slug) || today,
+      // addedAt = Supabase row's created_at (real design date). This
+      // gives a stable, meaningful creation order — a component
+      // designed 3 months ago that gets toggled to free today still
+      // ranks by when it was actually made, not by when Kit noticed
+      // it. Manual overrides live in pins.json / display_order.
+      addedAt: (row.created_at || '').slice(0, 10) || today,
       updatedAt: today,
       isNew: true,
       contributor: { name: 'Alok', href: 'https://x.com/Alok619308' },
