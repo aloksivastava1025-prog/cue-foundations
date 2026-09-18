@@ -1,31 +1,60 @@
 /**
- * Cue Kit hero headline — pure opacity + translate fade-in.
- * Deliberately boring: no background-clip: text, no dual layers,
- * no gradients. Text is always solid #2D2D2D, animation only nudges
- * opacity and Y. On any slow load, cache miss, or font swap, the
- * headline still renders correctly — the only "failure mode" is
- * seeing solid text instantly, which is fine.
+ * Cue Kit hero headline — rainbow color-band sweep reveal, pure
+ * CSS. Uses `background-clip: text` + a wider-than-container
+ * gradient whose position animates via CSS keyframes. Compositor-
+ * optimized — the browser can offload the animation to GPU, so
+ * it doesn't fight the main thread when the user scrolls.
+ *
+ * Rainbow stops (transparent → 5 colors → solid text color) sit
+ * in the same order as the Framer source so the visual identity
+ * stays close to the paid product.
  */
 export function HeroHeadingReveal({ children }: { children: string }) {
   return (
     <>
-      <h1 className="cue-hero-reveal mb-5 text-[28px] font-medium leading-[1.15] tracking-tight text-[#2D2D2D] md:text-[44px]">
+      <h1
+        className="cue-hero-reveal mb-5 text-[28px] font-medium leading-[1.15] tracking-tight md:text-[44px]"
+      >
         {children}
       </h1>
       <style>{`
         .cue-hero-reveal {
-          opacity: 0;
-          transform: translateY(8px);
-          animation: cue-hero-fade-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+          /* Gradient (left→right in image): TEXT — rainbow band —
+             transparent. Combined with the animation that slides
+             bg-position from 100% → 0%, the reveal front travels
+             LEFT→RIGHT across the headline (leftmost characters see
+             solid TEXT first). */
+          background: linear-gradient(
+            90deg,
+            #2D2D2D 0%,
+            #2D2D2D 57%,
+            #0358f7 61%,
+            #e1e1fe 64%,
+            #ffb005 67%,
+            #fa3d1d 70%,
+            #c679c4 73%,
+            transparent 76%,
+            transparent 100%
+          );
+          background-size: 250% 100%;
+          background-position: 100% 0;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+          will-change: background-position;
+          animation: cue-hero-reveal-sweep 1.4s cubic-bezier(0.65, 0, 0.35, 1) 120ms forwards;
         }
-        @keyframes cue-hero-fade-in {
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes cue-hero-reveal-sweep {
+          from { background-position: 100% 0; }
+          to   { background-position: 0% 0; }
         }
         @media (prefers-reduced-motion: reduce) {
           .cue-hero-reveal {
             animation: none;
-            opacity: 1;
-            transform: none;
+            background: none;
+            color: #2D2D2D;
+            -webkit-text-fill-color: initial;
           }
         }
       `}</style>
