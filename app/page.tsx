@@ -119,9 +119,12 @@ export default function HomePage() {
           Recently launched
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleRegistry.slice(0, 3).map((item) => (
-            <ComponentCard key={item.slug} item={item} />
-          ))}
+          {visibleRegistry
+            .filter((item) => (item.sortOrder ?? 0) < 9000)
+            .slice(0, 3)
+            .map((item) => (
+              <ComponentCard key={item.slug} item={item} />
+            ))}
         </div>
       </section>
 
