@@ -612,6 +612,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 13,
   },
   {
     slug: "gradient-ring-profile-dropdown",
@@ -631,6 +632,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 20,
   },
   {
     slug: "segmented-progress-card",
@@ -650,6 +652,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 23,
   },
   {
     slug: "thermal-cut-invoice-studio",
@@ -669,6 +672,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 27,
   },
   {
     slug: "morphing-bento-product-showcase",
@@ -688,6 +692,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 9997,
   },
   {
     slug: "diagonal-field-journal-scroll",
@@ -707,6 +712,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 32,
   },
   {
     slug: "3d-envelope-stamp-collector",
@@ -726,6 +732,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 36,
   },
   {
     slug: "helix-ribbon-portfolio-scroll",
@@ -745,6 +752,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 9999,
   },
   {
     slug: "mosaic-tunnel-scroll-odyssey",
@@ -764,6 +772,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 9998,
   },
   {
     slug: "morphing-blob-testimonial-cards",
@@ -783,6 +792,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 41,
   },
   {
     slug: "lime-retainer-pricing-and-reserve-modal",
@@ -802,6 +812,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 46,
   },
   {
     slug: "ferrum-infrastructure-saas-hero",
@@ -821,6 +832,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 49,
   },
   {
     slug: "tilt-stack-drop-cards",
@@ -840,6 +852,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 50,
   },
   {
     slug: "coming-soon",
@@ -859,6 +872,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 54,
   },
   {
     slug: "expanding-pill-navbar-system",
@@ -878,6 +892,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 55,
   },
   {
     slug: "paper-fold-showcase",
@@ -897,6 +912,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 56,
   },
   {
     slug: "mouse-trail-image-bounce",
@@ -916,6 +932,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 57,
   },
   {
     slug: "gravity-stretch-hero",
@@ -935,6 +952,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    sortOrder: 63,
   },
 ]
 

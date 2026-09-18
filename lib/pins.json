@@ -1,7 +1,7 @@
 {
   "_comment": "Manual grid ordering — lower number = higher on the homepage grid. Slugs not listed use the default (Cue paid display_order → addedAt desc). Edit this file and run npm run sync-kit to apply.",
-  "_example": {
-    "chained-spring-arc-carousel": 1,
-    "dot-graph-card": 2
-  }
+
+  "morphing-bento-product-showcase": 9997,
+  "mosaic-tunnel-scroll-odyssey": 9998,
+  "helix-ribbon-portfolio-scroll": 9999
 }
