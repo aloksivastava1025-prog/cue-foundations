@@ -326,13 +326,17 @@ async function main() {
 ${importLine}
 
 /**
- * Auto-generated live preview wrapper. Renders the component at its
- * natural size but centers it in the pane so components that don't
- * self-center (which is most of them) don't render in the top-left
- * corner. Regenerated on every sync-kit run — do not edit by hand.
+ * Auto-generated live preview wrapper. Centers the component in the
+ * iframe so small components (buttons, cards, chips) don't stick to
+ * the top-left corner. Fullscreen components override this with
+ * their own layout. Regenerated on every sync-kit run — do not edit.
  */
 export function ${pascalCase(slug)}Preview() {
-  return <${liveInfo.exportName} />
+  return (
+    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+      <${liveInfo.exportName} />
+    </div>
+  )
 }
 `
       await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })
