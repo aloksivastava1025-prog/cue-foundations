@@ -2,6 +2,7 @@ import Link from "next/link"
 import type { RegistryItem } from "@/lib/registry"
 import { PREVIEW_MAP, SAFE_LIVE_SLUGS } from "@/lib/preview-map"
 import { GridAutoMotion } from "@/components/docs/grid-auto-motion"
+import { CardVideo } from "@/components/docs/card-video"
 
 /**
  * Homepage grid card — Cue Foundations Design DNA (StackerBento).
@@ -40,14 +41,9 @@ export function ComponentCard({ item }: { item: RegistryItem }) {
     }
     if (item.videoSrc) {
       return (
-        <video
+        <CardVideo
           src={item.videoSrc}
           poster={item.posterSrc}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
           className="h-full w-full object-contain"
         />
       )
