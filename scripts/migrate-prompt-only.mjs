@@ -88,6 +88,9 @@ function registryEntryLiteral(entry) {
   lines.push(`    updatedAt: ${JSON.stringify(entry.updatedAt)},`)
   lines.push(`    isNew: true,`)
   lines.push(`    contributor: { name: "Alok", href: "https://x.com/Alok619308" },`)
+  if (typeof entry.sortOrder === 'number') {
+    lines.push(`    sortOrder: ${entry.sortOrder},`)
+  }
   lines.push('  },')
   return lines.join('\n')
 }
@@ -105,6 +108,14 @@ async function main() {
   const existingSlugs = new Set(
     [...reg.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]),
   )
+  // Kit-side pins override Cue paid display_order.
+  let pins = {}
+  try {
+    const raw = await fs.readFile(path.join(ROOT, 'lib/pins.json'), 'utf-8')
+    pins = JSON.parse(raw)
+    delete pins._comment
+    delete pins._example
+  } catch {}
   const existingAddedAt = new Map()
   const entryRe = /\{\s*slug:\s*"([^"]+)"[\s\S]*?addedAt:\s*"([^"]+)"/g
   let mm
@@ -136,6 +147,12 @@ async function main() {
       premiumHref: `https://cuedesign.space/component/${row.id}`,
       addedAt: existingAddedAt.get(slug) || today,
       updatedAt: today,
+      sortOrder:
+        typeof pins[slug] === 'number'
+          ? pins[slug]
+          : typeof row.display_order === 'number'
+          ? row.display_order
+          : undefined,
     })
     console.log(`[promptonly] ✓ ${row.id} → ${slug}`)
   }

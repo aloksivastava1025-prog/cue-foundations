@@ -260,6 +260,16 @@ async function main() {
   // Slugs that will get an auto-generated preview wrapper + entry in
   // preview-map.ts so their detail page shows the Video ⇄ Live toggle.
   const liveSlugs = []
+  // Local pins — Kit-side manual overrides for grid ordering. Wins
+  // over Cue paid's `display_order` (so you can promote a component
+  // on Kit without touching the DB). Edit lib/pins.json.
+  let pins = {}
+  try {
+    const raw = await fs.readFile(path.join(ROOT, 'lib/pins.json'), 'utf-8')
+    pins = JSON.parse(raw)
+    delete pins._comment
+    delete pins._example
+  } catch {}
   // Explicit exclude list — components that DID pass the safety
   // check but visually don't fit the docs pane (fullscreen layouts
   // designed to own the viewport, corner-rendering when clipped).
@@ -351,7 +361,14 @@ export function ${pascalCase(slug)}Preview() {
       isNew: true,
       contributor: { name: 'Alok', href: 'https://x.com/Alok619308' },
       related: [],
-      sortOrder: typeof row.display_order === 'number' ? row.display_order : undefined,
+      // Kit-side pin (pins.json) wins; otherwise fall back to Cue
+      // paid's display_order; otherwise no sortOrder (date-desc).
+      sortOrder:
+        typeof pins[slug] === 'number'
+          ? pins[slug]
+          : typeof row.display_order === 'number'
+          ? row.display_order
+          : undefined,
     })
 
     console.log(`[migrate] ✓ ${row.id.padEnd(8)} → ${slug}`)
