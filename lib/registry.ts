@@ -96,6 +96,25 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
+    slug: "expandable-share-card",
+    name: "Expandable Share Card",
+    description: "A white 400px share card with a public/private toggle, animated grid-row invite panel, multi-email token input, and expanding shared-users list.",
+    category: "inputs",
+    tags: ["toggle","token-input","grid-expand","invite-flow"],
+    dependencies: [],
+    sourcePath: "components/foundations/expandable-share-card.tsx",
+    promptPath: "lib/prompts/expandable-share-card.md",
+    previewMode: "video",
+    videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789737596171-6eab4f151abc4b51a35726a82266af7b.mp4",
+    posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1789737597361-d00323d2b72d4726a28baafe846c49fd.jpg",
+    premiumHref: "https://cuedesign.space/component/cue176",
+    addedAt: "2026-09-18",
+    updatedAt: "2026-09-18",
+    isNew: true,
+    contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["expandable-book-search-palette","add-product-wizard-modal"],
+  },
+  {
     slug: "cell-to-card-calendar-expansion",
     name: "Cell-to-Card Calendar Expansion",
     description: "A themeable weekly calendar grid where clicking an event cell performs a FLIP animation into a centered detail card with backdrop blur.",
@@ -377,7 +396,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["add-product-wizard-modal"],
+    related: ["expandable-share-card","add-product-wizard-modal"],
   },
   {
     slug: "3d-book-carousel-reading-mode",
@@ -472,7 +491,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-18",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["expandable-book-search-palette"],
+    related: ["expandable-share-card","expandable-book-search-palette"],
   },
   {
     slug: "chained-spring-arc-carousel",

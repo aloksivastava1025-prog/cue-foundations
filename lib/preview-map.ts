@@ -11,6 +11,7 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
+import { ExpandableShareCardPreview } from "@/components/previews/foundations/expandable-share-card"
 import { DotGraphCardPreview } from "@/components/previews/foundations/dot-graph-card"
 import { GlossySliderCallButtonPreview } from "@/components/previews/foundations/glossy-slider-call-button"
 import { StackerStyleBentoGridPreview } from "@/components/previews/foundations/stacker-style-bento-grid"
@@ -33,6 +34,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "expandable-share-card",
   "dot-graph-card",
   "glossy-slider-call-button",
   "stacker-style-bento-grid",
@@ -56,6 +58,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
+  "expandable-share-card": ExpandableShareCardPreview,
   "dot-graph-card": DotGraphCardPreview,
   "glossy-slider-call-button": GlossySliderCallButtonPreview,
   "stacker-style-bento-grid": StackerStyleBentoGridPreview,
