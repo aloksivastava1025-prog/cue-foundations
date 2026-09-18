@@ -19,20 +19,25 @@ export function HeroHeadingReveal({ children }: { children: string }) {
       </h1>
       <style>{`
         .cue-hero-reveal {
+          /* Gradient (left→right in image): TEXT — rainbow band —
+             transparent. Combined with the animation that slides
+             bg-position from 100% → 0%, the reveal front travels
+             LEFT→RIGHT across the headline (leftmost characters see
+             solid TEXT first). */
           background: linear-gradient(
             90deg,
-            transparent 0%,
-            transparent 24%,
-            #c679c4 27%,
-            #fa3d1d 30%,
-            #ffb005 33%,
-            #e1e1fe 36%,
-            #0358f7 39%,
-            #2D2D2D 43%,
-            #2D2D2D 100%
+            #2D2D2D 0%,
+            #2D2D2D 57%,
+            #0358f7 61%,
+            #e1e1fe 64%,
+            #ffb005 67%,
+            #fa3d1d 70%,
+            #c679c4 73%,
+            transparent 76%,
+            transparent 100%
           );
           background-size: 250% 100%;
-          background-position: 0% 0;
+          background-position: 100% 0;
           background-clip: text;
           -webkit-background-clip: text;
           color: transparent;
@@ -40,8 +45,8 @@ export function HeroHeadingReveal({ children }: { children: string }) {
           animation: cue-hero-reveal-sweep 1.6s cubic-bezier(0.65, 0, 0.35, 1) 120ms forwards;
         }
         @keyframes cue-hero-reveal-sweep {
-          from { background-position: 0% 0; }
-          to   { background-position: 100% 0; }
+          from { background-position: 100% 0; }
+          to   { background-position: 0% 0; }
         }
         @media (prefers-reduced-motion: reduce) {
           .cue-hero-reveal {
