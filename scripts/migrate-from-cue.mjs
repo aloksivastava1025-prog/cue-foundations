@@ -316,22 +316,32 @@ async function main() {
       const importLine = liveInfo.isDefault
         ? `import ${liveInfo.exportName} from "@/components/foundations/${slug}"`
         : `import { ${liveInfo.exportName} } from "@/components/foundations/${slug}"`
+      // If the component already fills the viewport (uses h-screen /
+      // 100vh / min-h-screen), render it bare — wrapping it in another
+      // min-h-screen flex-center makes the iframe double-tall and
+      // pushes the content down with a black gap on top. Otherwise
+      // (buttons, cards, chips) wrap in a flex-center so they don't
+      // stick to the top-left corner.
+      const fillsViewport = /(?:h-screen|min-h-screen|100vh|100dvh)/.test(row.code || '')
+      const wrapperBody = fillsViewport
+        ? `  return <${liveInfo.exportName} />`
+        : `  return (
+    <div className="flex min-h-screen w-full items-center justify-center">
+      <${liveInfo.exportName} />
+    </div>
+  )`
       const wrapper = `"use client"
 
 ${importLine}
 
 /**
- * Auto-generated live preview wrapper. Centers the component in the
- * iframe so small components (buttons, cards, chips) don't stick to
- * the top-left corner. Fullscreen components override this with
- * their own layout. Regenerated on every sync-kit run — do not edit.
+ * Auto-generated live preview wrapper. Fullscreen components render
+ * bare so they own the viewport; small components (buttons, cards,
+ * chips) get a centering flex parent so they don't stick to the
+ * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function ${pascalCase(slug)}Preview() {
-  return (
-    <div className="flex min-h-screen w-full items-center justify-center">
-      <${liveInfo.exportName} />
-    </div>
-  )
+${wrapperBody}
 }
 `
       await fs.mkdir(path.dirname(wrapperAbs), { recursive: true })
