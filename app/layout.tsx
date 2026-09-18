@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { PostHogProvider } from "@/components/providers/posthog-provider";
 
 /** DNA typography spine — Inter, 400/500/600. */
 const inter = Inter({
@@ -94,7 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         style={{ fontFamily: "var(--font-inter), Inter, system-ui, -apple-system, sans-serif" }}
         suppressHydrationWarning
       >
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
   );
