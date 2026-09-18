@@ -148,11 +148,7 @@ async function main() {
       addedAt: (row.created_at || '').slice(0, 10) || today,
       updatedAt: today,
       sortOrder:
-        typeof pins[slug] === 'number'
-          ? pins[slug]
-          : typeof row.display_order === 'number'
-          ? row.display_order
-          : undefined,
+        typeof pins[slug] === 'number' ? pins[slug] : undefined,
     })
     console.log(`[promptonly] ✓ ${row.id} → ${slug}`)
   }

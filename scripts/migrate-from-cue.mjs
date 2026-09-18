@@ -363,14 +363,11 @@ export function ${pascalCase(slug)}Preview() {
       isNew: true,
       contributor: { name: 'Alok', href: 'https://x.com/Alok619308' },
       related: [],
-      // Kit-side pin (pins.json) wins; otherwise fall back to Cue
-      // paid's display_order; otherwise no sortOrder (date-desc).
+      // Only Kit-side pins (pins.json) set sortOrder. Cue paid's
+      // display_order is ignored — Kit grid is date-desc by default
+      // so newly-added components surface at the top.
       sortOrder:
-        typeof pins[slug] === 'number'
-          ? pins[slug]
-          : typeof row.display_order === 'number'
-          ? row.display_order
-          : undefined,
+        typeof pins[slug] === 'number' ? pins[slug] : undefined,
     })
 
     console.log(`[migrate] ✓ ${row.id.padEnd(8)} → ${slug}`)
