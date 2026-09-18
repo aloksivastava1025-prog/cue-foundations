@@ -50,9 +50,14 @@ export function HeroInstallChip() {
       {/* Divider */}
       <span className="mx-2 h-4 w-px bg-[#E5E7EB]" />
 
-      {/* Command — truncates, full text still gets copied */}
-      <span className="max-w-[240px] truncate text-[#6B7280] sm:max-w-[380px] md:max-w-[520px]">
-        {commands[pm].replace(jsonUrl, "kit.cuedesign.space/r/…")}
+      {/* Command — mobile shows a short hint (full text still gets
+          copied). Desktop shows the URL preview truncated. Avoids the
+          320px "ki…" ugliness where only 2 chars were visible. */}
+      <span className="text-[#6B7280]">
+        <span className="sm:hidden">shadcn add …</span>
+        <span className="hidden max-w-[380px] truncate sm:inline-block md:max-w-[520px]">
+          {commands[pm].replace(jsonUrl, "kit.cuedesign.space/r/…")}
+        </span>
       </span>
 
       {/* Copy button */}
