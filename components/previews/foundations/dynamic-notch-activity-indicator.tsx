@@ -10,7 +10,7 @@ import DynamicNotch from "@/components/foundations/dynamic-notch-activity-indica
  */
 export function DynamicNotchActivityIndicatorPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <DynamicNotch />
     </div>
   )

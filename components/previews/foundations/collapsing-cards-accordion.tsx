@@ -10,7 +10,7 @@ import CollapsingCards from "@/components/foundations/collapsing-cards-accordion
  */
 export function CollapsingCardsAccordionPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <CollapsingCards />
     </div>
   )

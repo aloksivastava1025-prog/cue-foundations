@@ -10,7 +10,7 @@ import CueBenefits from "@/components/foundations/flex-grow-benefits-reveal"
  */
 export function FlexGrowBenefitsRevealPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <CueBenefits />
     </div>
   )

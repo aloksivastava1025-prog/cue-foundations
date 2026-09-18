@@ -10,7 +10,7 @@ import BookCallButton from "@/components/foundations/glossy-slider-call-button"
  */
 export function GlossySliderCallButtonPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <BookCallButton />
     </div>
   )

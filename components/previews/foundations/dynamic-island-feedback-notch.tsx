@@ -10,7 +10,7 @@ import DynamicNotchPoll from "@/components/foundations/dynamic-island-feedback-n
  */
 export function DynamicIslandFeedbackNotchPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <DynamicNotchPoll />
     </div>
   )

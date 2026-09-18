@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { getRegistryItem, registry } from "@/lib/registry"
 import { PREVIEW_MAP, SAFE_LIVE_SLUGS } from "@/lib/preview-map"
+import { BodyReset } from "./body-reset"
 
 /**
  * Isolated live-preview route. Renders the component alone inside
@@ -28,5 +29,10 @@ export default async function PreviewOnly({
   const Preview = PREVIEW_MAP[slug]
   if (!Preview) notFound()
 
-  return <Preview />
+  return (
+    <>
+      <BodyReset />
+      <Preview />
+    </>
+  )
 }

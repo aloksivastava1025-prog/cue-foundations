@@ -10,7 +10,7 @@ import DotGraphCard from "@/components/foundations/dot-graph-card"
  */
 export function DotGraphCardPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <DotGraphCard />
     </div>
   )

@@ -10,7 +10,7 @@ import DevAgentWorkspace from "@/components/foundations/minimal-ai-dev-workspace
  */
 export function MinimalAiDevWorkspacePreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <DevAgentWorkspace />
     </div>
   )

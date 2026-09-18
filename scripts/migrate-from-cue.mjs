@@ -328,7 +328,7 @@ ${importLine}
  */
 export function ${pascalCase(slug)}Preview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <${liveInfo.exportName} />
     </div>
   )

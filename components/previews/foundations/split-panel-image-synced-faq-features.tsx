@@ -10,7 +10,7 @@ import FaqAccordion from "@/components/foundations/split-panel-image-synced-faq-
  */
 export function SplitPanelImageSyncedFaqFeaturesPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <FaqAccordion />
     </div>
   )

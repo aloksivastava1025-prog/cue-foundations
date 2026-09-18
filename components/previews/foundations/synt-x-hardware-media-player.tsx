@@ -10,7 +10,7 @@ import SyntXPlayer from "@/components/foundations/synt-x-hardware-media-player"
  */
 export function SyntXHardwareMediaPlayerPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-white p-8">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <SyntXPlayer />
     </div>
   )
