@@ -13,6 +13,7 @@ import { ThemeTogglePreview } from "@/components/previews/foundations/theme-togg
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
 import { LiveWaveformAudioRecorderPreview } from "@/components/previews/foundations/live-waveform-audio-recorder"
 import { ExpandableShareCardPreview } from "@/components/previews/foundations/expandable-share-card"
+import { CellToCardCalendarExpansionPreview } from "@/components/previews/foundations/cell-to-card-calendar-expansion"
 import { DotGraphCardPreview } from "@/components/previews/foundations/dot-graph-card"
 import { GlossySliderCallButtonPreview } from "@/components/previews/foundations/glossy-slider-call-button"
 import { StackerStyleBentoGridPreview } from "@/components/previews/foundations/stacker-style-bento-grid"
@@ -37,6 +38,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tabs-pill",
   "live-waveform-audio-recorder",
   "expandable-share-card",
+  "cell-to-card-calendar-expansion",
   "dot-graph-card",
   "glossy-slider-call-button",
   "stacker-style-bento-grid",
@@ -62,6 +64,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tabs-pill": TabsPillPreview,
   "live-waveform-audio-recorder": LiveWaveformAudioRecorderPreview,
   "expandable-share-card": ExpandableShareCardPreview,
+  "cell-to-card-calendar-expansion": CellToCardCalendarExpansionPreview,
   "dot-graph-card": DotGraphCardPreview,
   "glossy-slider-call-button": GlossySliderCallButtonPreview,
   "stacker-style-bento-grid": StackerStyleBentoGridPreview,

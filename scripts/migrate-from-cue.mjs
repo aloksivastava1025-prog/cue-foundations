@@ -269,9 +269,7 @@ async function main() {
   // check but visually don't fit the docs pane (fullscreen layouts
   // designed to own the viewport, corner-rendering when clipped).
   // Video preview only for these.
-  const LIVE_EXCLUDE = new Set([
-    'cell-to-card-calendar-expansion',
-  ])
+  const LIVE_EXCLUDE = new Set([])
 
   // ── Pass 1: write files ────────────────────────────────────────
   for (const row of withCode) {
