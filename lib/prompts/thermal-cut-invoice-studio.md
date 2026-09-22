@@ -257,7 +257,7 @@ outline-none focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10
 
 Field labels: `text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-500`.
 
-Currency is a `<select>` with 5 options: `£ GBP · $ USD · € EUR · ₹ INR · ¥ JPY`.
+Currency is a `<select>` with 5 options: `£ GBP · $ USD · ��� EUR · ₹ INR · ¥ JPY`.
 
 Total-paid pill at the bottom of the editor:
 - `rounded-lg bg-neutral-50 ring-1 ring-neutral-200/70`
