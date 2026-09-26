@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Cue Kit — Launch</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0a0a0a;
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+      }
+      #root { position: relative; width: 100%; height: 100%; }
+
+      /* ═══════════════════════ Shader-ish gradient beds ═══════════════════════ */
+      /* CSS-only stand-ins for WebGL shaders. Kept deterministic (GSAP-driven
+         transforms, not CSS animations) so seek-safe rendering works. */
+      .grad {
+        position: absolute; inset: 0;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      .grad-liquid {
+        background:
+          radial-gradient(60% 45% at 30% 40%, #3D50E8 0%, transparent 55%),
+          radial-gradient(50% 40% at 75% 65%, #5C6DFF 0%, transparent 60%),
+          radial-gradient(65% 50% at 50% 90%, #1a1f4a 0%, transparent 65%),
+          #0a0a0a;
+      }
+      .grad-mesh {
+        background:
+          radial-gradient(45% 35% at 25% 30%, #3D50E8 0%, transparent 55%),
+          radial-gradient(55% 45% at 78% 45%, #e1e1fe 0%, transparent 50%),
+          radial-gradient(50% 50% at 45% 85%, #12162e 0%, transparent 70%),
+          #0a0a0a;
+      }
+      .grad-warp {
+        background:
+          conic-gradient(from 210deg at 50% 50%, #0a0a0a 0deg, #3D50E8 90deg, #0a0a0a 180deg, #5C6DFF 270deg, #0a0a0a 360deg);
+        filter: blur(50px) saturate(1.1);
+      }
+      .grad-neuro {
+        background:
+          radial-gradient(35% 25% at 20% 20%, #3D50E8 0%, transparent 60%),
+          radial-gradient(30% 25% at 80% 30%, #7C8AFF 0%, transparent 60%),
+          radial-gradient(40% 30% at 40% 70%, #1a1f4a 0%, transparent 65%),
+          radial-gradient(35% 30% at 75% 80%, #2a2a55 0%, transparent 70%),
+          #060606;
+      }
+      /* Vignette carried on top of any shader so text reads clean */
+      .vignette {
+        position: absolute; inset: 0;
+        background: radial-gradient(120% 120% at 50% 50%, transparent 30%, rgba(10,10,10,0.55) 70%, rgba(10,10,10,0.9) 100%);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      /* ═══════════════════════ Typography stages ═══════════════════════ */
+      .stage {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: 0 80px;
+        text-align: center;
+      }
+      .stack { display: flex; flex-direction: column; align-items: center; }
+      .line { display: block; opacity: 0; will-change: transform, opacity; letter-spacing: -0.02em; }
+
+      /* Scene 1 — hook */
+      #s1 .line { font-size: 68px; font-weight: 500; line-height: 1.15; color: #ffffff; }
+      #s1 .accent { color: #5C6DFF; }
+
+      /* Scene 2 — the turn */
+      #s2 .line-a, #s2 .line-b { font-size: 54px; font-weight: 500; line-height: 1.2; color: #ffffff; margin-bottom: 22px; }
+      #s2 .line-c { font-size: 76px; font-weight: 600; line-height: 1.15; color: #ffffff; }
+
+      /* Scene 3 — Cue Kit reveal */
+      #s3 .title {
+        font-size: 220px; font-weight: 700; line-height: 1; letter-spacing: -0.04em;
+        color: #ffffff; margin-bottom: 30px;
+      }
+      #s3 .sub-a { font-size: 38px; font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 10px; }
+      #s3 .sub-b { font-size: 30px; font-weight: 400; color: rgba(255,255,255,0.72); }
+
+      /* Scene 4 — category burst */
+      #s4 .burst {
+        font-size: 90px; font-weight: 800; color: #ffffff; letter-spacing: 0.02em; text-transform: uppercase;
+        line-height: 1.05;
+      }
+      #s4 .burst.sm { font-size: 62px; letter-spacing: 0.04em; }
+
+      /* Scene 5 — outro */
+      #s5 .url {
+        font-size: 92px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;
+        margin-bottom: 26px;
+      }
+      #s5 .meta {
+        font-size: 30px; font-weight: 400; color: rgba(255,255,255,0.72); letter-spacing: 0.02em;
+      }
+      #s5 .url .accent { color: #5C6DFF; }
+
+      /* End black fader */
+      #fader {
+        position: absolute; inset: 0; background: #000000; opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="24"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- ═══════════════════ Gradient beds (all present, opacity-managed) ═══════════════════ -->
+      <div id="grad-liquid" class="grad grad-liquid clip" data-start="0" data-duration="24" data-track-index="0"></div>
+      <div id="grad-mesh"   class="grad grad-mesh   clip" data-start="0" data-duration="24" data-track-index="0"></div>
+      <div id="grad-warp"   class="grad grad-warp   clip" data-start="0" data-duration="24" data-track-index="0"></div>
+      <div id="grad-neuro"  class="grad grad-neuro  clip" data-start="0" data-duration="24" data-track-index="0"></div>
+      <div id="vignette"    class="vignette         clip" data-start="0" data-duration="24" data-track-index="0"></div>
+
+      <!-- ═══════════════════ Scene 1 · 0-3s · Hook ═══════════════════ -->
+      <div id="s1" class="stage clip" data-start="0" data-duration="3" data-track-index="1">
+        <div class="stack">
+          <span class="line l1">The web has never</span>
+          <span class="line l2">looked this good<span class="accent">.</span></span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ Scene 2 · 3-8s · The turn ═══════════════════ -->
+      <div id="s2" class="stage clip" data-start="3" data-duration="5" data-track-index="1">
+        <div class="stack">
+          <span class="line line-a">So why does</span>
+          <span class="line line-b">everything still feel</span>
+          <span class="line line-c">the same?</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ Scene 3 · 8-13s · Cue Kit reveal ═══════════════════ -->
+      <div id="s3" class="stage clip" data-start="8" data-duration="5" data-track-index="1">
+        <div class="stack">
+          <span class="line title">Cue Kit<span class="accent" style="color:#5C6DFF">.</span></span>
+          <span class="line sub-a">The interaction library</span>
+          <span class="line sub-b">for websites that refuse to look generic.</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ Scene 4 · 13-19s · Category burst (3 hard-cut labels) ═══════════════════ -->
+      <div id="s4a" class="stage clip" data-start="13" data-duration="2"   data-track-index="1">
+        <div class="stack"><span class="line burst">Open<br/>source</span></div>
+      </div>
+      <div id="s4b" class="stage clip" data-start="15" data-duration="2"   data-track-index="1">
+        <div class="stack"><span class="line burst">MIT<br/>licensed</span></div>
+      </div>
+      <div id="s4c" class="stage clip" data-start="17" data-duration="2"   data-track-index="1">
+        <div class="stack"><span class="line burst sm">47+ components<br/>weekly drops</span></div>
+      </div>
+
+      <!-- ═══════════════════ Scene 5 · 19-24s · Outro ═══════════════════ -->
+      <div id="s5" class="stage clip" data-start="19" data-duration="5" data-track-index="1">
+        <div class="stack">
+          <span class="line url">kit<span class="accent">.</span>cuedesign<span class="accent">.</span>space</span>
+          <span class="line meta">Open source · MIT · Free forever</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════ End fade to black ═══════════════════ -->
+      <div id="fader" class="clip" data-start="23" data-duration="1" data-track-index="9"></div>
+    </div>
+
+    <script>
+      /*
+       * Cue Kit launch — 24-second cinematic film.
+       *
+       * One paused GSAP master timeline drives everything so every frame is
+       * deterministic (seek-safe). No CSS keyframes, no requestAnimationFrame
+       * outside GSAP — Hyperframes renders by seeking this timeline frame-by-
+       * frame, so any non-GSAP animation would tear.
+       *
+       * Structure mirrors the storyboard 1:1:
+       *   0-3s   Hook line
+       *   3-8s   3-phrase question with growing weight
+       *   8-13s  Cue Kit reveal on indigo shader
+       *   13-19s Three hard-cut category labels (2s each, no overlap)
+       *   19-24s URL + meta subtitle, fade to black on the last second
+       */
+      const tl = gsap.timeline({ paused: true });
+
+      // ── Gradient orchestration ────────────────────────────────────────
+      // scene 3 owns the liquid-metal reveal; scenes 4a/4b/4c cross to
+      // warp/neuro/mesh in turn; scene 5 returns to a calmer mesh.
+      // Everything else stays on plain black.
+      tl.fromTo("#grad-liquid",
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 7.6);
+      tl.to("#grad-liquid",
+        { opacity: 0, duration: 0.4, ease: "power1.in" }, 12.8);
+
+      tl.fromTo("#grad-warp",
+        { opacity: 0 }, { opacity: 0.9, duration: 0.15 }, 13.0);
+      tl.to("#grad-warp",
+        { opacity: 0, duration: 0.15 }, 15.0);
+
+      tl.fromTo("#grad-neuro",
+        { opacity: 0 }, { opacity: 0.95, duration: 0.15 }, 15.0);
+      tl.to("#grad-neuro",
+        { opacity: 0, duration: 0.15 }, 17.0);
+
+      tl.fromTo("#grad-mesh",
+        { opacity: 0 }, { opacity: 0.95, duration: 0.15 }, 17.0);
+      tl.to("#grad-mesh",
+        { opacity: 0.35, duration: 0.6, ease: "power2.out" }, 19.0);
+      tl.to("#grad-mesh",
+        { opacity: 0, duration: 0.6 }, 23.0);
+
+      // Persistent readability vignette while gradients are on
+      tl.fromTo("#vignette",
+        { opacity: 0 }, { opacity: 1, duration: 0.4 }, 7.6);
+      tl.to("#vignette",
+        { opacity: 0, duration: 0.6 }, 22.6);
+
+      // ── Scene 1 · Hook (0-3s) ─────────────────────────────────────────
+      tl.fromTo("#s1 .l1",
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.15);
+      tl.fromTo("#s1 .l2",
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.55);
+      // hold ~1.5s settled, then a soft exit
+      tl.to("#s1 .line",
+        { opacity: 0, y: -12, duration: 0.4, ease: "power1.in", stagger: 0.05 }, 2.6);
+
+      // ── Scene 2 · The turn (3-8s) ────────────────────────────────────
+      tl.fromTo("#s2 .line-a",
+        { opacity: 0, y: 24, filter: "blur(6px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.65, ease: "power2.out" }, 3.2);
+      tl.fromTo("#s2 .line-b",
+        { opacity: 0, y: 24, filter: "blur(6px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.65, ease: "power2.out" }, 3.8);
+      tl.fromTo("#s2 .line-c",
+        { opacity: 0, y: 30, filter: "blur(8px)", scale: 0.96 },
+        { opacity: 1, y: 0, filter: "blur(0px)", scale: 1, duration: 0.75, ease: "power2.out" }, 4.5);
+      // Hold the question (~2.5s legible), soft exit
+      tl.to(["#s2 .line-a", "#s2 .line-b", "#s2 .line-c"],
+        { opacity: 0, y: -14, duration: 0.5, ease: "power1.in", stagger: 0.05 }, 7.5);
+
+      // ── Scene 3 · Cue Kit reveal (8-13s) ─────────────────────────────
+      // Big title lands from a subtle zoom-blur; subtitles cascade in.
+      tl.fromTo("#s3 .title",
+        { opacity: 0, scale: 1.14, filter: "blur(14px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.75, ease: "power3.out" }, 8.2);
+      tl.fromTo("#s3 .sub-a",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 9.4);
+      tl.fromTo("#s3 .sub-b",
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 9.9);
+      // Hold the reveal ~2.4s legible, then clean exit
+      tl.to("#s3 .line",
+        { opacity: 0, y: -10, duration: 0.45, ease: "power1.in", stagger: 0.04 }, 12.6);
+
+      // ── Scene 4 · Category burst (13-19s, three 2-s hard-cuts) ───────
+      // Each label hard-in ~0.25s, holds ~1.5s legible, hard-out ~0.2s.
+      const bursts = [
+        { sel: "#s4a .burst", tIn: 13.05, tOut: 14.75 },
+        { sel: "#s4b .burst", tIn: 15.05, tOut: 16.75 },
+        { sel: "#s4c .burst", tIn: 17.05, tOut: 18.75 },
+      ];
+      bursts.forEach(({ sel, tIn, tOut }) => {
+        tl.fromTo(sel,
+          { opacity: 0, scale: 1.08, y: 12 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: "power3.out" }, tIn);
+        tl.to(sel,
+          { opacity: 0, scale: 0.98, duration: 0.22, ease: "power1.in" }, tOut);
+      });
+
+      // ── Scene 5 · Outro (19-24s) ─────────────────────────────────────
+      // URL fades up with a small vertical lift + scale settle — letter-
+      // spacing tweens break seek-safety (Hyperframes rounds them to
+      // device pixels; slow tails stutter), so only transforms/opacity.
+      tl.fromTo("#s5 .url",
+        { opacity: 0, y: 24, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.0, ease: "power2.out" }, 19.2);
+      tl.fromTo("#s5 .meta",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 20.4);
+      // Hold ~2s legible before the fader takes over
+      tl.to(["#s5 .url", "#s5 .meta"],
+        { opacity: 0, duration: 0.6, ease: "power1.in", stagger: 0.05 }, 22.8);
+
+      // ── End fader (23-24s) ───────────────────────────────────────────
+      tl.fromTo("#fader",
+        { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "power2.inOut" }, 23.0);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -11,6 +11,7 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
+import { NestedDarkContextMenuPreview } from "@/components/previews/foundations/nested-dark-context-menu"
 import { MorphingPillDurationEditorPreview } from "@/components/previews/foundations/morphing-pill-duration-editor"
 import { LiveWaveformAudioRecorderPreview } from "@/components/previews/foundations/live-waveform-audio-recorder"
 import { ExpandableShareCardPreview } from "@/components/previews/foundations/expandable-share-card"
@@ -37,6 +38,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "nested-dark-context-menu",
   "morphing-pill-duration-editor",
   "live-waveform-audio-recorder",
   "expandable-share-card",
@@ -64,6 +66,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
+  "nested-dark-context-menu": NestedDarkContextMenuPreview,
   "morphing-pill-duration-editor": MorphingPillDurationEditorPreview,
   "live-waveform-audio-recorder": LiveWaveformAudioRecorderPreview,
   "expandable-share-card": ExpandableShareCardPreview,
