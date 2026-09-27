@@ -238,7 +238,7 @@ RIM room: five point lights on the +X/-X/+Y/-Y/+Z faces of a virtual room, color
   - `page__cta` `margin-top: 1.4rem`. `page__back` `margin-top: 1.6rem`.
 
 **Robustness**
-- Resize / orientationchange / visualViewport.resize all coalesce to one rAF (a phone fires resize per URL-bar step; naïve handling reallocates canvases 30× / second).
+- Resize / orientationchange / visualViewport.resize all coalesce to one rAF (a phone fires resize per URL-bar step; na��ve handling reallocates canvases 30× / second).
 - `overflow: hidden; overscroll-behavior: none` on html+body — nothing scrolls.
 - `100dvh` where supported (address bar honesty).
 - `-webkit-tap-highlight-color: transparent`, `user-select: none`.
