@@ -96,6 +96,25 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
+    slug: "motionflow-feature-grid-showcase",
+    name: "MotionFlow Feature Grid Showcase",
+    description: "A three-card feature grid with masked split-line headline reveal, staggered fade-ups, and live animated UI mockups per card.",
+    category: "layouts",
+    tags: ["split-text","stagger-animation","progress-bar","product-mockup","feature-card"],
+    dependencies: [],
+    sourcePath: "components/foundations/motionflow-feature-grid-showcase.tsx",
+    promptPath: "lib/prompts/motionflow-feature-grid-showcase.md",
+    previewMode: "video",
+    videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1790539767218-2e713544adbc433c801377466d95c617.mp4",
+    posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1790539769565-a9c19e4dd34c4c298dd9ab7d637dd45c.jpg",
+    premiumHref: "https://cuedesign.space/component/cue187",
+    addedAt: "2026-09-27",
+    updatedAt: "2026-09-27",
+    isNew: true,
+    contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+  },
+  {
     slug: "grid-row-profile-expander",
     name: "Grid-Row Profile Expander",
     description: "A beige profile card that expands upward via the grid-row 0fr-to-1fr trick to reveal a nested menu and light/dark/system theme switcher.",
@@ -112,7 +131,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["nested-dark-context-menu","cell-to-card-calendar-expansion","dot-graph-card"],
+    related: ["motionflow-feature-grid-showcase","nested-dark-context-menu","cell-to-card-calendar-expansion"],
   },
   {
     slug: "nested-dark-context-menu",
@@ -131,7 +150,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","cell-to-card-calendar-expansion","dot-graph-card"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","cell-to-card-calendar-expansion"],
   },
   {
     slug: "morphing-pill-duration-editor",
@@ -207,7 +226,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","dot-graph-card"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "dot-graph-card",
@@ -226,7 +245,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "glossy-slider-call-button",
@@ -264,7 +283,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "stacked-deck-scroll-reveal",
@@ -321,7 +340,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "collapsing-cards-accordion",
@@ -359,7 +378,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "dynamic-island-feedback-notch",
@@ -434,7 +453,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "isometric-mechanical-keycap",
@@ -529,7 +548,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "sticky-cascade-services-and-timeline",
@@ -548,7 +567,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "add-product-wizard-modal",
@@ -605,7 +624,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-09-27",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "fisheye-chromatic-card-grid",
