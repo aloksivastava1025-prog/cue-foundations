@@ -9,5 +9,9 @@ import DotGraphCard from "@/components/foundations/dot-graph-card"
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function DotGraphCardPreview() {
-  return <DotGraphCard />
+  return (
+    <div className="h-screen w-screen">
+      <DotGraphCard />
+    </div>
+  )
 }

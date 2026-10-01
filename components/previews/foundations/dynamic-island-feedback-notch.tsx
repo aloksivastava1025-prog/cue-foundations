@@ -9,5 +9,9 @@ import DynamicNotchPoll from "@/components/foundations/dynamic-island-feedback-n
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function DynamicIslandFeedbackNotchPreview() {
-  return <DynamicNotchPoll />
+  return (
+    <div className="h-screen w-screen">
+      <DynamicNotchPoll />
+    </div>
+  )
 }

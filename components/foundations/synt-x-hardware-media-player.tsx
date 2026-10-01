@@ -152,7 +152,7 @@ export default function SyntXPlayer({
   // Initial idle setup
   useEffect(() => { resetIdle(); }, [resetIdle]);
 
-  // ── Dynamic styles ─────────────────────────────────��───
+  // ── Dynamic styles ─────────────────────────────────────
   const deviceStyle: React.CSSProperties = {
     transform: `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale3d(${tilt.hovering ? 1.02 : 1}, ${tilt.hovering ? 1.02 : 1}, 1)`,
     boxShadow: tilt.hovering

@@ -48,7 +48,7 @@ const ITEMS: Item[] = [
   { title: "Vera",     src: "https://i.pinimg.com/1200x/77/bd/d8/77bdd84c56688618569a4dc812112c7a.jpg", year: 2023, desc: "Portrait sequence, first pass — the honest one before we edited it." },
   { title: "Nexo",     src: "https://i.pinimg.com/1200x/f8/7f/dd/f87fdde4441ea5f3affbb4a6dfe25d1f.jpg", year: 2024, desc: "Where two systems meet, and briefly agree on a single language." },
   { title: "Kite",     src: "https://i.pinimg.com/736x/59/94/03/5994032453417acae9481e23a2268b15.jpg",  year: 2023, desc: "Tethered but not held — how weight and lift argue politely." },
-  { title: "Aurora",   src: "https://i.pinimg.com/1200x/04/fc/40/04fc405577290da0c7818a43373a4d88.jpg", year: 2024, desc: "First light on skin ��� the exact minute before the room admits it." },
+  { title: "Aurora",   src: "https://i.pinimg.com/1200x/04/fc/40/04fc405577290da0c7818a43373a4d88.jpg", year: 2024, desc: "First light on skin — the exact minute before the room admits it." },
   { title: "Meridian", src: "https://i.pinimg.com/1200x/30/ce/26/30ce267bf4168ecaac4ea635a53a68c7.jpg", year: 2024, desc: "The imaginary line that decides where a day tips into the next." },
   { title: "Solace",   src: "https://i.pinimg.com/1200x/73/44/7d/73447d6054c3d7f1e5ac81bb262e50c8.jpg", year: 2023, desc: "A quiet interior. Nothing happens. This is the point." },
   { title: "Prism",    src: "https://i.pinimg.com/1200x/ad/e2/cb/ade2cb376704782ed5a5ed05c9c16757.jpg", year: 2024, desc: "The same subject, refracted six different ways — pick your favourite lie." },

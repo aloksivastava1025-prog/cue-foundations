@@ -9,5 +9,9 @@ import ArcCarousel from "@/components/foundations/chained-spring-arc-carousel"
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function ChainedSpringArcCarouselPreview() {
-  return <ArcCarousel />
+  return (
+    <div className="h-screen w-screen">
+      <ArcCarousel />
+    </div>
+  )
 }

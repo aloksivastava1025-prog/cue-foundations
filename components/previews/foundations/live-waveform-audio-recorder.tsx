@@ -9,5 +9,9 @@ import AudioRecorder from "@/components/foundations/live-waveform-audio-recorder
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function LiveWaveformAudioRecorderPreview() {
-  return <AudioRecorder />
+  return (
+    <div className="h-screen w-screen">
+      <AudioRecorder />
+    </div>
+  )
 }

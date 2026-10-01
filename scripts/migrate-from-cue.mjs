@@ -321,8 +321,17 @@ async function main() {
       // (buttons, cards, chips) wrap in a flex-center so they don't
       // stick to the top-left corner.
       const fillsViewport = /(?:h-screen|min-h-screen|100vh|100dvh)/.test(row.code || '')
+      // Fullscreen components get an explicit h-screen w-screen parent
+      // (BodyReset zeros out body min-height, so bare "fills parent"
+      // components would otherwise collapse to the top-left). Small
+      // components wrap in a flex-center so they don't stick to the
+      // corner.
       const wrapperBody = fillsViewport
-        ? `  return <${liveInfo.exportName} />`
+        ? `  return (
+    <div className="h-screen w-screen">
+      <${liveInfo.exportName} />
+    </div>
+  )`
         : `  return (
     <div className="flex min-h-screen w-full items-center justify-center">
       <${liveInfo.exportName} />

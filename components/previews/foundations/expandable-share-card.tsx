@@ -9,5 +9,9 @@ import ShareCard from "@/components/foundations/expandable-share-card"
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function ExpandableShareCardPreview() {
-  return <ShareCard />
+  return (
+    <div className="h-screen w-screen">
+      <ShareCard />
+    </div>
+  )
 }

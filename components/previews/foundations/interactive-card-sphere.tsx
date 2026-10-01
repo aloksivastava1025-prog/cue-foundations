@@ -9,5 +9,9 @@ import CardSphere from "@/components/foundations/interactive-card-sphere"
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function InteractiveCardSpherePreview() {
-  return <CardSphere />
+  return (
+    <div className="h-screen w-screen">
+      <CardSphere />
+    </div>
+  )
 }

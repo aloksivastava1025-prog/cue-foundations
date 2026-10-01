@@ -9,5 +9,9 @@ import FaqAccordion from "@/components/foundations/split-panel-image-synced-faq-
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function SplitPanelImageSyncedFaqFeaturesPreview() {
-  return <FaqAccordion />
+  return (
+    <div className="h-screen w-screen">
+      <FaqAccordion />
+    </div>
+  )
 }

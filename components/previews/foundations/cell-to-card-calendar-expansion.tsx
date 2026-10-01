@@ -9,5 +9,9 @@ import PremiumCalendar from "@/components/foundations/cell-to-card-calendar-expa
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function CellToCardCalendarExpansionPreview() {
-  return <PremiumCalendar />
+  return (
+    <div className="h-screen w-screen">
+      <PremiumCalendar />
+    </div>
+  )
 }

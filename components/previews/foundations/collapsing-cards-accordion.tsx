@@ -9,5 +9,9 @@ import CollapsingCards from "@/components/foundations/collapsing-cards-accordion
  * top-left corner. Regenerated on every sync-kit run — do not edit.
  */
 export function CollapsingCardsAccordionPreview() {
-  return <CollapsingCards />
+  return (
+    <div className="h-screen w-screen">
+      <CollapsingCards />
+    </div>
+  )
 }
