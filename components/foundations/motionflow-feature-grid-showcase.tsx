@@ -181,7 +181,7 @@ export default function MotionFlowFeatures({
             </div>
           </div>
 
-          {/* CARD 3 ��� Timelines */}
+          {/* CARD 3 — Timelines */}
           <div className="mff-card">
             <div className="mff-card-header">
               <div className="mff-card-label">Timelines</div>

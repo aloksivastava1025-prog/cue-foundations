@@ -11,6 +11,7 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
+import { InteractiveCardSpherePreview } from "@/components/previews/foundations/interactive-card-sphere"
 import { MotionflowFeatureGridShowcasePreview } from "@/components/previews/foundations/motionflow-feature-grid-showcase"
 import { GridRowProfileExpanderPreview } from "@/components/previews/foundations/grid-row-profile-expander"
 import { NestedDarkContextMenuPreview } from "@/components/previews/foundations/nested-dark-context-menu"
@@ -40,6 +41,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "interactive-card-sphere",
   "motionflow-feature-grid-showcase",
   "grid-row-profile-expander",
   "nested-dark-context-menu",
@@ -70,6 +72,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
+  "interactive-card-sphere": InteractiveCardSpherePreview,
   "motionflow-feature-grid-showcase": MotionflowFeatureGridShowcasePreview,
   "grid-row-profile-expander": GridRowProfileExpanderPreview,
   "nested-dark-context-menu": NestedDarkContextMenuPreview,
