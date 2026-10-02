@@ -84,7 +84,7 @@ export default function SyntXPlayer({
     resetIdle();
   }, [resetIdle]);
 
-  // ── Mute ───────────────────────────────────────────────
+  // ── Mute ��──────────────────────────────────────────────
   const toggleMute = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     const v = videoRef.current;

@@ -82,7 +82,7 @@ type ShopOnboardingProps = {
   - an art tile (aspect 1.7, flat SVG item on a soft background);
   - "NN% match" (`min(99, 62 + score·6)`);
   - a heart button that toggles the wishlist (pink fill);
-  - the name (ellipsis), the price with an optional struck-out old price, and Add ��� "Added ✓" (green `#2f9a5b`).
+  - the name (ellipsis), the price with an optional struck-out old price, and Add ⇄ "Added ✓" (green `#2f9a5b`).
 - **Animation:** cards play `tagIn` with a 60 ms stagger **only when the step opens**. Add and heart clicks must not replay it.
 - **No matches:** "Nothing under this budget yet — try raising it a little."
 

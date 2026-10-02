@@ -11,6 +11,7 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
+import { PixelPerfectCommandPalettePreview } from "@/components/previews/foundations/pixel-perfect-command-palette"
 import { PixelPerfectShopOnboardingPreview } from "@/components/previews/foundations/pixel-perfect-shop-onboarding"
 import { InteractiveCardSpherePreview } from "@/components/previews/foundations/interactive-card-sphere"
 import { MotionflowFeatureGridShowcasePreview } from "@/components/previews/foundations/motionflow-feature-grid-showcase"
@@ -42,6 +43,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "pixel-perfect-command-palette",
   "pixel-perfect-shop-onboarding",
   "interactive-card-sphere",
   "motionflow-feature-grid-showcase",
@@ -74,6 +76,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
+  "pixel-perfect-command-palette": PixelPerfectCommandPalettePreview,
   "pixel-perfect-shop-onboarding": PixelPerfectShopOnboardingPreview,
   "interactive-card-sphere": InteractiveCardSpherePreview,
   "motionflow-feature-grid-showcase": MotionflowFeatureGridShowcasePreview,

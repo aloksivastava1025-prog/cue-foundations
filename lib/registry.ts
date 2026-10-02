@@ -96,6 +96,25 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
+    slug: "pixel-perfect-command-palette",
+    name: "Pixel-Perfect Command Palette",
+    description: "A light, pixel-precise command palette with keyboard navigation, key-cap chords, letter sequences, file search, and toast feedback on run.",
+    category: "layouts",
+    tags: ["command-palette","keyboard-shortcuts","search"],
+    dependencies: [],
+    sourcePath: "components/foundations/pixel-perfect-command-palette.tsx",
+    promptPath: "lib/prompts/pixel-perfect-command-palette.md",
+    previewMode: "video",
+    videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1790955992322-9b41ce2d06fc4e4fa6e594d5a7bbb205.mp4",
+    posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1790955996292-f3c2a09cd0fb454d9535ebdf35b62c97.jpg",
+    premiumHref: "https://cuedesign.space/component/cue209",
+    addedAt: "2026-10-02",
+    updatedAt: "2026-10-02",
+    isNew: true,
+    contributor: { name: "Alok", href: "https://x.com/Alok619308" },
+    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+  },
+  {
     slug: "pixel-perfect-shop-onboarding",
     name: "Pixel-Perfect Shop Onboarding",
     description: "A four-step onboarding card that collects shopper preferences and ends in a personalised, scored product edit with wishlist and bag.",
@@ -150,7 +169,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["grid-row-profile-expander","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["pixel-perfect-command-palette","grid-row-profile-expander","nested-dark-context-menu"],
   },
   {
     slug: "grid-row-profile-expander",
@@ -169,7 +188,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","nested-dark-context-menu","cell-to-card-calendar-expansion"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","nested-dark-context-menu"],
   },
   {
     slug: "nested-dark-context-menu",
@@ -188,7 +207,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","cell-to-card-calendar-expansion"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "morphing-pill-duration-editor",
@@ -264,7 +283,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "dot-graph-card",
@@ -283,7 +302,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "glossy-slider-call-button",
@@ -321,7 +340,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "stacked-deck-scroll-reveal",
@@ -378,7 +397,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "collapsing-cards-accordion",
@@ -416,7 +435,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "dynamic-island-feedback-notch",
@@ -491,7 +510,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "isometric-mechanical-keycap",
@@ -586,7 +605,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "sticky-cascade-services-and-timeline",
@@ -605,7 +624,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "add-product-wizard-modal",
@@ -662,7 +681,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["motionflow-feature-grid-showcase","grid-row-profile-expander","nested-dark-context-menu"],
+    related: ["pixel-perfect-command-palette","motionflow-feature-grid-showcase","grid-row-profile-expander"],
   },
   {
     slug: "fisheye-chromatic-card-grid",
