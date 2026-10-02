@@ -1,3 +1,6 @@
+"use client";
+
+
 /**
  * Cue Foundations · Pixel-Perfect Shop Onboarding
  * ────────────────────────────────────────────
@@ -13,100 +16,33 @@
  * ────────────────────────────────────────────
  */
 
-# Prompt — "ShopOnboarding" 4-step shopper onboarding card (pixel-perfect)
+/**
+ * ShopOnboarding — a 4-step shopper onboarding card (React 18 + TypeScript, no other dependencies).
+ *   1 · Who are you shopping for?   pixel-face cards, multi-select, at least one
+ *   2 · Pick the styles you love     tag picker: Enter / comma to add, × or 2× Backspace to remove, suggestions, no duplicates, 3–12
+ *   3 · Your size and budget         clothing size, UK shoe size stepper, budget slider (drag / keys)
+ *   4 · Your edit is ready           matched products, match score, wishlist, add to bag, bag counter, checkout
+ * The step bar, Back and Continue drive the flow; Continue unlocks only when the current step is complete,
+ * and any finished step can be reopened from the step bar.
+ */
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent as RPointerEvent } from 'react';
 
-Copy everything below the line into any AI coding agent.
-
----
-
-Build a React + TypeScript component `ShopOnboarding.tsx` (React 18, no other dependencies; font Inter 400/500/600). It is a single white rounded card, 440 px wide, that walks a shopper through four steps and ends on a personalised product edit with wishlist and bag.
-
-| step | title | subtitle | content | Continue unlocks when |
-|---|---|---|---|---|
-| 1 | Who are you shopping for? | Pick everyone you buy for. We’ll tune every page to them. | 2×2 cards with pixel faces: Women, Men, Kids, Home (multi-select) | at least one is picked |
-| 2 | Pick the styles you love | Type a style or tap one below. The more you add, the better your edit. | tag input + "Popular right now" suggestions | 3 or more styles |
-| 3 | Your size and budget | So we only show things that fit — and fit your wallet. | size chips XS–XXL, UK shoe size stepper (3–13), budget slider ₹500–₹10,000+ | a clothing size is picked |
-| 4 | Your edit is ready | Hand-picked from today’s drops, matched to your styles, size and budget. | summary pills + 4 matched product cards | always |
-
-The look is **monochrome**: the step bar, the slider fill, the selected states and the primary button are all `#1f1f22`. No gradients. The only colour comes from the pixel faces, the soft icon tiles and the product art tiles.
-
-## 1. Props
-
-```ts
-type ShopOnboardingProps = {
-  products?: Product[];          // default: the 14-item catalogue below
-  suggestions?: string[];        // default: Streetwear, Denim, Ethnic, Workwear, Athleisure, Pastels, Vintage, Monochrome, Boho
-  defaultValues?: Partial<{ who: Audience[]; styles: string[]; size: string; shoe: number; budget: number }>;
-  onCheckout?: (r: ShopResult) => void;   // the final button: { who, styles, size, shoe, budget, cart, wishlist }
+/* ---------- types ---------- */
+export type Audience = 'Women' | 'Men' | 'Kids' | 'Home';
+export type ArtKind = 'shirt' | 'tee' | 'shoe' | 'pants' | 'bag' | 'dress' | 'cap' | 'vase' | 'kurta';
+export type Product = { n: string; who: Audience; st: string[]; a: ArtKind; c: string; bg: string; p: number; was?: number };
+export type ShopResult = { who: Audience[]; styles: string[]; size: string; shoe: number; budget: number; cart: string[]; wishlist: string[] };
+export type ShopOnboardingProps = {
+  products?: Product[];
+  suggestions?: string[];
+  defaultValues?: Partial<Pick<ShopResult, 'who' | 'styles' | 'size' | 'shoe' | 'budget'>>;
+  onCheckout?: (result: ShopResult) => void;   // final button
   onCartChange?: (cart: string[]) => void;
-  loadFont?: boolean; className?: string; style?: CSSProperties;
+  loadFont?: boolean;
+  className?: string;
+  style?: CSSProperties;
 };
-```
 
-- **Defaults:** who = ['Women'], styles = ['Linen', 'Sneakers', 'Minimal'], size 'M', shoe 7, budget 4000.
-- **Root:** `<div class="so">` (flex, centred) containing `<section class="card">`. Inject the CSS below (scoped under `.so`) in a `<style>`.
-
-## 2. Header (every step)
-
-- **Step bar:** `.steps` is a 4-column grid of 6 px pill buttons. Each button's `::after` is `scaleX(var(--f))` and `--f` is 1 for steps up to and including the current one. The transition is `.5s cubic-bezier(.3,.8,.3,1)`.
-  - Buttons for steps you haven't reached are disabled.
-  - Clicking an earlier step jumps back to it, with the slide-from-left animation.
-- **Top row:** on the left, `<b>{step·25}% of your edit</b> ready ✦` (the bold part is ink, the rest muted). On the right, the bag pill: a bag icon plus the count. Every time the bag changes, the pill replays the `bump` animation (scale 1.18 at 50%).
-- **Badge:** a grey pill (sparkle icon + "SMART PICKS"). On step 4 it reads "YOUR EDIT".
-- **Title and subtitle:** the h1 is 25 px / 500, centred; the subtitle is 14 px, muted, max 340 px wide.
-
-## 3. Behaviour
-
-### Step 1 · who
-- Each card toggles `aria-pressed`. A selected card gets a 2 px ink ring and a black check circle (top-right `::after`).
-- The pixel face lifts on hover or when selected (`translateY(-2px) rotate(-4deg)`).
-- With nothing picked, the hint reads "Pick at least one to continue." and Continue is disabled.
-
-### Step 2 · styles (tag picker)
-- **Adding:** Enter or "," adds the trimmed text. Whitespace is collapsed and the text is cut to 28 characters. Pasting "a, b," adds both. Blur also adds whatever is typed.
-- **Duplicates** are checked case-insensitively, with the hint `“x” is already on your list.`
-- **Cap:** at 12 styles the input is disabled with the placeholder "That’s the maximum", and all suggestions are disabled. The counter `n/12` turns bold ink.
-- **Removing:**
-  - × removes a chip and refocuses the input.
-  - Backspace on an empty input first marks the last chip `.pending` (pink ring). A second Backspace removes it. Any other key clears the mark.
-- **Hint:** below 3 styles it reads "Add N more to continue." unless a duplicate or cap message is showing.
-- **Suggestions** already on the list are hidden. When none are left, it shows "All added".
-- **Animation:** only a newly added chip plays `tagIn` (pop from scale .8).
-
-### Step 3 · size & budget
-- **Size:** chips toggle a single size (clicking the selected one clears it, and the hint reads "Pick a clothing size to continue.").
-- **Shoe size:** the stepper shows `UK n` and is clamped to 3–13, with the − and + buttons disabled at the ends.
-- **Slider:**
-  - track 24 px tall; knob 20 px; fill and knob position = `calc(p% + 24·(1−p/100) px)`;
-  - pointer drag with pointer capture (`.drag` scales the knob 1.12);
-  - keys: arrows ±250, PageUp/PageDown ±1000, Home/End;
-  - values snap to 250;
-  - the label reads "Up to ₹4,000", or "No limit" at 10,000.
-
-### Step 4 · the edit
-- **Summary pills:** who + the first 4 styles + `Size M` + `UK 7` + `≤ ₹4,000` (or "Any price").
-- **Cards:** `matchProducts` (below) gives up to 4 cards, in a 2-column grid. Each card has:
-  - an art tile (aspect 1.7, flat SVG item on a soft background);
-  - "NN% match" (`min(99, 62 + score·6)`);
-  - a heart button that toggles the wishlist (pink fill);
-  - the name (ellipsis), the price with an optional struck-out old price, and Add ⇄ "Added ✓" (green `#2f9a5b`).
-- **Animation:** cards play `tagIn` with a 60 ms stagger **only when the step opens**. Add and heart clicks must not replay it.
-- **No matches:** "Nothing under this budget yet — try raising it a little."
-
-### Footer
-- **Back:** disabled on step 1.
-- **Primary button:** "Continue" on steps 1–2, "Show my edit" on step 3. On step 4 it reads "Start shopping", or "Checkout · n" once the bag has items. Clicking it there shows "Opening checkout…" (or "Opening the shop…") and calls `onCheckout`.
-- **Slides:** panes slide in from the right going forward (`inR`), and from the left going back or jumping back (`inL`, via `.stage.back`).
-- **Choices are kept** when moving back and forth.
-
-### Accessibility
-- Visible focus rings on every control.
-- The slider is `role=slider` with valuenow and valuetext.
-- `prefers-reduced-motion` turns off all animations.
-
-## 4. Data, copy and pixel sprites (use verbatim)
-
-```tsx
 /* ---------- copy & data ---------- */
 const COPY: Record<number, [string, string]> = {
   1: ['Who are you shopping for?', 'Pick everyone you buy for. We’ll tune every page to them.'],
@@ -150,24 +86,28 @@ export const PRODUCTS: Product[] = [
   { n: 'Utility cargo pants', who: 'Men', st: ['Workwear', 'Streetwear'], a: 'pants', c: '#6e6a4f', bg: '#efeee6', p: 2299 },
   { n: 'Washed cap', who: 'Men', st: ['Streetwear', 'Vintage', 'Athleisure'], a: 'cap', c: '#2f5fc6', bg: '#e3ecfd', p: 699 },
 ];
-```
 
-Render a sprite as a `viewBox="0 0 12 12"` SVG with one `<rect x y width=1.02 height=1.02 fill>` per non-"." character, sized 36 px inside a 46 px rounded tile (`shape-rendering: crispEdges`).
+/* ---------- small svg pieces ---------- */
+const Pixel = ({ rows }: { rows: string[] }) => (
+  <svg viewBox="0 0 12 12" aria-hidden="true">
+    {rows.flatMap((row, y) => [...row].map((ch, x) => (PAL[ch] ? <rect key={`${x}-${y}`} x={x} y={y} width="1.02" height="1.02" fill={PAL[ch]} /> : null)))}
+  </svg>
+);
+function Art({ a, c }: { a: ArtKind; c: string }) {
+  switch (a) {
+    case 'shirt': return <path d="M8 4 4 7l2 4 2-1v10h8V10l2 1 2-4-4-3-2 2h-4z" fill={c} />;
+    case 'tee': return <path d="M8 4 3 8l2.5 3L8 10v10h8V10l2.5 1L21 8l-5-4c-.5 2-2 3-4 3s-3.5-1-4-3z" fill={c} />;
+    case 'shoe': return <><path d="M3 15c0-3 1-6 3-8l4 4c2 1 6 1 9 2 1.5.5 2 2 2 3v1H3z" fill={c} /><path d="M3 18h18" stroke="#fff" strokeWidth="1.6" /></>;
+    case 'pants': return <path d="M7 3h10l1 18h-4l-2-11-2 11H6z" fill={c} />;
+    case 'bag': return <><path d="M5 8h14l-1 12H6z" fill={c} /><path d="M9 8a3 3 0 0 1 6 0" fill="none" stroke={c} strokeWidth="1.8" /></>;
+    case 'dress': return <path d="M9 3h6l-1 5 5 13H5l5-13z" fill={c} />;
+    case 'cap': return <><path d="M4 14a8 8 0 0 1 16 0z" fill={c} /><path d="M12 14h9" stroke={c} strokeWidth="2.4" strokeLinecap="round" /></>;
+    case 'vase': return <path d="M9 3h6v3c3 2 4 5 3 9-1 4-3 6-6 6s-5-2-6-6c-1-4 0-7 3-9z" fill={c} />;
+    case 'kurta': return <><path d="M8 3 4 6l2 4 2-1v12h8V9l2 1 2-4-4-3-2 3h-4z" fill={c} /><path d="M12 6v6" stroke="#fff" strokeWidth="1.4" /></>;
+  }
+}
+const X = () => <svg width="9" height="9" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="m2 2 8 8M10 2l-8 8" /></svg>;
 
-Product art paths, all in a 24-unit viewBox with `fill = c`:
-- shirt `M8 4 4 7l2 4 2-1v10h8V10l2 1 2-4-4-3-2 2h-4z`
-- tee `M8 4 3 8l2.5 3L8 10v10h8V10l2.5 1L21 8l-5-4c-.5 2-2 3-4 3s-3.5-1-4-3z`
-- shoe `M3 15c0-3 1-6 3-8l4 4c2 1 6 1 9 2 1.5.5 2 2 2 3v1H3z` + a white sole line `M3 18h18`
-- pants `M7 3h10l1 18h-4l-2-11-2 11H6z`
-- bag `M5 8h14l-1 12H6z` + a handle `M9 8a3 3 0 0 1 6 0` (stroke)
-- dress `M9 3h6l-1 5 5 13H5l5-13z`
-- cap `M4 14a8 8 0 0 1 16 0z` + a brim `M12 14h9` (stroke 2.4)
-- vase `M9 3h6v3c3 2 4 5 3 9-1 4-3 6-6 6s-5-2-6-6c-1-4 0-7 3-9z`
-- kurta `M8 3 4 6l2 4 2-1v12h8V9l2 1 2-4-4-3-2 3h-4z` + a white placket `M12 6v6`
-
-## 5. Matching (use verbatim)
-
-```ts
 /* ---------- matching ---------- */
 // score: shared styles (×2) + audience match (×3); anything over budget is dropped; best 4, cheaper first on ties
 export function matchProducts(list: Product[], who: Audience[], styles: string[], budget: number) {
@@ -176,28 +116,8 @@ export function matchProducts(list: Product[], who: Audience[], styles: string[]
     .filter((r) => r.x.p <= budget && (who.includes(r.x.who) || !who.length))
     .sort((a, b) => b.s - a.s || a.x.p - b.x.p).slice(0, 4);
 }
-```
 
-## 6. Markup (the CSS depends on these classes)
-
-```
-div.so > section.card
-  div.steps[role=tablist] > button[role=tab][style=--f]×4
-  div.top > span(b …% of your edit + " ready ✦") + span.cart(.bump) > svg + span count
-  div.badge > svg + span · h1 · p.sub
-  div.stage(.back)
-    div.pane(.on)  1: div.lbl("Shopping for" span"(pick any)") · div.who > button[aria-pressed] > span.ic(bg) > svg sprite + span(b + small) · div.hint
-    div.pane       2: div.lbl(label + span.cnt(.full)) · div.tags > span.tag(.pending) > text + button(×) … + input · div.hint · div.sg-l · div.suggs > button.sg…
-    div.pane       3: div.lbl · div.sizes > button[aria-pressed]×6 · div.row > span.lbl + span.stepper(button − · output · button +)
-                      div.budget > div.lbl(span.bud-v) · div.slider(.drag) > span.fill + span.knob[role=slider] > svg(4 dots) · div.scale · div.hint
-    div.pane       4: div.edit-sum > span… · div.grid > article.prod > div.art > svg · span.match · button.heart · b · div.pr > span(price s) + button.add(.in)
-  div.foot > button.btn Back + button.btn.dark (primary)
-```
-
-## 7. CSS (inject verbatim)
-
-```css
-.so, .so *{box-sizing: border-box;}
+const CSS = `.so, .so *{box-sizing: border-box;}
 .so{display:flex;justify-content:center;width:100%;font-family:Inter,system-ui,sans-serif;color:#1f1f22;-webkit-font-smoothing:antialiased;--page: #f0f0f0; --card: #fff; --card-2: #f7f7f8; --line: #e8e8ea; --ink: #1f1f22; --text: #5d5d64; --muted: #8e8e95; --g1: #f9b94a; --g2: #f5823f; --g3: #ee5c8e; --g4: #d65be6; --chip: #e6ecfb; --chip-ink: #2a2f45; --sugg: #ececee; --sel: #1f1f22;}
 .so button, .so input{font: inherit; color: inherit;}
 .so .card{width: min(100%, 440px); background: linear-gradient(180deg, #fff 0, #fbfbfb 100%); border-radius: 26px; padding: 26px 26px 20px; box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(0,0,0,.03), 0 18px 40px -30px rgba(0,0,0,.2); overflow: hidden;}
@@ -302,26 +222,221 @@ div.so > section.card
 .so .btn:focus-visible, .so .sg:focus-visible, .so .who button:focus-visible, .so .sizes button:focus-visible, .so .stepper button:focus-visible, .so .add:focus-visible, .so .heart:focus-visible, .so .tag button:focus-visible, .so .steps button:focus-visible{outline: 2px solid var(--ink); outline-offset: 2px;}
 @media (max-width: 420px){.so .card{padding: 22px 18px 18px; border-radius: 22px;}
 .so h1{font-size: 22px;}}
-@media (prefers-reduced-motion: reduce){.so, .so *, .so *::before, .so *::after{animation: none !important; transition: none !important;}}
-```
+@media (prefers-reduced-motion: reduce){.so, .so *, .so *::before, .so *::after{animation: none !important; transition: none !important;}}`;
 
-## 8. Acceptance checks
+export default function ShopOnboarding({ products = PRODUCTS, suggestions = SUGG, defaultValues, onCheckout, onCartChange, loadFont = true, className, style }: ShopOnboardingProps) {
+  const [step, setStep] = useState(1);
+  const [dir, setDir] = useState(1);
+  const [who, setWho] = useState<Audience[]>(defaultValues?.who ?? ['Women']);
+  const [styles, setStyles] = useState<string[]>(defaultValues?.styles ?? ['Linen', 'Sneakers', 'Minimal']);
+  const [size, setSize] = useState<string | null>(defaultValues?.size ?? 'M');
+  const [shoe, setShoe] = useState(defaultValues?.shoe ?? 7);
+  const [budget, setBudgetRaw] = useState(defaultValues?.budget ?? 4000);
+  const [cart, setCart] = useState<string[]>([]);
+  const [wish, setWish] = useState<string[]>([]);
+  const [draft, setDraft] = useState('');
+  const [hint, setHint] = useState('');
+  const [pendingDel, setPendingDel] = useState(false);
+  const [lastAdded, setLastAdded] = useState<string | null>(null);
+  const [drag, setDrag] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const [bump, setBump] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const cartRef = useRef<HTMLSpanElement>(null);
 
-- **Step 1:** unpicking Women leaves nothing picked, so Continue is disabled and the hint shows. Picking Men + Home enables it.
-- **Step 2:**
-  - removing 2 of the 3 default chips disables Continue ("Add 2 more to continue.");
-  - typing "Workwear, Streetwear," adds both, and tapping "Vintage" adds it;
-  - "linen" shows the duplicate hint;
-  - Backspace twice on an empty input removes the last chip;
-  - filling to 12 disables the input and the suggestions.
-- **Step 3:**
-  - unselecting M disables "Show my edit";
-  - + + makes UK 9;
-  - dragging the slider to 30% shows "Up to ₹3,250", and → makes it "Up to ₹3,500".
-- **Step 4:**
-  - no card costs more than the budget;
-  - adding 2 makes the bag pill read 2 and the button "Checkout · 2";
-  - a heart fills pink;
-  - clicking Add does not re-animate the other cards.
-- **Jumping:** step-bar segment 2 jumps back with the styles kept, and Continue twice returns to step 4 with the bag still at 2.
-- **Width and errors:** no horizontal overflow at 375 px wide, and no console errors.
+  useEffect(() => {
+    if (!loadFont || document.getElementById('so-inter')) return;
+    const l = document.createElement('link'); l.id = 'so-inter'; l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap'; document.head.appendChild(l);
+  }, [loadFont]);
+  // the bag counter pops whenever the bag changes (restart the animation)
+  useEffect(() => { if (!bump || !cartRef.current) return; const c = cartRef.current; c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump'); }, [bump]);
+
+  /* ---------- step 2 helpers ---------- */
+  const has = (list: string[], s: string) => list.some((x) => x.toLowerCase() === s.toLowerCase());
+  // adds one style; works on a running list so a comma-pasted batch is applied in one go
+  const addTo = (list: string[], raw: string): string[] | null => {
+    const s = raw.trim().replace(/\s+/g, ' ').slice(0, 28);
+    if (!s) return null;
+    if (has(list, s)) { setHint(`“${s}” is already on your list.`); return null; }
+    if (list.length >= MAXS) { setHint('You’ve picked 12 styles — remove one to add another.'); return null; }
+    setHint(''); setPendingDel(false); setLastAdded(s); return [...list, s];
+  };
+  const addStyle = (raw: string) => { const next = addTo(styles, raw); if (next) setStyles(next); return !!next; };
+  const removeStyle = (s: string) => { setStyles((l) => l.filter((x) => x !== s)); setPendingDel(false); setHint(''); };
+  const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    const v = draft;
+    if ((e.key === 'Enter' || e.key === ',') && v.trim()) { e.preventDefault(); if (addStyle(v)) setDraft(''); }
+    else if (e.key === 'Enter') e.preventDefault();
+    else if (e.key === 'Backspace' && !v && styles.length) { e.preventDefault(); if (pendingDel) removeStyle(styles[styles.length - 1]); else setPendingDel(true); }
+    else if (pendingDel) setPendingDel(false);
+  };
+  const onDraft = (v: string) => {
+    if (!v.includes(',')) return setDraft(v);
+    const parts = v.split(','); let list = styles;
+    parts.slice(0, -1).forEach((p) => { const n = addTo(list, p); if (n) list = n; });
+    if (list !== styles) setStyles(list);
+    setDraft(parts[parts.length - 1]);
+  };
+  const full = styles.length >= MAXS;
+  const hint2 = hint || (styles.length < MINS ? `Add ${MINS - styles.length} more to continue.` : '');
+
+  /* ---------- step 3 helpers ---------- */
+  const setBudget = (v: number) => setBudgetRaw(Math.round(Math.max(BMIN, Math.min(BMAX, v)) / 250) * 250);
+  const at = (e: RPointerEvent) => { const r = sliderRef.current!.getBoundingClientRect(); return BMIN + Math.max(0, Math.min(1, (e.clientX - r.left - 12) / (r.width - 24))) * (BMAX - BMIN); };
+  const pct = (budget - BMIN) / (BMAX - BMIN) * 100;
+  const pos = `calc(${pct}% + ${24 * (1 - pct / 100)}px)`;
+  const budText = budget >= BMAX ? 'No limit' : `Up to ${inr(budget)}`;
+  const onKnobKey = (e: KeyboardEvent) => {
+    const d = ({ ArrowRight: 250, ArrowUp: 250, ArrowLeft: -250, ArrowDown: -250, PageUp: 1000, PageDown: -1000 } as Record<string, number>)[e.key];
+    if (d) { e.preventDefault(); setBudget(budget + d); } else if (e.key === 'Home') setBudget(BMIN); else if (e.key === 'End') setBudget(BMAX);
+  };
+
+  /* ---------- step 4 ---------- */
+  const picks = useMemo(() => matchProducts(products, who, styles, budget), [products, who, styles, budget]);
+  const toggleCart = (id: string) => { const next = cart.includes(id) ? cart.filter((x) => x !== id) : [...cart, id]; setCart(next); setBump((b) => b + 1); onCartChange?.(next); };
+  const toggleWish = (id: string) => setWish((w) => (w.includes(id) ? w.filter((x) => x !== id) : [...w, id]));
+
+  /* ---------- flow ---------- */
+  const valid = (st: number) => (st === 1 ? who.length > 0 : st === 2 ? styles.length >= MINS : st === 3 ? !!size : true);
+  const go = (n: number, d: number) => { setDir(d); setStep(n); setLeaving(false); };
+  const next = () => {
+    if (!valid(step)) return;
+    if (step < 4) return go(step + 1, 1);
+    setLeaving(true);
+    onCheckout?.({ who, styles, size: size!, shoe, budget, cart, wishlist: wish });
+  };
+  const nextLabel = step === 3 ? 'Show my edit' : step === 4 ? (leaving ? (cart.length ? 'Opening checkout…' : 'Opening the shop…') : cart.length ? `Checkout · ${cart.length}` : 'Start shopping') : 'Continue';
+  const [title, sub] = COPY[step];
+
+  return (
+    <div className={'so' + (className ? ' ' + className : '')} style={style}>
+      <style>{CSS}</style>
+      <section className="card" aria-labelledby="so-title">
+        <div className="steps" role="tablist" aria-label="Steps">
+          {[1, 2, 3, 4].map((n, i) => (
+            <button key={n} type="button" role="tab" aria-label={`Step ${n}`} aria-selected={n === step} disabled={n > step}
+              style={{ '--f': i < step ? 1 : 0 } as CSSProperties} onClick={() => { if (n < step) go(n, -1); }} />
+          ))}
+        </div>
+        <div className="top">
+          <span><b>{step * 25}% of your edit</b> ready ✦</span>
+          <span className="cart" ref={cartRef} aria-live="polite">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 7h12l-1 13H7z" /><path d="M9 7a3 3 0 0 1 6 0" /></svg>
+            <span>{cart.length}</span>
+          </span>
+        </div>
+        <div className="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M10 2l1.8 5.2L17 9l-5.2 1.8L10 16l-1.8-5.2L3 9l5.2-1.8zM18 13l.9 2.6 2.6.9-2.6.9L18 20l-.9-2.6-2.6-.9 2.6-.9z" /></svg>
+          <span>{step === 4 ? 'Your edit' : 'Smart picks'}</span>
+        </div>
+        <h1 id="so-title">{title}</h1>
+        <p className="sub">{sub}</p>
+
+        <div className={'stage' + (dir < 0 ? ' back' : '')} aria-live="polite">
+          {/* 1 · who */}
+          <div className={'pane' + (step === 1 ? ' on' : '')}>
+            <div className="lbl">Shopping for <span>(pick any)</span></div>
+            <div className="who">
+              {WHO.map((w) => (
+                <button key={w.n} type="button" aria-pressed={who.includes(w.n)}
+                  onClick={() => setWho((l) => (l.includes(w.n) ? l.filter((x) => x !== w.n) : [...l, w.n]))}>
+                  <span className="ic" style={{ background: w.c }}><Pixel rows={PX[w.n]} /></span>
+                  <span><b>{w.n}</b><small>{w.d}</small></span>
+                </button>
+              ))}
+            </div>
+            <div className="hint">{step === 1 && !who.length ? 'Pick at least one to continue.' : ''}</div>
+          </div>
+
+          {/* 2 · styles */}
+          <div className={'pane' + (step === 2 ? ' on' : '')}>
+            <div className="lbl"><label htmlFor="so-st">Styles <span>(3 to 12)</span></label><span className={'cnt' + (full ? ' full' : '')}>{styles.length}/{MAXS}</span></div>
+            <div className="tags" onClick={() => inputRef.current?.focus()}>
+              {styles.map((s, i) => (
+                <span key={s} className={'tag' + (pendingDel && i === styles.length - 1 ? ' pending' : '')} style={s === lastAdded ? undefined : { animation: 'none' }}>
+                  {s}<button type="button" aria-label={`Remove ${s}`} onClick={(e) => { e.stopPropagation(); removeStyle(s); inputRef.current?.focus(); }}><X /></button>
+                </span>
+              ))}
+              <input id="so-st" ref={inputRef} autoComplete="off" aria-describedby="so-h2" value={draft} disabled={full}
+                placeholder={full ? 'That’s the maximum' : styles.length ? 'Add another style…' : 'Type a style, press Enter'}
+                onChange={(e) => onDraft(e.target.value)} onKeyDown={onKey}
+                onBlur={() => { if (draft.trim() && addStyle(draft)) setDraft(''); }} />
+            </div>
+            <div className="hint" id="so-h2" aria-live="polite">{hint2}</div>
+            <div className="sg-l">Popular right now:</div>
+            <div className="suggs">
+              {suggestions.filter((s) => !has(styles, s)).map((s) => (
+                <button key={s} type="button" className="sg" disabled={full} onClick={() => addStyle(s)}>{s}</button>
+              ))}
+              {suggestions.every((s) => has(styles, s)) && <span className="sg-l" style={{ margin: 0 }}>All added</span>}
+            </div>
+          </div>
+
+          {/* 3 · size & budget */}
+          <div className={'pane' + (step === 3 ? ' on' : '')}>
+            <div className="lbl">Clothing size</div>
+            <div className="sizes" role="group" aria-label="Clothing size">
+              {SIZES.map((z) => <button key={z} type="button" aria-pressed={size === z} onClick={() => setSize((v) => (v === z ? null : z))}>{z}</button>)}
+            </div>
+            <div className="row"><span className="lbl">Shoe size <span>(UK)</span></span>
+              <span className="stepper">
+                <button type="button" aria-label="Smaller shoe size" disabled={shoe <= 3} onClick={() => setShoe((v) => Math.max(3, v - 1))}>−</button>
+                <output aria-live="polite">UK {shoe}</output>
+                <button type="button" aria-label="Bigger shoe size" disabled={shoe >= 13} onClick={() => setShoe((v) => Math.min(13, v + 1))}>+</button>
+              </span>
+            </div>
+            <div className="budget">
+              <div className="lbl" style={{ margin: 0 }}>Budget per item <span className="bud-v">{budText}</span></div>
+              <div className={'slider' + (drag ? ' drag' : '')} ref={sliderRef}
+                onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); setDrag(true); setBudget(at(e)); }}
+                onPointerMove={(e) => { if (e.currentTarget.hasPointerCapture(e.pointerId)) setBudget(at(e)); }}
+                onPointerUp={() => setDrag(false)} onPointerCancel={() => setDrag(false)}>
+                <span className="fill" style={{ width: pos }} />
+                <span className="knob" style={{ left: pos }} role="slider" tabIndex={0} aria-label="Budget per item" aria-valuemin={BMIN} aria-valuemax={BMAX}
+                  aria-valuenow={budget} aria-valuetext={budText} onKeyDown={onKnobKey}>
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="#444"><circle cx="2" cy="2" r=".9" /><circle cx="6" cy="2" r=".9" /><circle cx="2" cy="6" r=".9" /><circle cx="6" cy="6" r=".9" /></svg>
+                </span>
+              </div>
+              <div className="scale"><span>₹500</span><span>₹10,000+</span></div>
+            </div>
+            <div className="hint">{size ? '' : 'Pick a clothing size to continue.'}</div>
+          </div>
+
+          {/* 4 · the edit (mounted only on step 4 so the cards animate in each time you arrive) */}
+          <div className={'pane' + (step === 4 ? ' on' : '')}>
+            {step === 4 && <>
+              <div className="edit-sum">
+                {[...who, ...styles.slice(0, 4), `Size ${size}`, `UK ${shoe}`, budget >= BMAX ? 'Any price' : `≤ ${inr(budget)}`].map((t, i) => <span key={i}>{t}</span>)}
+              </div>
+              <div className="grid">
+                {!picks.length && <div className="hint" style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px 0' }}>Nothing under this budget yet — try raising it a little.</div>}
+                {picks.map(({ x, s }, i) => {
+                  const inCart = cart.includes(x.n), liked = wish.includes(x.n);
+                  return (
+                    <article key={x.n} className="prod" style={{ animationDelay: `${i * 60}ms` }}>
+                      <div className="art" style={{ background: x.bg }}><svg viewBox="0 0 24 24" aria-hidden="true"><Art a={x.a} c={x.c} /></svg></div>
+                      <span className="match">{Math.min(99, 62 + s * 6)}% match</span>
+                      <button type="button" className="heart" aria-pressed={liked} aria-label={`${liked ? 'Remove from' : 'Save to'} wishlist: ${x.n}`} onClick={() => toggleWish(x.n)}>
+                        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="#1f1f22" strokeWidth="1.8" strokeLinejoin="round" /></svg>
+                      </button>
+                      <b title={x.n}>{x.n}</b>
+                      <div className="pr"><span>{inr(x.p)}{x.was ? <s>{inr(x.was)}</s> : null}</span>
+                        <button type="button" className={'add' + (inCart ? ' in' : '')} onClick={() => toggleCart(x.n)}>{inCart ? 'Added ✓' : 'Add'}</button></div>
+                    </article>
+                  );
+                })}
+              </div>
+            </>}
+          </div>
+        </div>
+
+        <div className="foot">
+          <button type="button" className="btn" disabled={step === 1} onClick={() => step > 1 && go(step - 1, -1)}>Back</button>
+          <button type="button" className="btn dark" disabled={!valid(step)} onClick={next}>{nextLabel}</button>
+        </div>
+      </section>
+    </div>
+  );
+}
