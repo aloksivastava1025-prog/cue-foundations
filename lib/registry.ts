@@ -96,14 +96,14 @@ export type RegistryItem = {
 
 export const registry: RegistryItem[] = [
   {
-    slug: "shopper-onboarding-wizard",
-    name: "Shopper Onboarding Wizard",
-    description: "A four-step monochrome onboarding card that profiles a shopper's preferences, size and budget, then reveals a matched product edit.",
+    slug: "pixel-perfect-shop-onboarding",
+    name: "Pixel-Perfect Shop Onboarding",
+    description: "A four-step onboarding card that collects shopper preferences and ends in a personalised, scored product edit with wishlist and bag.",
     category: "inputs",
-    tags: ["multi-step","onboarding","monochrome","e-commerce"],
+    tags: ["multi-step-form","monochrome","pixel-art","product-matching"],
     dependencies: [],
-    sourcePath: "components/foundations/shopper-onboarding-wizard.tsx",
-    promptPath: "lib/prompts/shopper-onboarding-wizard.md",
+    sourcePath: "components/foundations/pixel-perfect-shop-onboarding.tsx",
+    promptPath: "lib/prompts/pixel-perfect-shop-onboarding.md",
     previewMode: "video",
     videoSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1790931065858-a5e7115b8c584647b88e70e44e6baf6a.mp4",
     posterSrc: "https://pub-bffac370ca114a6f873486297600ac6f.r2.dev/1790931067984-e498417e811543e88b54c0e51da7f627.jpg",
@@ -207,7 +207,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["shopper-onboarding-wizard","expandable-share-card","expandable-book-search-palette"],
+    related: ["pixel-perfect-shop-onboarding","expandable-share-card","expandable-book-search-palette"],
   },
   {
     slug: "live-waveform-audio-recorder",
@@ -245,7 +245,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["shopper-onboarding-wizard","morphing-pill-duration-editor","expandable-book-search-palette"],
+    related: ["pixel-perfect-shop-onboarding","morphing-pill-duration-editor","expandable-book-search-palette"],
   },
   {
     slug: "cell-to-card-calendar-expansion",
@@ -529,7 +529,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["shopper-onboarding-wizard","morphing-pill-duration-editor","expandable-share-card"],
+    related: ["pixel-perfect-shop-onboarding","morphing-pill-duration-editor","expandable-share-card"],
   },
   {
     slug: "3d-book-carousel-reading-mode",
@@ -624,7 +624,7 @@ export const registry: RegistryItem[] = [
     updatedAt: "2026-10-02",
     isNew: true,
     contributor: { name: "Alok", href: "https://x.com/Alok619308" },
-    related: ["shopper-onboarding-wizard","morphing-pill-duration-editor","expandable-share-card"],
+    related: ["pixel-perfect-shop-onboarding","morphing-pill-duration-editor","expandable-share-card"],
   },
   {
     slug: "chained-spring-arc-carousel",
