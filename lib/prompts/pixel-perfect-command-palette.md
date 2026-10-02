@@ -29,13 +29,15 @@ type CommandPaletteProps = {
   defaultOpen?: boolean;           // true
   placeholder?: string;            // 'Search commands, people or files…'
   onRun?: (target) => void;        // { kind: 'command', command, via: 'click'|'enter'|'key' } | { kind: 'file', file, via }
-  showToast?: boolean; showLauncher?: boolean; loadFont?: boolean; className?: string; style?: CSSProperties;
+  showToast?: boolean; showLauncher?: boolean;
+  backdrop?: boolean;              // true: the root paints the blue-grey background and is min-height 100vh
+  loadFont?: boolean; className?: string; style?: CSSProperties;
 };
 ```
 
-- **Root:** `<div class="cp">`, a grid that centres horizontally and anchors near the top (`padding-top: max(70px, 16vh)`) so the palette never jumps when the results shrink.
+- **Root:** `<div class="cp">`, a **full-width** grid (`width: 100%`, so a centring flex parent can't shrink the palette below 600 px) that centres horizontally and anchors near the top (`padding-top: max(70px, 16vh)`), so the palette never jumps when the results shrink.
 - **CSS:** inject the CSS below (scoped under `.cp`) in a `<style>`.
-- **Demo page background:** `#e7edf2` with soft `#d6e5f0` / `#dbe7ef` radial patches, so the grey shell stands out.
+- **Backdrop (`cp-bg`, on by default):** `min-height: 100vh` and `#e7edf2` with soft `#d6e5f0` / `#dbe7ef` radial patches, so the grey shell stands out on any host page.
 
 ## 2. Look (1× sizes)
 
@@ -112,7 +114,7 @@ div.cp
 
 ```css
 .cp, .cp *{box-sizing: border-box;}
-.cp{display:grid;justify-items:center;align-items:start;padding:max(70px, 16vh) 16px 24px;font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;--shell: #f3f3f3; --shell-line: #e7e7e7; --card: #fdfdfd; --field: #f2f2f2; --row: #f4f4f4; --ink: #2a2a2a; --text: #3b3b3b; --dim: #8f8f8f; --cap-line: #d5d5d5;}
+.cp{width:100%;box-sizing:border-box;display:grid;justify-items:center;align-items:start;padding:max(70px, 16vh) 16px 24px;font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;--shell: #f3f3f3; --shell-line: #e7e7e7; --card: #fdfdfd; --field: #f2f2f2; --row: #f4f4f4; --ink: #2a2a2a; --text: #3b3b3b; --dim: #8f8f8f; --cap-line: #d5d5d5;}
 .cp button, .cp input{font: inherit; color: inherit;}
 .cp .launch{position: fixed; top: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 8px 0 12px; border: 0; border-radius: 10px; background: rgba(255,255,255,.92); box-shadow: 0 0 0 1px #dfe3e7, 0 6px 18px -10px rgba(25,55,85,.3); color: var(--dim); font-size: 13px; cursor: pointer; transition: opacity .2s;}
 .cp .launch.hide{opacity: 0; pointer-events: none;}
@@ -155,6 +157,7 @@ div.cp
 .cp .toast small{color: #9b9b9b; font-size: 12px; margin-left: 4px;}
 .cp .item:focus-visible, .cp .launch:focus-visible, .cp .clear:focus-visible{outline: 2px solid #8bb8d6; outline-offset: -2px;}
 @media (prefers-reduced-motion: reduce){.cp, .cp *, .cp *::before, .cp *::after{transition: none !important; animation: none !important;}}
+.cp.cp-bg{min-height:100vh;background: radial-gradient(70% 60% at 85% 8%, #d6e5f0 0%, transparent 70%), radial-gradient(60% 55% at 8% 95%, #dbe7ef 0%, transparent 70%), #e7edf2;}
 ```
 
 ## 7. Acceptance checks

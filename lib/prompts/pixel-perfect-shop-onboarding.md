@@ -18,7 +18,7 @@ Build a React + TypeScript component `ShopOnboarding.tsx` (React 18, no other de
 |---|---|---|---|---|
 | 1 | Who are you shopping for? | Pick everyone you buy for. We’ll tune every page to them. | 2×2 cards with pixel faces: Women, Men, Kids, Home (multi-select) | at least one is picked |
 | 2 | Pick the styles you love | Type a style or tap one below. The more you add, the better your edit. | tag input + "Popular right now" suggestions | 3 or more styles |
-| 3 | Your size and budget | So we only show things that fit — and fit your wallet. | size chips XS–XXL, UK shoe size stepper (3–13), budget slider ₹500–₹10,000+ | a clothing size is picked |
+| 3 | Your size and budget | So we only show things that fit ��� and fit your wallet. | size chips XS–XXL, UK shoe size stepper (3–13), budget slider ₹500–₹10,000+ | a clothing size is picked |
 | 4 | Your edit is ready | Hand-picked from today’s drops, matched to your styles, size and budget. | summary pills + 4 matched product cards | always |
 
 The look is **monochrome**: the step bar, the slider fill, the selected states and the primary button are all `#1f1f22`. No gradients. The only colour comes from the pixel faces, the soft icon tiles and the product art tiles.

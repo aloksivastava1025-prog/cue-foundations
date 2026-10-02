@@ -38,6 +38,7 @@ export type CommandPaletteProps = {
   onRun?: (target: RunTarget) => void;
   showToast?: boolean;             // default true
   showLauncher?: boolean;          // the "Search or jump to…" button while closed; default true
+  backdrop?: boolean;              // the soft blue-grey full-height background; default true (set false to sit on your own page)
   loadFont?: boolean;
   className?: string;
   style?: CSSProperties;
@@ -79,7 +80,7 @@ export const FILES: FileItem[] = [
 ];
 
 const CSS = `.cp, .cp *{box-sizing: border-box;}
-.cp{display:grid;justify-items:center;align-items:start;padding:max(70px, 16vh) 16px 24px;font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;--shell: #f3f3f3; --shell-line: #e7e7e7; --card: #fdfdfd; --field: #f2f2f2; --row: #f4f4f4; --ink: #2a2a2a; --text: #3b3b3b; --dim: #8f8f8f; --cap-line: #d5d5d5;}
+.cp{width:100%;box-sizing:border-box;display:grid;justify-items:center;align-items:start;padding:max(70px, 16vh) 16px 24px;font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;--shell: #f3f3f3; --shell-line: #e7e7e7; --card: #fdfdfd; --field: #f2f2f2; --row: #f4f4f4; --ink: #2a2a2a; --text: #3b3b3b; --dim: #8f8f8f; --cap-line: #d5d5d5;}
 .cp button, .cp input{font: inherit; color: inherit;}
 .cp .launch{position: fixed; top: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 8px 0 12px; border: 0; border-radius: 10px; background: rgba(255,255,255,.92); box-shadow: 0 0 0 1px #dfe3e7, 0 6px 18px -10px rgba(25,55,85,.3); color: var(--dim); font-size: 13px; cursor: pointer; transition: opacity .2s;}
 .cp .launch.hide{opacity: 0; pointer-events: none;}
@@ -121,7 +122,8 @@ const CSS = `.cp, .cp *{box-sizing: border-box;}
 .cp .toast i{width: 20px; height: 20px; border-radius: 6px; background: #2f2f2f; display: grid; place-items: center;}
 .cp .toast small{color: #9b9b9b; font-size: 12px; margin-left: 4px;}
 .cp .item:focus-visible, .cp .launch:focus-visible, .cp .clear:focus-visible{outline: 2px solid #8bb8d6; outline-offset: -2px;}
-@media (prefers-reduced-motion: reduce){.cp, .cp *, .cp *::before, .cp *::after{transition: none !important; animation: none !important;}}`;
+@media (prefers-reduced-motion: reduce){.cp, .cp *, .cp *::before, .cp *::after{transition: none !important; animation: none !important;}}
+.cp.cp-bg{min-height:100vh;background: radial-gradient(70% 60% at 85% 8%, #d6e5f0 0%, transparent 70%), radial-gradient(60% 55% at 8% 95%, #dbe7ef 0%, transparent 70%), #e7edf2;}`;
 
 const Mark = ({ t, q }: { t: string; q: string }) => {
   const i = q ? t.toLowerCase().indexOf(q) : -1;
@@ -131,7 +133,7 @@ const Mark = ({ t, q }: { t: string; q: string }) => {
 
 export default function CommandPalette({
   commands = COMMANDS, files = FILES, initialRecent = ['board', 'archive', 'invite', 'ideas'], defaultOpen = true,
-  placeholder = 'Search commands, people or files…', onRun, showToast = true, showLauncher = true, loadFont = true, className, style,
+  placeholder = 'Search commands, people or files…', onRun, showToast = true, showLauncher = true, backdrop = true, loadFont = true, className, style,
 }: CommandPaletteProps) {
   const uid = useId().replace(/:/g, '');
   const [open, setOpen] = useState(defaultOpen);
@@ -220,7 +222,7 @@ export default function CommandPalette({
   let n = -1;
 
   return (
-    <div ref={root} className={'cp' + (className ? ' ' + className : '')} style={style}>
+    <div ref={root} className={'cp' + (backdrop ? ' cp-bg' : '') + (className ? ' ' + className : '')} style={style}>
       <style>{CSS}</style>
       {showLauncher && (
         <button className={'launch' + (open ? ' hide' : '')} aria-label="Open command palette" onClick={doOpen}>
