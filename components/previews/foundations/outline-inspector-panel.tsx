@@ -10,7 +10,7 @@ import OutlinePanel from "@/components/foundations/outline-inspector-panel"
  */
 export function OutlineInspectorPanelPreview() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
+    <div className="h-screen w-screen">
       <OutlinePanel />
     </div>
   )

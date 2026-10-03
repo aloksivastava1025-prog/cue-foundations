@@ -39,7 +39,62 @@ export type OutlinePanelProps = {
   style?: CSSProperties;
 };
 
-const CSS = `__CSS__`;
+const CSS = `.os{position: relative; width: 100%; text-align: left; font-family: Inter, system-ui, sans-serif; color: #2b2b2e; -webkit-font-smoothing: antialiased; background: #ececed; min-height: 100vh; display: grid; place-items: center; padding: 40px 16px;}
+.os, .os *{box-sizing: border-box;}
+.os button, .os input{font: inherit; color: inherit;}
+.os button{background: none; border: 0; padding: 0; cursor: pointer;}
+.os :focus-visible{outline: 2px solid #3b82f6; outline-offset: 1px;}
+.os .panel{position: relative; width: min(300px, 100%); background: #fbfbfb; border-radius: 16px; box-shadow: 0 0 0 1px #e4e4e6, 0 24px 48px -28px rgba(0, 0, 0, .25); padding: 14px 12px 12px;}
+.os .sec{display: flex; align-items: center; justify-content: space-between; height: 22px; margin: 2px 6px 10px;}
+.os .sec h3{margin: 0; font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: #77777c;}
+.os .rows{display: flex; flex-direction: column; gap: 8px;}
+.os .row{position: relative; width: 100%; height: 34px; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 13px; border-radius: 9px; background: #f2f2f3; box-shadow: inset 0 0 0 1px #e9e9eb; font-size: 13px; text-align: left; overflow: hidden; user-select: none; transition: box-shadow .15s;}
+.os .row .lb{position: relative; color: #8b8b90; transition: color .15s; pointer-events: none;}
+.os .row:hover .lb, .os .row:focus-visible .lb, .os .row.drag .lb, .os .row.open .lb{color: #3a3a3d;}
+.os .row .val{position: relative; margin-left: auto; color: #2b2b2e; font-variant-numeric: tabular-nums;}
+.os .row.open{box-shadow: inset 0 0 0 1px #d6d6d9;}
+.os .select .chev{color: #8b8b90; flex: none; margin-right: -2px;}
+.os .slider{cursor: ew-resize; touch-action: none;}
+.os .slider .fill{position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #e3e3e5; border-radius: 9px 0 0 9px; transition: background .15s;}
+.os .slider .fill.full{border-radius: 9px;}
+.os .slider:hover .fill, .os .slider.drag .fill{background: #dbdbde;}
+.os .slider .grip{position: absolute; right: 9px; top: 50%; width: 2px; height: 14px; margin-top: -7px; border-radius: 1px; background: #9d9da2;}
+.os .slider .fill.small .grip{display: none;}
+.os .slider .val{cursor: ew-resize; padding: 6px 0 6px 10px; margin-top: -6px; margin-bottom: -6px;}
+.os .slider .dots{position: absolute; inset: 0; pointer-events: none;}
+.os .slider .dots i{position: absolute; top: 50%; width: 2.5px; height: 2.5px; margin: -1.25px 0 0 -1.25px; border-radius: 50%; background: #b9b9bd; transition: opacity .12s;}
+.os .slider .val input{width: 54px; height: 24px; margin-right: -6px; padding: 0 6px; border: 0; border-radius: 6px; background: #fff; box-shadow: inset 0 0 0 1px #3b82f6; text-align: right; font-size: 13px; outline: 0; cursor: text;}
+.os .color .sw{width: 22px; height: 22px; margin-right: -2px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1);}
+.os .color .hex{color: #8b8b90; font-size: 12px; font-variant-numeric: tabular-nums; text-transform: uppercase; opacity: 0; transition: opacity .15s;}
+.os .color:hover .hex, .os .color.open .hex{opacity: 1;}
+.os .switch{cursor: pointer;}
+.os .switch .tg{position: relative; margin-left: auto; margin-right: -2px; width: 36px; height: 21px; border-radius: 999px; background: #dcdcdf; transition: background .2s; flex: none;}
+.os .switch .tg::after{content: ""; position: absolute; left: 2px; top: 2px; width: 17px; height: 17px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .18); transition: transform .2s cubic-bezier(.3, .7, .4, 1);}
+.os .switch[aria-checked="true"] .tg{background: #3b82f6;}
+.os .switch[aria-checked="true"] .tg::after{transform: translateX(15px);}
+.os .pop{position: absolute; z-index: 10; left: 12px; right: 12px; padding: 5px; border-radius: 11px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .07), 0 14px 34px -10px rgba(0, 0, 0, .22); display: none; animation: os-pin .14s ease-out;}
+.os .pop.open{display: block;}
+@keyframes os-pin{from { opacity: 0; transform: translateY(-4px); }}
+.os .menu button{width: 100%; height: 32px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border-radius: 7px; font-size: 13px; text-align: left;}
+.os .menu button svg{color: #8b8b90; flex: none;}
+.os .menu button .ck{margin-left: auto; color: #3b82f6; visibility: hidden;}
+.os .menu button[aria-selected="true"] .ck{visibility: visible;}
+.os .menu button.hi{background: #f2f2f3;}
+.os .picker{padding: 10px;}
+.os .sv{position: relative; height: 120px; border-radius: 7px; background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), var(--h); cursor: crosshair; touch-action: none;}
+.os .sv .knob, .os .hue .knob{position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 2px 5px rgba(0, 0, 0, .25); pointer-events: none;}
+.os .hue{position: relative; height: 12px; margin: 12px 0 10px; border-radius: 999px; background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); cursor: ew-resize; touch-action: none;}
+.os .hue .knob{top: 50%;}
+.os .hexrow{display: flex; gap: 8px; align-items: center;}
+.os .hexrow label{font-size: 12px; color: #8b8b90;}
+.os .hexrow input{flex: 1; min-width: 0; height: 28px; padding: 0 8px; border: 0; border-radius: 7px; background: #f2f2f3; box-shadow: inset 0 0 0 1px #e9e9eb; font-size: 12.5px; text-transform: uppercase; outline: 0;}
+.os .hexrow input:focus{box-shadow: inset 0 0 0 1px #3b82f6;}
+.os .presets{display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-top: 10px;}
+.os .presets button{aspect-ratio: 1; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); transition: transform .12s;}
+.os .presets button:hover{transform: scale(1.12);}
+@media (max-width: 720px){.os .row{height: 40px; font-size: 14px;}}
+@media (prefers-reduced-motion: reduce){.os, .os *, .os *::before, .os *::after{animation: none !important; transition: none !important;}}
+.os.nobd{background: none; min-height: 0; padding: 0;}`;
 
 export const DEFAULT_SETTINGS: OutlineSettings = { shape: 'semi', weight: 4, color: '#ef6a3a', radius: 268, flip: false };
 const FORMS: [OutlineForm, string, string][] = [
