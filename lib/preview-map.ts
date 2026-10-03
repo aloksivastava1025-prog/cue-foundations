@@ -11,6 +11,7 @@ import { MagneticButtonPreview } from "@/components/previews/foundations/button-
 import { TiltCardPreview } from "@/components/previews/foundations/tilt-card"
 import { ThemeTogglePreview } from "@/components/previews/foundations/theme-toggle"
 import { TabsPillPreview } from "@/components/previews/foundations/tabs-pill"
+import { OutlineInspectorPanelPreview } from "@/components/previews/foundations/outline-inspector-panel"
 import { PixelPerfectCommandPalettePreview } from "@/components/previews/foundations/pixel-perfect-command-palette"
 import { PixelPerfectShopOnboardingPreview } from "@/components/previews/foundations/pixel-perfect-shop-onboarding"
 import { InteractiveCardSpherePreview } from "@/components/previews/foundations/interactive-card-sphere"
@@ -43,6 +44,7 @@ export const SAFE_LIVE_SLUGS = new Set([
   "tilt-card",
   "theme-toggle",
   "tabs-pill",
+  "outline-inspector-panel",
   "pixel-perfect-command-palette",
   "pixel-perfect-shop-onboarding",
   "interactive-card-sphere",
@@ -76,6 +78,7 @@ export const PREVIEW_MAP: Record<string, () => React.JSX.Element> = {
   "tilt-card": TiltCardPreview,
   "theme-toggle": ThemeTogglePreview,
   "tabs-pill": TabsPillPreview,
+  "outline-inspector-panel": OutlineInspectorPanelPreview,
   "pixel-perfect-command-palette": PixelPerfectCommandPalettePreview,
   "pixel-perfect-shop-onboarding": PixelPerfectShopOnboardingPreview,
   "interactive-card-sphere": InteractiveCardSpherePreview,
