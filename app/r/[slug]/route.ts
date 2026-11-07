@@ -1,7 +1,22 @@
 import { NextRequest } from "next/server"
-import { getRegistryItem } from "@/lib/registry"
+import { getRegistryItem, registry } from "@/lib/registry"
 import path from "node:path"
 import fs from "node:fs/promises"
+
+/**
+ * Prerender every with-code entry at build time (both `/r/x` and
+ * `/r/x.json`). Cloudflare Workers has no file system at runtime, so
+ * the fs.readFile below must only ever run during `next build`.
+ * Unknown / prompt-only slugs still hit the handler at runtime and
+ * return their 404 JSON before any fs access.
+ */
+export const dynamic = "force-static"
+
+export function generateStaticParams() {
+  return registry
+    .filter((item) => item.codeAvailable !== false && !!item.sourcePath)
+    .flatMap((item) => [{ slug: item.slug }, { slug: `${item.slug}.json` }])
+}
 
 /**
  * shadcn CLI registry endpoint.
