@@ -1,0 +1,5 @@
+# shadcn registry: /r/<slug> and /r/<slug>.json are JSON files built at deploy time
+/r/*
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300

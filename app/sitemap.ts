@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next"
 import { registry } from "@/lib/registry"
 
+// static export: built once per deploy
+export const dynamic = "force-static"
+
 const BASE = "https://kit.cuedesign.space"
 
 /**

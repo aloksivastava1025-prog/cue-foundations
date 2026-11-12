@@ -1,15 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "cue-kit",
-  "main": ".open-next/worker.js",
   "compatibility_date": "2026-11-01",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Kit is a static export (next build -> out/). There is no Worker script:
+  // Cloudflare serves the files straight from Workers static assets, which
+  // costs no CPU and isn't billed per request on the Free plan.
   "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
   },
-  "services": [
-    { "binding": "WORKER_SELF_REFERENCE", "service": "cue-kit" }
-  ],
   "observability": { "enabled": true }
 }

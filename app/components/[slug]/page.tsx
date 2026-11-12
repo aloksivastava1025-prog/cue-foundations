@@ -19,6 +19,9 @@ import { LiveScaled } from "@/components/docs/live-scaled"
  * outer geometry · barely-visible shadow · indigo #5C6DFF accent.
  */
 
+// static export: only the slugs built at deploy time exist
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return registry.map((item) => ({ slug: item.slug }))
 }

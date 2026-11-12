@@ -11,6 +11,9 @@ import { BodyReset } from "./body-reset"
  * IntersectionObserver against window) work as authored. Zero CSS
  * leak to the docs page: everything is scoped to the iframe.
  */
+// static export: only the slugs built at deploy time exist
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   return registry
     .filter((it) => SAFE_LIVE_SLUGS.has(it.slug))

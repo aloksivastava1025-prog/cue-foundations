@@ -8,6 +8,9 @@ import type { NextConfig } from "next";
  * and lib/prompts with each route.
  */
 const nextConfig: NextConfig = {
+  // Kit is fully prerendered, so it ships as plain static files (out/) and
+  // Cloudflare serves them as Workers static assets: no server, no CPU per visit.
+  output: "export",
   outputFileTracingIncludes: {
     "/components/[slug]": [
       "./components/foundations/**",

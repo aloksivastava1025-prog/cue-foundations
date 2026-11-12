@@ -11,6 +11,7 @@ import fs from "node:fs/promises"
  * return their 404 JSON before any fs access.
  */
 export const dynamic = "force-static"
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return registry
